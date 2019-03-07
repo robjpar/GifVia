@@ -1,3 +1,12 @@
+// data sent from index.js
+var currentPlayer = JSON.parse(localStorage.getItem("currentPlayer"));
+
+console.log(currentPlayer);
+console.log(currentPlayer.nickName);
+console.log(currentPlayer.category);
+console.log(currentPlayer.categoryId);
+// ==================
+
 var winsCounter = 0;
 var lossesCounter = 0;
 var count = 0;
