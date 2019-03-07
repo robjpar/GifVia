@@ -1,3 +1,26 @@
+var currentPlayer = {
+    nickName: "Player1",
+    category: "Art",
+    categoryId: 25
+}
+
+
+// data sent to quiz.js
+
+localStorage.setItem("currentPlayer", JSON.stringify(currentPlayer));
+
+// ===============
+
+
+// this run in quiz.js
+var currentPlayer = JSON.parse(localStorage.getItem("currentPlayer"));
+console.log(currentPlayer);
+console.log(currentPlayer.nickName);
+console.log(currentPlayer.category);
+console.log(currentPlayer.categoryId);
+// ===============
+
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyBwE9yjpyz60Le4j6krVBvHU9Yk3wyCIjg",
@@ -11,86 +34,67 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-var currentPlayer = {
-    nickName: "Player1",
-    category: "Art"
+// this runs in quiz.js
+var highestScore = 14; // example
+
+var pastPlayer = {
+    nickName: currentPlayer.nickName,
+    category: currentPlayer.category,
+    highestScore: highestScore
 }
 
-const CURRENT_PLAYER_REF = "current-player";
-
-database.ref(CURRENT_PLAYER_REF).set(currentPlayer, function (error) {
+database.ref("past-players").push(pastPlayer, function (error) {
     if (error) {
-        console.log(`The write failed: ${CURRENT_PLAYER_REF}, error code: ` + error.code);
+        console.log("The write failed: past-players, error code: " + error.code);
     } else {
-        console.log(`The write successful: ${CURRENT_PLAYER_REF}`);
+        console.log("The write successful: past-players");
     }
 });
+// =================
 
-database.ref(CURRENT_PLAYER_REF).once('value', function (snapshot) {
-    console.log(snapshot.val().nickName);
-    console.log(snapshot.val().category);
 
-}, function (error) {
-    if (error) {
-        console.log(`The read failed: ${CURRENT_PLAYER_REF}, error code: ` + error.code);
-    } else {
-        console.log(`The read successful: ${CURRENT_PLAYER_REF}`);
-    }
-});
-
-var pastPlayers = [{
-        nickName: "Player2",
-        category: "A",
-        highestScore: "1"
-    },
-    {
-        nickName: "Player3",
-        category: "B",
-        highestScore: "1"
-    },
-    {
-        nickName: "Player4",
-        category: "B",
-        highestScore: "2"
-    },
-    {
-        nickName: "Player5",
-        category: "A",
-        highestScore: "2"
-    }
-]
+// Simulation of adding past players to the firebase
 
 const PAST_PLAYERS_REF = "past-players";
 
-pastPlayers.forEach(function (player) {
+for (let i = 0; i < 10; i++) {
 
-    database.ref(PAST_PLAYERS_REF).push(player, function (error) {
+    var pastPlayer = {
+        nickName: "Player-" + Math.floor(Math.random() * 1000000),
+        category: ["A", "B", "C", "D", "E"][Math.floor(Math.random() * 4)],
+        highestScore: Math.floor(Math.random() * 100)
+    }
+
+    database.ref(PAST_PLAYERS_REF).push(pastPlayer, function (error) {
         if (error) {
             console.log(`The write failed: ${PAST_PLAYERS_REF}, error code: ` + error.code);
         } else {
             console.log(`The write successful: ${PAST_PLAYERS_REF}`);
         }
-    })
+    });
 
-});
+}
+
+// =================================================
+
+
+// Getting the list or past players from the firebase
 
 var pastPlayers = [];
 
 database.ref(PAST_PLAYERS_REF).orderByChild('highestScore').limitToLast(10).on('value', function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
-        pastPlayers.push({
-            nickName: childSnapshot.val().nickName,
-            category: childSnapshot.val().category,
-            highestScore: childSnapshot.val().highestScore
-        });
+        pastPlayers.push(childSnapshot.val());
     })
 
     console.log(pastPlayers);
 
 }, function (error) {
     if (error) {
-        console.log(`The read failed: ${CURRENT_PLAYER_REF}, error code: ` + error.code);
+        console.log(`The read failed: ${CURRENT_PLAYER_REF}, error code: ${error.code}`);
     } else {
         console.log(`The read successful: ${CURRENT_PLAYER_REF}`);
     }
 });
+
+// ====================================================
