@@ -7,13 +7,13 @@ var currentPlayer = {
 
 // data sent to quiz.js
 
-localStorage.setItem("currentPlayer", JSON.stringify(currentPlayer));
+sessionStorage.setItem("currentPlayer", JSON.stringify(currentPlayer));
 
 // ===============
 
 
 // this run in quiz.js
-var currentPlayer = JSON.parse(localStorage.getItem("currentPlayer"));
+var currentPlayer = JSON.parse(sessionStorage.getItem("currentPlayer"));
 console.log(currentPlayer);
 console.log(currentPlayer.nickName);
 console.log(currentPlayer.category);
@@ -35,19 +35,19 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // this runs in quiz.js
-var highestScore = 14; // example
+var score = 14; // example
 
 var pastPlayer = {
     nickName: currentPlayer.nickName,
     category: currentPlayer.category,
-    highestScore: highestScore
+    score: score
 }
 
 database.ref("past-players").push(pastPlayer, function (error) {
     if (error) {
-        console.log("The write failed: past-players, error code: " + error.code);
+        console.log("The write failed, error code: " + error.code);
     } else {
-        console.log("The write successful: past-players");
+        console.log("The write successful");
     }
 });
 // =================
@@ -62,7 +62,7 @@ for (let i = 0; i < 10; i++) {
     var pastPlayer = {
         nickName: "Player-" + Math.floor(Math.random() * 1000000),
         category: ["A", "B", "C", "D", "E"][Math.floor(Math.random() * 4)],
-        highestScore: Math.floor(Math.random() * 100)
+        score: Math.floor(Math.random() * 100)
     }
 
     database.ref(PAST_PLAYERS_REF).push(pastPlayer, function (error) {
@@ -82,7 +82,7 @@ for (let i = 0; i < 10; i++) {
 
 var pastPlayers = [];
 
-database.ref(PAST_PLAYERS_REF).orderByChild('highestScore').limitToLast(10).on('value', function (snapshot) {
+database.ref(PAST_PLAYERS_REF).orderByChild('score').limitToLast(10).on('value', function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
         pastPlayers.push(childSnapshot.val());
     })

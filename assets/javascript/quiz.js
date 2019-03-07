@@ -1,5 +1,5 @@
 // data sent from index.js
-var currentPlayer = JSON.parse(localStorage.getItem("currentPlayer"));
+var currentPlayer = JSON.parse(sessionStorage.getItem("currentPlayer"));
 
 console.log(currentPlayer);
 console.log(currentPlayer.nickName);
