@@ -83,18 +83,16 @@ for (let i = 0; i < 10; i++) {
 var pastPlayers = [];
 
 database.ref(PAST_PLAYERS_REF).orderByChild('score').limitToLast(10).on('value', function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
-        pastPlayers.push(childSnapshot.val());
-    })
+    if (snapshot.val()) {
+        snapshot.forEach(function (childSnapshot) {
+            pastPlayers.push(childSnapshot.val());
+        })
+    } else {
+        console.log(`There is no data: ${PAST_PLAYERS_REF}`);
+    }
 
     console.log(pastPlayers);
 
-}, function (error) {
-    if (error) {
-        console.log(`The read failed: ${CURRENT_PLAYER_REF}, error code: ${error.code}`);
-    } else {
-        console.log(`The read successful: ${CURRENT_PLAYER_REF}`);
-    }
 });
 
 // ====================================================
