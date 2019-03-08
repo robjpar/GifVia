@@ -53,6 +53,8 @@ var pastPlayer = {
     score: score
 }
 
+// database.ref("past-players").set("");
+
 database.ref("past-players").push(pastPlayer, function (error) {
     if (error) {
         console.log("The write failed, error code: " + error.code);
@@ -67,7 +69,7 @@ database.ref("past-players").push(pastPlayer, function (error) {
 
 const PAST_PLAYERS_REF = "past-players";
 
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 0; i++) {
 
     var pastPlayer = {
         nickName: "Player-" + Math.floor(Math.random() * 1000000),
