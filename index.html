@@ -30,7 +30,70 @@
 </head>
 <body>
 
-    <a href="Quiz.html">Quiz</a>
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="nickname">Nickname:</label>
+      <input type="text" class="form-control" id="nickname">
+
+      <label for="sel1">Select list (select one):</label>
+      <select class="form-control" id="sel1" name="sellist1">
+        <option>Topic 1</option>
+        <option>Topic 2</option>
+        <option>Topic 3</option>
+        <option>Topic 4</option>
+      </select>
+
+      <button type="button" class="btn btn-primary">Primary</button>
+    </div>
+</form>
+
+<div class="card">
+  <div class="card-header">
+    Nickname: <span>John</span> Topic: <span>Topic 1</span> Highest Score: <span>15</span>
+  </div>
+  <div class="card-body">gif here</div>
+</div>
+
+<div class="card">
+  <div class="card-header">Scoreboard</div>
+  <div class="card-body">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nickname</th>
+            <th>Topic</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John</td>
+            <td>Topic 1</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>Mary</td>
+            <td>Topic 2</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>July</td>
+            <td>Topic 3</td>
+            <td>10</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <a href="stats.html" target="_blank">Stats</a>
+
+  <a href="Quiz.html">Quiz</a>
+
+</div>
 
     <!-- Link to this webpage's JS script -->
     <script src="assets/javascript/index.js"></script>
