@@ -22,14 +22,24 @@ console.log(currentPlayer.categoryId);
 
 
 // Initialize Firebase
+// var config = {
+//     apiKey: "AIzaSyBwE9yjpyz60Le4j6krVBvHU9Yk3wyCIjg",
+//     authDomain: "gifvia-7b161.firebaseapp.com",
+//     databaseURL: "https://gifvia-7b161.firebaseio.com",
+//     projectId: "gifvia-7b161",
+//     storageBucket: "gifvia-7b161.appspot.com",
+//     messagingSenderId: "400561292234"
+// };
+
 var config = {
-    apiKey: "AIzaSyBwE9yjpyz60Le4j6krVBvHU9Yk3wyCIjg",
-    authDomain: "gifvia-7b161.firebaseapp.com",
-    databaseURL: "https://gifvia-7b161.firebaseio.com",
-    projectId: "gifvia-7b161",
-    storageBucket: "gifvia-7b161.appspot.com",
-    messagingSenderId: "400561292234"
+    apiKey: "AIzaSyAh9csQszjYRTf32OYxyoalMqw1fIusxac",
+    authDomain: "gifvia-b45c0.firebaseapp.com",
+    databaseURL: "https://gifvia-b45c0.firebaseio.com",
+    projectId: "gifvia-b45c0",
+    storageBucket: "gifvia-b45c0.appspot.com",
+    messagingSenderId: "160762099816"
 };
+
 firebase.initializeApp(config);
 
 var database = firebase.database();
