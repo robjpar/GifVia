@@ -33,7 +33,7 @@ var answerArray = [];
 var textArray = [$("#answer-1"), $("#answer-2"), $("#answer-3"), $("#answer-4")];
 var category = "";
 
-var gif = $("<img>");
+var gif = $("#trivia-gif");
 
 var winLoss = "win";
 
@@ -41,6 +41,7 @@ var topics = "";
 var topicNumber = 0;
 var difficulty = "";
 var giphyAPIKey = "pUpYuVe3td58u23oogHLM1T2pHFENVTJ&limit=10";
+var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&tag=";
 
 
 var pastPlayer = {
@@ -85,14 +86,13 @@ function questionGenerator() {
     };
 
     function generateTriviaGif() {
-        var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&tag=" + currentPlayer.category;
         $.ajax({
-            url: gifQueryURL, 
+            url: gifQueryURL+currentPlayer.category, 
             method: "GET"
         }).then(function(response) {
             console.log(response);
             var imageURL = response.data.image_original_url;
-            $("#trivia-gif").attr("src", imageURL).attr("alt", "trivia image");
+            gif.attr("src", imageURL).attr("alt", "trivia image");
         })
     };
 };
@@ -107,7 +107,41 @@ function shuffleAnswers() {
         textArray[index] = temp;
     }
     for (var i = 0; i < textArray.length; i++) {
-        textArray[i].text(answerArray[i])
+        textArray[i].html(answerArray[i])
     }
     console.log(textArray);
 };
+
+questionGenerator();
+console.log(answerArray);
+console.log(count);
+
+$(".answer").on("click", function() {
+    userSelection = $(this).text();
+    console.log(userSelection);
+    if (userSelection === answerArray[0]) {
+        $(this).css("color", "green");
+        winsCounter++;
+        $("#wins").text(winsCounter);
+        winLoss = "winner";
+        generateWinLossGif();
+    } else {
+        lossesCounter++;
+        $(this).css("color", "red");
+        $("#losses").text(lossesCounter);
+        winLoss = "loser";
+        generateWinLossGif();
+    }
+})
+
+
+function generateWinLossGif() {
+    $.ajax({
+        url: gifQueryURL + winLoss,
+        method: "GET"
+    }).then(function(response) {
+        var imageURL = response.data.image_original_url;
+        console.log(imageURL);
+        gif.attr("src", imageURL);
+    })
+}
