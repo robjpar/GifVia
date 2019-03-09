@@ -22,59 +22,59 @@
 
 <body>
 
-    <div class="jumbotron jumbotron-fluid text-center">
-        <div class="container">
-            <h1 class="display-4">GifVia</h1>
-            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.
-            </p>
-        </div>
+    <div id="header">
+        <h1 id="banner">GifVia</h1>
+        <h6>An interactive, GIF animated trivia game</h6>
     </div>
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="assets/images/me.png" class="card-img-top" alt="nash dog">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card bgColor" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title" id="username">Nickname</h5>
+                    <h5 class="card-title" id="topic">Quiz Topic</h5>
+                    <p class="card-text"><span id="wins">0</span></p>
+                    <p class="card-text"><span id="losses">0</span></p>
                 </div>
             </div>
-            <div class="col text-center">
-                <h1>Question Div <span class="badge badge-secondary"></span></h1>
-                <div class="card text-center" style="width: 21rem;">
-                    <img src="assets/images/me.png" class="card-img-top" alt="nash dog">
-                </div>
-
-                <div class="row">
-                    <div class="col">Answer 1</div>
-                    <div class="col">Answer 2</div>
-                </div>
-                <div class="row">
-                    <div class="col">Answer 3</div>
-                    <div class="col">Answer 4</div>
-                </div>
+        </div>
+        <div class="col bgColor">
+            <h1>Question Div <span class="badge badge-secondary"></span></h1>
+            <div class="row">
+                <div class="col-md-6"><button type="button" class="btn btn-info Answer" id="A1">This is a semi-long answer to a question</button></div>
+                <div class="col-md-6"><button type="button" class="btn btn-info Answer" id="A2">This is a semi-long answer to a question</button></div>
             </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="assets/images/me.png" class="card-img-top" alt="nash dog">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                    </div>
+            <div class="row text-center">
+                <div class = "col">
+                        <img src="assets/images/me.png" class="card-img-top" id="gifDiv" alt="Gif">
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-md-6"><button type="button" class="btn btn-info Answer" id="A3">This is a semi-long answer to a question</button></div>
+                <div class="col-md-6"><button type="button" class="btn btn-info Answer" id="A4">This is a semi-long answer to a question</button></div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-center bgColor" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Timer</h5>
+                    <h5 class="card-title" id="timer">15</h5>
                 </div>
             </div>
         </div>
     </div>
+    
 
+    <footer>Designed by Phillip Makris, Nash Mcdonald, Krystal Christensen-Wiederrich and Robert Paruch </footer>
 
+    <!-- Link to Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
 
     <!-- Links to Javascript/jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="assets/javascript/app.js"></script>
+    <script type="text/javascript" src="assets/logic/quiz.js"></script>
 
     <!-- Link to Bootstrap Javascript/jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
