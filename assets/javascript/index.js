@@ -96,6 +96,8 @@ var pastPlayers = [];
 
 database.ref(PAST_PLAYERS_REF).orderByChild('score').limitToLast(10).on('value', function (snapshot) {
     if (snapshot.val()) {
+        pastPlayers = [];
+
         snapshot.forEach(function (childSnapshot) {
             pastPlayers.push(childSnapshot.val());
         })
