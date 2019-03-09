@@ -23,7 +23,7 @@ var database = firebase.database();
 
 var winsCounter = 0;
 var lossesCounter = 0;
-var count = 0;
+var count = 1;
 var timer = 0;
 var intervalId;
 var timerRunning = false;
@@ -58,27 +58,42 @@ database.ref("past-players").push(pastPlayer, function (error) {
     }
 });
 
+$( document ).ready(function() {
+    $("#username").html(currentPlayer.nickName);
+    $("#topic").html(currentPlayer.category);
+    questionGenerator();
+});
+
 
 function questionGenerator() {
-    if (count < 5) {
+    userSelection = null;
+    timer = 10;
+    timerRunning = true;
+    if (count < 3) {
         difficulty = "easy";
         getAjax();
-    } else if (count > 4 && count < 9) {
+    } else if (count > 2 && count < 5) {
         difficulty = "medium";
         getAjax();
-    } else if (count > 8) {
+    } else if (count > 4 && count < 7) {
         difficulty = "hard";
         getAjax();
+    } else if (count >= 6) {
+        gameOver();
     }
+    intervalId = setInterval(countDown, 1000);
+
 
     function getAjax() {
         var triviaQueryURL = "https://opentdb.com/api.php?amount=1&category=" + currentPlayer.categoryId + "&difficulty=" + difficulty + "&type=multiple";
+        console.log(triviaQueryURL);
         $.ajax({
             url: triviaQueryURL,
             method: "GET"
         }).then(function(response) {
             $("#question-display").html(response.results[0].question);
             var short = response.results[0];
+            answerArray = [];
             answerArray.push(short.correct_answer, short.incorrect_answers[0], short.incorrect_answers[1], short.incorrect_answers[2]);
             shuffleAnswers();
             generateTriviaGif(this.category);
@@ -107,33 +122,34 @@ function shuffleAnswers() {
         textArray[index] = temp;
     }
     for (var i = 0; i < textArray.length; i++) {
-        textArray[i].html(answerArray[i])
+        textArray[i].html(answerArray[i]).css("color", "black");
     }
     console.log(textArray);
 };
-
-questionGenerator();
-console.log(answerArray);
-console.log(count);
 
 $(".answer").on("click", function() {
     userSelection = $(this).text();
     console.log(userSelection);
     if (userSelection === answerArray[0]) {
+        $("#question-display").text("Yes! You are correct!");
         $(this).css("color", "green");
         winsCounter++;
         $("#wins").text(winsCounter);
         winLoss = "winner";
         generateWinLossGif();
+        count++;
+        timerRunning = false;
     } else {
+        $("#question-display").text("Sorry, that was not right");
         lossesCounter++;
         $(this).css("color", "red");
         $("#losses").text(lossesCounter);
         winLoss = "loser";
         generateWinLossGif();
+        count++;
+        timerRunning = false;
     }
-})
-
+});
 
 function generateWinLossGif() {
     $.ajax({
@@ -143,5 +159,38 @@ function generateWinLossGif() {
         var imageURL = response.data.image_original_url;
         console.log(imageURL);
         gif.attr("src", imageURL);
-    })
+    });
+    clearInterval(intervalId);
+    setTimeout(questionGenerator, 3000);
 }
+
+function countDown() {
+    if (timerRunning) {
+        $("#timer").text(timer);
+        timer--;
+        if (timer < 0) {
+            $("#question-display").text("You are out of time");
+            lossesCounter++;
+            $("#losses").text(lossesCounter)
+            winLoss = "loser";
+            timerRunning = false;
+            generateWinLossGif();
+        }
+    }
+    console.log(timer)
+};
+
+function gameOver() {
+    $(".answer").text("");
+    if (winsCounter > lossesCounter) {
+        $("#question-display").text("You won! Great job");
+        winLoss = "winner";
+    } else if (lossesCounter > winsCounter) {
+        $("#question-display").text("You lose :(");
+        winLoss = "loser";
+    } else if (lossesCounter === winsCounter) {
+        $("#question-display").text("You tied!");
+        winLoss = "tie";
+    };
+    generateWinLossGif();
+};
