@@ -72,21 +72,22 @@ function questionGenerator() {
     if (count < 3) {
         difficulty = "easy";
         getAjax();
+        intervalId = setInterval(countDown, 1000);
     } else if (count > 2 && count < 5) {
         difficulty = "medium";
         getAjax();
+        intervalId = setInterval(countDown, 1000);
     } else if (count > 4 && count < 7) {
         difficulty = "hard";
         getAjax();
+        intervalId = setInterval(countDown, 1000);
     } else if (count >= 6) {
         gameOver();
     }
-    intervalId = setInterval(countDown, 1000);
 
 
     function getAjax() {
         var triviaQueryURL = "https://opentdb.com/api.php?amount=1&category=" + currentPlayer.categoryId + "&difficulty=" + difficulty + "&type=multiple";
-        console.log(triviaQueryURL);
         $.ajax({
             url: triviaQueryURL,
             method: "GET"
@@ -105,7 +106,6 @@ function questionGenerator() {
             url: gifQueryURL+currentPlayer.category, 
             method: "GET"
         }).then(function(response) {
-            console.log(response);
             var imageURL = response.data.image_original_url;
             gif.attr("src", imageURL).attr("alt", "trivia image");
         })
@@ -124,27 +124,26 @@ function shuffleAnswers() {
     for (var i = 0; i < textArray.length; i++) {
         textArray[i].html(answerArray[i]).css("color", "black");
     }
-    console.log(textArray);
 };
 
-$(".answer").on("click", function() {
+$(".answer").one("click", function() {
     userSelection = $(this).text();
-    console.log(userSelection);
     if (userSelection === answerArray[0]) {
         $("#question-display").text("Yes! You are correct!");
         $(this).css("color", "green");
         winsCounter++;
         $("#wins").text(winsCounter);
         winLoss = "winner";
-        generateWinLossGif();
-        count++;
-        timerRunning = false;
+        results();
     } else {
         $("#question-display").text("Sorry, that was not right");
         lossesCounter++;
         $(this).css("color", "red");
         $("#losses").text(lossesCounter);
         winLoss = "loser";
+        results();
+    }
+    function results() {
         generateWinLossGif();
         count++;
         timerRunning = false;
@@ -157,7 +156,6 @@ function generateWinLossGif() {
         method: "GET"
     }).then(function(response) {
         var imageURL = response.data.image_original_url;
-        console.log(imageURL);
         gif.attr("src", imageURL);
     });
     clearInterval(intervalId);
@@ -181,6 +179,7 @@ function countDown() {
 };
 
 function gameOver() {
+    timerRunning = false;
     $(".answer").text("");
     if (winsCounter > lossesCounter) {
         $("#question-display").text("You won! Great job");
@@ -193,4 +192,5 @@ function gameOver() {
         winLoss = "tie";
     };
     generateWinLossGif();
+    $(".answers").html('<a class="btn btn-primary" href="" role="button">Try Again!</a>')
 };
