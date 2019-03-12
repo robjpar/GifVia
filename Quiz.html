@@ -41,7 +41,7 @@
                     <!-- Used for Centering -->
                 </div>
                 <div class="col">
-                                    <!-- Score Card -->
+                    <!-- Score Card -->
                     <div class="card bgColor fade-in one" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title" id="username">Nickname</h5>
@@ -56,16 +56,16 @@
                 </div>
             </div>
         </div>
-                                <!-- Question/Answer Container -->
+        <!-- Question/Answer Container -->
         <div class="col bgColor fade-in two">
-            <div class="container mt-2 mb-2" id="question-container">
-                <h1 id="question-display">
-                    <!-- <span class="badge badge-secondary"></span> -->
-                </h1>
+            <div class="card-body">
+                <h5 class="card-title" id="question-display"><!-- Question Here --></h5>
             </div>
             <div class="row">
-                <div class="col-md-6"><button type="button" class="btn btn-info answer" id="answer-1"></button></div>
-                <div class="col-md-6"><button type="button" class="btn btn-info answer" id="answer-2"></button></div>
+                <div class="col-md-6"><button type="button" class="btn btn-light answer" id="answer-1"></button>
+                </div>
+                <div class="col-md-6"><button type="button" class="btn btn-light answer" id="answer-2"></button>
+                </div>
             </div>
             <div class="row text-center">
                 <div class="col">
@@ -75,6 +75,9 @@
                     <div class="card" style="width: 22rem;">
                         <div class="card-img-top">
                             <img src="assets/images/me.png" class="card-img-top" id="gifDiv" alt="Gif">
+                            <div id = "startBtn">
+                                <!-- Area for dynamically adding/removing start/restart quiz button -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,13 +85,16 @@
                     <!-- Used for Centering -->
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6"><button type="button" class="btn btn-info answer" id="answer-3"></button></div>
-                <div class="col-md-6"><button type="button" class="btn btn-info answer" id="answer-4"></button></div>
+            <div class="row mb-4">
+                <div class="col-md-6"><button type="button" class="btn btn-light answer" id="answer-3"></button>
+                </div>
+                <div class="col-md-6"><button type="button" class="btn btn-light answer" id="answer-4"></button>
+                </div>
             </div>
+
         </div>
         <div class="col">
-                            <!-- Timer -->
+            <!-- Timer -->
             <div class="card text-center bgColor fade-in three" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Timer</h5>

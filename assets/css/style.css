@@ -156,8 +156,9 @@ input {
 .answer:hover{
     font-size:1.5rem;
 }
-#question-container{
-    word-wrap: break-word;
+#question-display{
+    text-align: center;
+    height: 60px; /* Set so that the div doesn't constantly shift when larger text is added */
 }
 
 /* --------------------------------- */
