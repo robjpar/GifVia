@@ -1,7 +1,7 @@
 var currentPlayer = {
-    nickName: "Player2",
-    category: "books",
-    categoryId: 10
+    nickName: "Player566",
+    category: "mythology",
+    categoryId: 20
 }
 
 sessionStorage.setItem("currentPlayer", JSON.stringify(currentPlayer));
@@ -28,10 +28,13 @@ var timer = 0;
 var intervalId;
 var timerRunning = false;
 var userSelection = null;
-var questions = [];
+var question = "";
+var words = [];
+var wordArray = [];
 var answerArray = [];
 var textArray = [$("#answer-1"), $("#answer-2"), $("#answer-3"), $("#answer-4")];
 var category = "";
+var allowClicks = false;
 
 var gif = $("#trivia-gif");
 
@@ -69,20 +72,22 @@ function questionGenerator() {
     userSelection = null;
     timer = 10;
     timerRunning = true;
+    allowClicks = true;
     if (count < 3) {
         difficulty = "easy";
-        getAjax();
-        intervalId = setInterval(countDown, 1000);
+        allowGamePlay();
     } else if (count > 2 && count < 5) {
         difficulty = "medium";
-        getAjax();
-        intervalId = setInterval(countDown, 1000);
+        allowGamePlay();
     } else if (count > 4 && count < 7) {
         difficulty = "hard";
-        getAjax();
-        intervalId = setInterval(countDown, 1000);
+        allowGamePlay();
     } else if (count >= 6) {
         gameOver();
+    }
+    function allowGamePlay() {
+        getAjax();
+        intervalId = setInterval(countDown, 1000);
     }
 
 
@@ -92,7 +97,11 @@ function questionGenerator() {
             url: triviaQueryURL,
             method: "GET"
         }).then(function(response) {
-            $("#question-display").html(response.results[0].question);
+            question = response.results[0].question;
+            console.log(question);
+            wordArray = question.split(" ");
+            pickWord();
+            $("#question-display").html(question);
             var short = response.results[0];
             answerArray = [];
             answerArray.push(short.correct_answer, short.incorrect_answers[0], short.incorrect_answers[1], short.incorrect_answers[2]);
@@ -100,16 +109,18 @@ function questionGenerator() {
             generateTriviaGif(this.category);
         });
     };
+};
 
-    function generateTriviaGif() {
-        $.ajax({
-            url: gifQueryURL+currentPlayer.category, 
-            method: "GET"
-        }).then(function(response) {
-            var imageURL = response.data.image_original_url;
-            gif.attr("src", imageURL).attr("alt", "trivia image");
-        })
-    };
+//this technically now works, but it's very slow in loading gifs
+
+function generateTriviaGif() {
+    $.ajax({
+        url: gifQueryURL, 
+        method: "GET"
+    }).then(function(response) {
+        var imageURL = response.data.image_original_url;
+        gif.attr("src", imageURL).attr("alt", "trivia image");
+    })
 };
 
 function shuffleAnswers() {
@@ -126,28 +137,39 @@ function shuffleAnswers() {
     }
 };
 
-$(".answer").one("click", function() {
-    userSelection = $(this).text();
-    if (userSelection === answerArray[0]) {
-        $("#question-display").text("Yes! You are correct!");
-        $(this).css("color", "green");
-        winsCounter++;
-        $("#wins").text(winsCounter);
-        winLoss = "winner";
-        results();
-    } else {
-        $("#question-display").text("Sorry, that was not right");
-        lossesCounter++;
-        $(this).css("color", "red");
-        $("#losses").text(lossesCounter);
-        winLoss = "loser";
-        results();
+$(".answer").on("click", function() {
+    if (allowClicks) {
+        userSelection = $(this).text();
+        if (userSelection === answerArray[0]) {
+            $("#question-display").text("Yes! You are correct!");
+            $(this).css("color", "green");
+            winsCounter++;
+            $("#wins").text(winsCounter);
+            winLoss = "winner";
+            results();
+        } else {
+            $("#question-display").text("Sorry, that was not right");
+            lossesCounter++;
+            $(this).css("color", "red");
+            //bug == this is not working to display correct answer
+            for (var i = 0; i < textArray.length; i++) {
+                if (textArray[i] === answerArray[0]) {
+                    console.log("this is the correct answer" + textArray[i]);
+                    textArray[i].css ("color", "green")
+                }
+            };
+            $("#losses").text(lossesCounter);
+            winLoss = "loser";
+            results();
+        }
+        function results() {
+            allowClicks = false;
+            generateWinLossGif();
+            count++;
+            timerRunning = false;
+        }
     }
-    function results() {
-        generateWinLossGif();
-        count++;
-        timerRunning = false;
-    }
+    
 });
 
 function generateWinLossGif() {
@@ -179,6 +201,7 @@ function countDown() {
 };
 
 function gameOver() {
+    clearInterval(intervalId);
     timerRunning = false;
     $(".answer").text("");
     if (winsCounter > lossesCounter) {
@@ -191,6 +214,41 @@ function gameOver() {
         $("#question-display").text("You tied!");
         winLoss = "tie";
     };
-    generateWinLossGif();
-    $(".answers").html('<a class="btn btn-primary" href="" role="button">Try Again!</a>')
+    finalWinLoss();
+    $("#try-again").html('<a class="btn btn-primary" href="index.html" role="button">Try Again?</a>');
+    function finalWinLoss() {
+        $.ajax({
+            url: gifQueryURL + winLoss,
+            method: "GET"
+        }).then(function(response) {
+            var imageURL = response.data.image_original_url;
+            gif.attr("src", imageURL);
+        });
+    }
 };
+
+//this code isn't working correctly
+
+function pickWord() {
+    var item = Math.floor(Math.random()*wordArray.length);
+    console.log(wordArray[item]);
+        if (wordArray[item].length < 6) {
+            pickWord();
+        } else {
+            console.log("pick me!");
+            gifQueryURL = gifQueryURL+item;
+            generateTriviaGif();
+        }
+    }
+    
+    // console.log(wordArray);
+    // for (var i = 0; i < wordArray.length; i++) {
+    //     if (wordArray[i].indexOf("$#039")) {
+    //         console.log("yes" + i);
+    //         ("$#039").replace("$#039", " ");
+    //     } else if (wordArray[i].indexOf("&quot;")) {
+    //         ("$&quot;").replace("$&quot;", " ");
+    //     }
+    // }
+    
+// };
