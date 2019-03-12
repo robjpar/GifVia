@@ -34,29 +34,26 @@
 
     <form>
       <div class="form-group">
-        <label for="nickname">Nickname:</label>
+        <label for="nickname">Nickname: <small>(alphanumeric and underscore, at least 8)</small> <span id="nickname-message"
+            style="color: red"></span></label>
         <input type="text" class="form-control" id="nickname">
 
-        <label for="nickname">PIN:</label>
-        <input type="number" class="form-control" id="nickname">
+        <label for="secret-number">If you want to reuse the nickname, choose a Secret #: <small>(numeric, at least 4)
+          </small><span id="secret-number-message" style="color: red"></span></label>
+        <input type="number" class="form-control" id="secret-number">
 
-        <label for="sel1">Select list (select one):</label>
-        <select class="form-control" id="sel1" name="sellist1">
-          <option>Topic 1</option>
-          <option>Topic 2</option>
-          <option>Topic 3</option>
-          <option>Topic 4</option>
-        </select>
+        <label for="quiz-category">Quiz topic: <small>(select one)</small></label>
+        <select class="form-control" id="quiz-category" name="quiz-category-list"></select>
 
-        <button type="button" class="btn btn-outline-secondary">Register</button>
+        <button type="button" class="btn btn-outline-secondary" id="register-button">Register</button>
       </div>
     </form>
 
     <div class="card">
       <div class="card-header">
-        Nickname: John Topic: Topic 1 Highest Score: 15
+        <span id="highest-score-message"></span>
       </div>
-      <div class="card-body">gif here</div>
+      <div class="card-body"><img id="gif-img"></div>
     </div>
 
     <div class="card">
@@ -71,31 +68,13 @@
               <th>Score</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>John</td>
-              <td>Topic 1</td>
-              <td>15</td>
-            </tr>
-            <tr>
-              <td>Mary</td>
-              <td>Topic 2</td>
-              <td>12</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Topic 3</td>
-              <td>10</td>
-            </tr>
-          </tbody>
+          <tbody id="scoreboard-body"></tbody>
         </table>
 
       </div>
     </div>
 
     <a href="stats.html" target="_blank">Stats</a>
-
-    <a href="Quiz.html">Quiz</a>
 
   </div>
 
