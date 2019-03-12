@@ -18,9 +18,19 @@
 
 <body>
     <div id="header">
-        <h1 id="banner">GifVia</h1>
-        <h6>An interactive, GIF animated trivia game</h6>
+            
+            
+    <h1 id="banner">GifVia</h1>
+    
+    <h5>An interactive, GIF animated trivia game</h5>
+    
+    
+
     </div>
+    
+            
+            
+            
 
     <br>
 
@@ -29,7 +39,7 @@
             <div class="col-sm-4">
                 <div class="row">
                     <div class="col-sm-12" id="info">
-                        <h4>Choose a topic then enter a nickname.</h4>
+                        <h3>Choose a topic then enter a nickname.</h3>
                         <h5>If no nickname is chosen, you will be registered as anonymous.</h5>
                     </div>
                 </div>
@@ -41,33 +51,34 @@
                                 <select class="form-control" id="sel1">
                                 </select>
                             </div>
-                        </div>
-
+                            
+                            <h1>Nickname:</h1>
+                <input type="text" id="tBox">
+                <br>
+                             <!--JS-->
+                <button id="startGameButton" type="button" class="btn btn-info">Start Game</button>
+                        
                     </div>
                 </div>
             </div>
             <div class="col-sm-7" id="highScore">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="well">
-                            <h1 id="scoreHead">High Score:</h1>
-                            <h5>(nickname goes here): (# goes here)</h5>
-                            <div class="playerName"></div>
-                        </div>
-                        <br><br><br><br><br><br><br><br>
-                        <h4># Of Questions Answered: (number goes here)</h4>
+                                                                            <!--JS-->                           <!--JS-->
+                            <h1 id="scoreHead">High Score:</h1><h3><div id="highscoreNickname"></div>: <div id="highscoreNumber"></div> </h3><div class="playerName"></div>
+                        
+                        <img id="gif" src="https://media.giphy.com/media/9xt1MUZqkneFiWrAAD/giphy.gif">
+                        <br><br><br>
+                        <h4># Of Questions Answered: <div id="numberOfQuestions"></div></h4>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4" id="nickname">
-                <h1>Nickname:</h1>
-                <input type="text" id="tBox">
-            </div>
-
-            <div class="col-sm-7" id="table">
-                <h4>Top Players</h4>
+            
+            
+            <div class="col-sm-11" id="table">
+                    <h3>Top Players</h3>
                 <table class="table table-sm text-center" id=tableText>
 
                     <tr id="tableHead">
@@ -77,34 +88,22 @@
 
                     </tr>
                     <div class="tableItems">
-                        <tr>
-                            <td>(player name)</td>
-                            <td>(player score)</td>
-                            <td>(topic)</td>
-                        </tr>
-
-                        <td>(player name)</td>
-                        <td>(player score)</td>
-                        <td>(topic)</td>
-                        </tr>
-                </table>
+                    <tr>                <!--JS-->
+                            <td><div id="playerName"></div></td>
+                            <td><div id="playerScore"></div></td>
+                            <td><div id="topic"></div></td>
+                            </tr>
+                                        <!--JS-->
+                            <td><div id="playerName2"></div></td>
+                            <td><div id="playerScore2"></div></td>
+                            <td><div id="topic2"></div></td>
+                            </tr>
+                            </table>
             </div>
-
-
+                            
+                        
         </div>
     </div>
-
-    <br><br>
-
-
-
-    <footer>Designed by Phillip Makris, Nash Mcdonald, Krystal Christensen-Wiederrich and Robert Paruch</footer>
-
-
-
-
-
-
 
 
 
