@@ -44,20 +44,7 @@
     color: rgb(212, 212, 212);
 }
 
-#nickname {
-    border: solid;
-    border-color: rgba(0, 0, 0, 0.336);
-    margin-top: 10px;
-    
-    padding-top: 0px;
-    
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.788);
-    color: rgb(212, 212, 212);
-    font-size: 35px;
-    font-weight: bold;
-    
-}
+
 
 footer {
    
@@ -87,7 +74,7 @@ footer {
 
 
 
-#tBox {
+.tBox {
     
     text-align: center;
     font-size: 35px;
@@ -154,7 +141,7 @@ input {
     font-size: 45px;
 }
 
-#startGameButton {
+.startGameButton {
     font-size: 30px;
     background-color: rgb(0, 70, 83);
     margin-top: 30px;
@@ -185,6 +172,20 @@ input {
     width: 90px;
     float: left;
     
+}
+
+.alpha {
+  font-size: 15px;
+}
+
+.pinNumber {
+  text-align: center;
+  font-size: 20px;
+}
+
+.tBox2 {
+  font-size: 20px;
+  text-align: center;
 }
 
 /*HOVER SECTION*/
@@ -225,7 +226,7 @@ input {
     100% {transform: rotate(0deg);}
   }
 
-#startGameButton:hover {
+.startGameButton:hover {
     -webkit-animation-name: wiggle;
         -ms-animation-name: wiggle;
         -ms-animation-duration: 1000ms;

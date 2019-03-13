@@ -58,17 +58,24 @@
           <div class="col-sm-12" id="quizTopic">
             <div class="dropdown">
               <div class="form-group">
-                <label for="sel1" id="quizLabel">Quiz Topic:</label><br>
-                <select class="form-control" id="sel1">
+                <label for="quiz-categiry" id="quizLabel">Quiz Topic:</label><br>
+                <select class="form-control" id="quiz-category">
                 </select>
               </div>
             </div>
 
             <h1>Nickname:</h1>
-            <input type="text" id="tBox">
-            <br>
+            <span id="nickname-message"
+            style="color: orange"></span>
+            <input  type="text" class="tBox" id="nickname">
+            <br><br>
+            <p class="pinNumber">If you want to reuse the nickname, choose a Secret #:</p>
+            <span id="secret-number-message" style="color: red"></span>
+            <input  type="number" class="tBox2"id="secret-number">
             <!--JS-->
-            <button id="startGameButton" type="button" class="btn btn-info">Start Game</button>
+            
+            <button id="register-button" type="button" class="startGameButton btn btn-info">Start Game</button>
+            
 
           </div>
         </div>
@@ -80,14 +87,15 @@
             <!--JS-->
             <h1 id="scoreHead">High Score:</h1>
             <h3>
-              <div id="highscoreNickname"></div>: <div id="highscoreNumber"></div>
+              
+              <span id="highest-score-message"></span>
             </h3>
             <div class="playerName"></div>
 
-            <img id="gif" src="https://media.giphy.com/media/9xt1MUZqkneFiWrAAD/giphy.gif">
+            <!-- <img id="gif" src="https://media.giphy.com/media/9xt1MUZqkneFiWrAAD/giphy.gif"> -->
+            <img id="gif-img">
             <br><br><br>
-            <h4># Of Questions Answered: <div id="numberOfQuestions"></div>
-            </h4>
+            
           </div>
         </div>
       </div>
@@ -101,14 +109,15 @@
 
           <tr id="tableHead">
             <th>Player</th>
-            <th>Score</th>
             <th>Topic</th>
+            <th>Score</th>
 
           </tr>
           <div class="tableItems">
-            <tr>
-              <!--JS-->
-              <td>
+              <tbody id="scoreboard-body"></tbody>
+            <!-- <tr>
+              <JS-->
+              <!-- <td>
                 <div id="playerName"></div>
               </td>
               <td>
@@ -118,8 +127,8 @@
                 <div id="topic"></div>
               </td>
             </tr>
-            <!--JS-->
-            <td>
+            <!-JS-->
+            <!-- <td>
               <div id="playerName2"></div>
             </td>
             <td>
@@ -128,7 +137,8 @@
             <td>
               <div id="topic2"></div>
             </td>
-            </tr>
+            </tr> -->
+        </div>
         </table>
       </div>
 
@@ -147,7 +157,7 @@
 
   <!-- ======================================================================================= -->
 
-  <div class="container">
+  <!-- <div class="container">
 
     <form>
       <div class="form-group">
@@ -193,7 +203,7 @@
 
     <a href="stats.html" target="_blank">Stats</a>
 
-  </div>
+  </div> -->
 
   <!-- ======================================================================================= -->
 
