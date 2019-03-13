@@ -46,9 +46,9 @@
                         <div class="card-body">
                             <h5 class="card-title" id="username">Nickname</h5>
                             <h5 class="card-title" id="topic">Quiz Topic</h5>
-                            <p class="card-text"><span id="wins">0</span></p>
-                            <p class="card-text"><span id="losses">0</span></p>
-                            <p class="card-text"><span id="score">0</span></p>
+                            <p class="card-text">Correct = <span id="wins">0</span></p>
+                            <p class="card-text">Incorrect = <span id="losses">0</span></p>
+                            <p class="card-text">Score = <span id="score">0</span></p>
                         </div>
                     </div>
                 </div>
@@ -60,13 +60,13 @@
         <!-- Question/Answer Container -->
         <div class="col bgColor fade-in two">
             <div class="card-body">
-                <h5 class="card-title" id="question-display"><!-- Question Here --></h5>
+                <h5 class="card-title" id="question-display">
+                    <!-- Question Here -->
+                </h5>
             </div>
             <div class="row">
-                <div class="col-md-6"><button type="button" class="btn btn-light answer" id="answer-1"></button>
-                </div>
-                <div class="col-md-6"><button type="button" class="btn btn-light answer" id="answer-2"></button>
-                </div>
+                <div class="col-md-6" id="answer-1"><!-- Placement for button --></div>
+                <div class="col-md-6" id="answer-2"><!-- Placement for button --></div>
             </div>
             <div class="row text-center">
                 <div class="col">
@@ -83,13 +83,15 @@
                     <!-- Used for Centering -->
                 </div>
             </div>
-            <div class="row mb-4">
-                <div class="col-md-6"><button type="button" class="btn btn-light answer" id="answer-3"></button>
-                </div>
-                <div class="col-md-6"><button type="button" class="btn btn-light answer" id="answer-4"></button>
-                </div>
+            <div class="row">
+                <div class="col-md-6" id="answer-3"><!-- Placement for button --></div>
+                <div class="col-md-6" id="answer-4"><!-- Placement for button --></div>
             </div>
-
+            <div class="row mb-4">
+                <div class = "col"><!-- for centering --></div>
+                <div class = "col" id="try-again"><!-- Try Again Button Appended Here --></div>
+                <div class = "col"><!-- for centering --></div>
+            </div>
         </div>
         <div class="col">
             <!-- Timer -->

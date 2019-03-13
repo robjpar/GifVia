@@ -126,7 +126,8 @@ function generateTriviaGif() {
         method: "GET"
     }).then(function(response) {
         console.log(gifQueryURL);
-        var imageURL = response.data.image_original_url;
+        console.log(response);
+        var imageURL = response.data.image_url;
         gif.attr("src", imageURL).attr("alt", "trivia image");
     })
 };
