@@ -45,7 +45,7 @@ var topics = "";
 var topicNumber = 0;
 var difficulty = "";
 var giphyAPIKey = "pUpYuVe3td58u23oogHLM1T2pHFENVTJ&limit=10";
-var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&tag=";
+var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&tag=" + currentPlayer.category;
 
 
 var pastPlayer = {
@@ -107,7 +107,7 @@ function questionGenerator() {
             question = response.results[0].question;
             console.log(question);
             wordArray = question.split(" ");
-            pickWord();
+            // pickWord();
             $("#question-display").html(question);
             var short = response.results[0];
             answerArray = [];
@@ -122,7 +122,7 @@ function questionGenerator() {
 
 function generateTriviaGif() {
     $.ajax({
-        url: (gifQueryURL+word), 
+        url: gifQueryURL, 
         method: "GET"
     }).then(function(response) {
         console.log(gifQueryURL);
