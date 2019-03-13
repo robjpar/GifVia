@@ -33,6 +33,7 @@ var question = "";
 var word = "";
 var wordArray = [];
 var answerArray = [];
+var correctAnswer = "";
 var textArray = [$("#answer-1"), $("#answer-2"), $("#answer-3"), $("#answer-4")];
 var category = "";
 var allowClicks = false;
@@ -45,7 +46,7 @@ var topics = "";
 var topicNumber = 0;
 var difficulty = "";
 var giphyAPIKey = "pUpYuVe3td58u23oogHLM1T2pHFENVTJ&limit=10";
-var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&tag=" + currentPlayer.category;
+var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&rating=g&tag=";
 
 
 var pastPlayer = {
@@ -57,7 +58,7 @@ var pastPlayer = {
 var questionInformation = {
     question: question,
     outcome: winLoss,
-    correctAnswer: answerArray[0],
+    correctAnswer: correctAnswer,
     userSelection: userSelection,
 }
 
@@ -73,6 +74,7 @@ $(document).ready(function() {
     $("#username").html(currentPlayer.nickName);
     $("#topic").html(currentPlayer.category);
     timerRunning = false;
+    $("#question-display").text("Click the image to get started!");
 });
 
 $("#trivia-gif").one("click", function() {
@@ -94,7 +96,7 @@ function questionGenerator() {
     } else if (count > 4 && count < 7) {
         difficulty = "hard";
         allowGamePlay();
-    } else if (count >= 6) {
+    } else if (count > 6) {
         gameOver();
     }
     // console.log(difficulty);
@@ -119,6 +121,7 @@ function questionGenerator() {
             var short = response.results[0];
             answerArray = [];
             answerArray.push(short.correct_answer, short.incorrect_answers[0], short.incorrect_answers[1], short.incorrect_answers[2]);
+            correctAnswer = answerArray[0];
             shuffleAnswers();
             generateTriviaGif(this.category);
         });
@@ -127,9 +130,10 @@ function questionGenerator() {
 
 function generateTriviaGif() {
     $.ajax({
-        url: gifQueryURL, 
+        url: gifQueryURL + currentPlayer.category, 
         method: "GET"
     }).then(function(response) {
+        createCORSRequest();
         var imageURL = response.data.fixed_height_small_url;
         gif.attr("src", imageURL).attr("alt", "trivia image");
     })
@@ -145,20 +149,18 @@ function shuffleAnswers() {
         textArray[index] = temp;
     }
     for (var i = 0; i < textArray.length; i++) {
-        var button = $(`<button type="button" class="btn btn-light answer" style="color:purple">${answerArray[i]}</button>`);
-        textArray[i].val("");
+        textArray[i].text("");
+        var button = $(`<button type="button" class="btn btn-light answer" id="button-${i+1}" style="color:black">${answerArray[i]}</button>`);
         textArray[i].append(button).css("color", "purple");
     }
 };
 
-$(".answer").on("click", function() {
-    // console.log("Answer[0] = "+answerArray[0]);
-    //         console.log("1 = "+ $("#answer-1").text());
+function selectAnswer() {
     if (allowClicks) {
         userSelection = $(this).text();
         if (userSelection === answerArray[0]) {
             $("#question-display").text("Yes! You are correct!");
-            $(this).css("color", "green");
+            $(this).css("color", "green").css("background-color", "greenyellow");
             winsCounter++;
             $("#wins").text(winsCounter);
             if (difficulty === "easy") {
@@ -174,45 +176,46 @@ $(".answer").on("click", function() {
         } else {
             $("#question-display").text("Sorry, that was not right");
             lossesCounter++;
-            $(this).css("color", "red");
+            $(this).css("color", "red").css("background-color", "pink");
             showRightAnswer();
             $("#losses").text(lossesCounter);
             winLoss = "loser";
             results();
         }
-        function showRightAnswer() {
-            if ($("#answer-1").text() === answerArray[0]) {
-                $("#answer-1").css("color", "green")
-            } else if ($("#answer-2").text() === answerArray[0]) {
-                $("#answer-2").css("color", "green")
-            } else if ($("#answer-3").text() === answerArray[0]) {
-                $("#answer-3").css("color", "green")
-            } else if ($("#answer-4").text() === answerArray[0]) {
-                $("#answer-4").css("color", "green")
+        database.ref("questions").push(questionInformation, function (error) {
+            if (error) {
+                console.log("The write failed, error code: " + error.code);
+            } else {
+                console.log("The write successful");
             }
-        }
+        });
         function results() {
-            database.ref("questions").push(questionInformation, function (error) {
-                if (error) {
-                    console.log("The write failed, error code: " + error.code);
-                } else {
-                    console.log("The write successful");
-                }
-            });
             allowClicks = false;
             generateWinLossGif();
             count++;
             timerRunning = false;
         }
     }
-    
-});
+};
+
+function showRightAnswer() {
+    if ($("#button-1").text() === answerArray[0]) {
+        $("#button-1").css("color", "green").css("background-color", "greenyellow");
+    } else if ($("#button-2").text() === answerArray[0]) {
+        $("#button-2").css("color", "green")
+    } else if ($("#button-3").text() === answerArray[0]) {
+        $("#button-3").css("color", "green")
+    } else if ($("#button-4").text() === answerArray[0]) {
+        $("#button-4").css("color", "green")
+    }
+};
 
 function generateWinLossGif() {
     $.ajax({
         url: gifQueryURL + winLoss,
         method: "GET"
     }).then(function(response) {
+        createCORSRequest();
         var imageURL = response.data.image_original_url;
         gif.attr("src", imageURL);
     });
@@ -227,7 +230,8 @@ function countDown() {
         if (timer < 0) {
             $("#question-display").text("You are out of time");
             lossesCounter++;
-            $("#losses").text(lossesCounter)
+            $("#losses").text(lossesCounter);
+            showRightAnswer();
             winLoss = "loser";
             timerRunning = false;
             generateWinLossGif();
@@ -239,7 +243,9 @@ function countDown() {
 function gameOver() {
     clearInterval(intervalId);
     timerRunning = false;
-    $(".answer").text("");
+    for (var i = 0; i < textArray.length; i++) {
+        textArray[i].text("");
+    }
     if (winsCounter > lossesCounter) {
         $("#question-display").text("You won! Great job");
         winLoss = "winner";
@@ -251,12 +257,14 @@ function gameOver() {
         winLoss = "tie";
     };
     finalWinLoss();
-    $("#try-again").html('<a class="btn btn-primary" href="index.html" role="button">Try Again?</a>');
+    $("#try-again").html('<a class="btn btn-primary" href="index.html" role="button">Try Again!</a>');
+    
     function finalWinLoss() {
         $.ajax({
             url: gifQueryURL + winLoss,
             method: "GET"
         }).then(function(response) {
+            createCORSRequest();
             var imageURL = response.data.image_original_url;
             gif.attr("src", imageURL);
         });
@@ -285,4 +293,52 @@ function pickWord() {
     }
 };
 
+$(document).on("click", ".answer", selectAnswer);
+
 //re-write database push for current player?
+
+// Create the XHR object.
+function createCORSRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+      // XHR for Chrome/Firefox/Opera/Safari.
+      xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined") {
+      // XDomainRequest for IE.
+      xhr = new XDomainRequest();
+      xhr.open(method, url);
+    } else {
+      // CORS not supported.
+      xhr = null;
+    }
+    return xhr;
+  }
+  
+  // Helper method to parse the title tag from the response.
+  function getTitle(text) {
+    return text.match('<title>(.*)?</title>')[1];
+  }
+  
+  // Make the actual CORS request.
+  function makeCorsRequest() {
+    // This is a sample server that supports CORS.
+     
+    var xhr = createCORSRequest('GET', url);
+    if (!xhr) {
+      alert('CORS not supported');
+      return;
+    }
+  
+    // Response handlers.
+    xhr.onload = function() {
+      var text = xhr.responseText;
+      var title = getTitle(text);
+      alert('Response from CORS request to ' + url + ': ' + title);
+    };
+  
+    xhr.onerror = function() {
+      alert('Woops, there was an error making the request.');
+    };
+  
+    xhr.send();
+  }
