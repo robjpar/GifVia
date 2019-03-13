@@ -42,7 +42,7 @@ var gif = $("#trivia-gif");
 
 var winLoss = "win";
 
-var topics = "";
+// var topics = "";
 var topicNumber = 0;
 var difficulty = "";
 var giphyAPIKey = "pUpYuVe3td58u23oogHLM1T2pHFENVTJ&limit=10";
@@ -60,6 +60,7 @@ var questionInformation = {
     outcome: winLoss,
     correctAnswer: correctAnswer,
     userSelection: userSelection,
+    category: currentPlayer.category,
 }
 
 database.ref("past-players").push(pastPlayer, function (error) {
@@ -87,16 +88,16 @@ function questionGenerator() {
     timer = 10;
     timerRunning = true;
     allowClicks = true;
-    if (count < 3) {
+    if (count < 2) {
         difficulty = "easy";
         allowGamePlay();
-    } else if (count > 2 && count < 5) {
+    } else if (count > 1 && count < 3) {
         difficulty = "medium";
         allowGamePlay();
-    } else if (count > 4 && count < 7) {
+    } else if (count > 2 && count < 4) {
         difficulty = "hard";
         allowGamePlay();
-    } else if (count > 6) {
+    } else if (count > 3) {
         gameOver();
     }
     // console.log(difficulty);
@@ -257,7 +258,7 @@ function gameOver() {
         winLoss = "tie";
     };
     finalWinLoss();
-    $("#try-again").html('<a class="btn btn-primary" href="index.html" role="button">Try Again!</a>');
+    $("#try-again").html('<a class="btn btn-primary" href="index.html" role="button" style="margin:10px">Pick a new topic!</a>').append('<a class="btn btn-primary" role="button" id="more-questions">Get another 12 questions</a>');
     
     function finalWinLoss() {
         $.ajax({
@@ -269,6 +270,15 @@ function gameOver() {
             gif.attr("src", imageURL);
         });
     }
+};
+
+function moreQuestions() {
+    count = 1;
+    winsCounter = 0;
+    lossesCounter = 0;
+    $("#wins").text(winsCounter);
+    $("#losses").text(lossesCounter);
+    questionGenerator();
 };
 
 //need to finish/check code for removing html description of ' and "
@@ -294,6 +304,7 @@ function pickWord() {
 };
 
 $(document).on("click", ".answer", selectAnswer);
+$(document).on("click", "#more-questions", moreQuestions);
 
 //re-write database push for current player?
 
