@@ -47,7 +47,7 @@ var winLoss = "win";
 // var topics = "";
 // var topicNumber = 0;
 var difficulty = "";
-var giphyAPIKey = "pUpYuVe3td58u23oogHLM1T2pHFENVTJ&limit=10";
+var giphyAPIKey = "dc6zaTOxFJmzC";
 var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&rating=g&tag=";
 
 
@@ -221,6 +221,7 @@ function countDown() {
         timer--;
         if (timer < 0) {
             $("#question-display").text("You are out of time");
+            count++;
             lossesCounter++;
             $("#losses").text(lossesCounter);
             showRightAnswer();
