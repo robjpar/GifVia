@@ -172,6 +172,7 @@ function selectAnswer() {
             correctAnswer: correctAnswer,
             userSelection: userSelection,
             category: currentPlayer.category,
+            difficulty: difficulty
         }
         database.ref("questions").push(questionInformation, function (error) {
             if (error) {
