@@ -1,12 +1,14 @@
-var currentPlayer = {
-    nickName: "Player1032",
-    category: "books",
-    categoryId: 10
-}
+// var currentPlayer = {
+//     nickName: "",
+//     category: "",
+//     categoryId: 0,
+//     score = 0
+// }
 
-sessionStorage.setItem("currentPlayer", JSON.stringify(currentPlayer));
+// sessionStorage.setItem("currentPlayer", JSON.stringify(currentPlayer));
 
 var currentPlayer = JSON.parse(sessionStorage.getItem("currentPlayer"));
+console.log(currentPlayer);
 
 var config = {
     apiKey: "AIzaSyAh9csQszjYRTf32OYxyoalMqw1fIusxac",
@@ -49,30 +51,9 @@ var giphyAPIKey = "pUpYuVe3td58u23oogHLM1T2pHFENVTJ&limit=10";
 var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&rating=g&tag=";
 
 
-var pastPlayer = {
-    nickName: currentPlayer.nickName,
-    category: currentPlayer.category,
-    score: score
-}
-
-var questionInformation = {
-    question: question,
-    outcome: winLoss,
-    correctAnswer: correctAnswer,
-    userSelection: userSelection,
-    category: currentPlayer.category,
-}
-
-database.ref("past-players").push(pastPlayer, function (error) {
-    if (error) {
-        console.log("The write failed, error code: " + error.code);
-    } else {
-        console.log("The write successful");
-    }
-});
 
 $(document).ready(function() {
-    $("#username").html(currentPlayer.nickName);
+    $("#username").html(currentPlayer.nickname);
     $("#topic").html(currentPlayer.category);
     timerRunning = false;
     $("#question-display").text("Click the image to get started!");
@@ -185,6 +166,13 @@ function selectAnswer() {
             winLoss = "loser";
             results();
         }
+        var questionInformation = {
+            question: question,
+            outcome: winLoss,
+            correctAnswer: correctAnswer,
+            userSelection: userSelection,
+            category: currentPlayer.category,
+        }
         database.ref("questions").push(questionInformation, function (error) {
             if (error) {
                 console.log("The write failed, error code: " + error.code);
@@ -219,7 +207,7 @@ function generateWinLossGif() {
         method: "GET"
     }).then(function(response) {
         createCORSRequest();
-        var imageURL = response.data.image_original_url;
+        var imageURL = response.data.fixed_height_small_url;
         gif.attr("src", imageURL);
     });
     clearInterval(intervalId);
@@ -260,15 +248,26 @@ function gameOver() {
         winLoss = "tie";
     };
     finalWinLoss();
-    $("#try-again").html('<a class="btn btn-primary" href="index.html" role="button" style="margin:10px">Pick a new topic!</a>').append('<a class="btn btn-primary" role="button" id="more-questions">Get another 12 questions</a>');
-    
+    $("#try-again").html('<a class="btn btn-primary" href="index.html" role="button" id="new-topic" style="margin:10px">Pick a new topic!</a>').append('<a class="btn btn-primary" role="button" id="more-questions">Get another 12 questions</a>');
+    var pastPlayer = {
+        nickName: currentPlayer.nickname,
+        category: currentPlayer.category,
+        score: score
+    }
+    database.ref("past-players").push(pastPlayer, function (error) {
+        if (error) {
+            console.log("The write failed, error code: " + error.code);
+        } else {
+            console.log("The write successful");
+        }
+    });
     function finalWinLoss() {
         $.ajax({
             url: gifQueryURL + winLoss,
             method: "GET"
         }).then(function(response) {
             createCORSRequest();
-            var imageURL = response.data.image_original_url;
+            var imageURL = response.data.fixed_height_small_url;
             gif.attr("src", imageURL);
         });
     }
@@ -284,6 +283,7 @@ function moreQuestions() {
     $("#try-again").text("");
     questionGenerator();
 };
+
 
 //need to finish/check code for removing html description of ' and "
 //do we want gif to be related to word from question or topic?
