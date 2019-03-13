@@ -17,69 +17,105 @@
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- Links to style CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/QuizStyle.css">
+
+    <!-- Link to AJAX -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
 </head>
 
 <body>
 
-    <div class="jumbotron jumbotron-fluid text-center">
-        <div class="container">
-            <h1 class="display-4">GifVia</h1>
-            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.
-            </p>
-        </div>
+    <div id="header">
+        <h1 id="banner">GifVia</h1>
+        <h6>An interactive, GIF animated trivia game</h6>
     </div>
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="assets/images/me.png" class="card-img-top" alt="nash dog">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <!-- Used for Centering -->
+                </div>
+                <div class="col">
+                    <!-- Score Card -->
+                    <div class="card bgColor fade-in one" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title" id="username">Nickname</h5>
+                            <h5 class="card-title" id="topic">Quiz Topic</h5>
+                            <p class="card-text">Correct = <span id="wins">0</span></p>
+                            <p class="card-text">Incorrect = <span id="losses">0</span></p>
+                            <p class="card-text">Score = <span id="score">0</span></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col text-center">
-                <h1>Question Div <span class="badge badge-secondary"></span></h1>
-                <div class="card text-center" style="width: 21rem;">
-                    <img src="assets/images/me.png" class="card-img-top" alt="nash dog">
-                </div>
-
-                <div class="row">
-                    <div class="col">Answer 1</div>
-                    <div class="col">Answer 2</div>
-                </div>
-                <div class="row">
-                    <div class="col">Answer 3</div>
-                    <div class="col">Answer 4</div>
+                <div class="col">
+                    <!-- Used for Centering -->
                 </div>
             </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="assets/images/me.png" class="card-img-top" alt="nash dog">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
+        </div>
+        <!-- Question/Answer Container -->
+        <div class="col bgColor fade-in two">
+            <div class="card-body">
+                <h5 class="card-title" id="question-display">
+                    <!-- Question Here -->
+                </h5>
+            </div>
+            <div class="row">
+                <div class="col-md-6" id="answer-1"><!-- Placement for button --></div>
+                <div class="col-md-6" id="answer-2"><!-- Placement for button --></div>
+            </div>
+            <div class="row text-center">
+                <div class="col">
+                    <!-- Used for Centering -->
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 22rem;">
+                        <div class="card-img-top">
+                            <img src="assets/images/me.png" class="card-img-top" id="trivia-gif" alt="Gif">
+                        </div>
                     </div>
+                </div>
+                <div class="col">
+                    <!-- Used for Centering -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" id="answer-3"><!-- Placement for button --></div>
+                <div class="col-md-6" id="answer-4"><!-- Placement for button --></div>
+            </div>
+            <div class="row mb-4">
+                <div class = "col"><!-- for centering --></div>
+                <div class = "col" id="try-again"><!-- Try Again Button Appended Here --></div>
+                <div class = "col"><!-- for centering --></div>
+            </div>
+        </div>
+        <div class="col">
+            <!-- Timer -->
+            <div class="card text-center bgColor fade-in three" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Timer</h5>
+                    <h5 class="card-title" id="timer">10</h5>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Link to this webpage's JS script -->
+    <script type="text/javascript" src="assets/javascript/quiz.js"></script>
 
+    <footer>Designed by Phillip Makris, Nash Mcdonald, Krystal Christensen-Wiederrich and Robert Paruch </footer>
 
-    <!-- Links to Javascript/jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="assets/javascript/app.js"></script>
+    <!-- Link to Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
 
     <!-- Link to Bootstrap Javascript/jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="assets/logic/quiz.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>

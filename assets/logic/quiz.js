@@ -130,8 +130,6 @@ function generateTriviaGif() {
         url: gifQueryURL, 
         method: "GET"
     }).then(function(response) {
-        // console.log(response);
-        // console.log(gifQueryURL);
         var imageURL = response.data.fixed_height_small_url;
         gif.attr("src", imageURL).attr("alt", "trivia image");
     })

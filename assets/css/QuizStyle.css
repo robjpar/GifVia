@@ -1,0 +1,208 @@
+@import url("https://www.w3schools.com/w3css/4/w3.css");
+
+#header {
+    text-align: center;
+    border: solid;
+    
+    border-color: rgba(0, 0, 0, 0);
+    
+    
+    background-color: rgb(0, 70, 83);
+    color: rgb(236, 236, 236);
+    
+}
+
+#info {
+    border: solid;
+    background-color: rgba(0, 0, 0, 0.788);
+    color: rgb(212, 212, 212);
+    border-color: rgba(0, 0, 0, 0.062);
+    font-size: 1px;
+    
+}
+
+#highScore {
+    text-align: center;
+    border: solid;
+    background-color: rgba(0, 0, 0, 0.788);
+    color: rgb(212, 212, 212);
+    border-color: rgba(0, 0, 0, 0.281);
+    
+    margin-left: 20px;
+    
+    
+    
+}
+
+#quizTopic {
+    border: solid;
+    border-color: rgba(0, 0, 0, 0.336);
+    margin-top: 10px;
+    padding-bottom: 65px;
+    font-size: 50px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.788);
+    color: rgb(212, 212, 212);
+}
+
+#nickname {
+    border: solid;
+    border-color: rgba(0, 0, 0, 0.336);
+    margin-top: 10px;
+    
+    padding-top: 0px;
+    
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.788);
+    color: rgb(212, 212, 212);
+    font-size: 35px;
+    font-weight: bold;
+    
+}
+
+footer {
+   
+    text-align: center;
+    
+    margin: 50px 0px 0px 0px;
+    padding: 5px 0px 5x 0px;
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+
+
+#banner {
+    font-size: 85px;  
+}
+
+#tBox {
+    
+    text-align: center;
+    
+}
+
+aside {
+    border: solid;
+    float: right;
+    
+     margin-left: auto;
+    margin-right: auto;
+    margin: 5px; 
+
+    
+}
+
+body {
+    background-image: url("https://i.imgur.com/dqj1Hfw.jpg");
+    background-size: cover;
+    font-family: 'Neucha', cursive;
+}
+
+input {
+    background-color: rgb(224, 224, 224);
+}
+
+#quizLabel {
+    font-size: 60px;
+}
+
+.scoreTable {
+    background-color: black;
+}
+
+#table {
+    border: solid;
+    background-color: rgba(0, 0, 0, 0.788);
+    color: rgb(212, 212, 212);
+    border-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    margin-left: 20px;
+    
+    margin-top: 10px;
+    
+}
+
+#tableText {
+    color: rgb(212, 212, 212);
+}
+
+#tableHead {
+    font-size: 20px;
+}
+
+#tableItems {
+    font-size: 1px;
+}
+
+#scoreHead {
+    font-size: 45px;
+}
+
+/* If all divs have the same styling, why not create a class that does it all. */
+.bgColor{
+    border: solid;
+    background-color: rgba(0, 0, 0, 0.788);
+    color: rgb(212, 212, 212);
+    border-color: rgba(255, 255, 255, 0);
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.answer{
+    margin: 5px 5px 5px 5px;
+}
+.answer:hover{
+    font-size:1.5rem;
+}
+#question-display{
+    text-align: center;
+    height: 60px; /* Set so that the div doesn't constantly shift when larger text is added */
+}
+
+/* --------------------------------- */
+/*         Fade Animations           */
+/* --------------------------------- */
+
+/* make keyframes that tell the start state and the end state of our object */
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.fade-in {
+  opacity:0;  /* make things invisible upon start */
+  -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}
+
+.fade-in.one {
+  -webkit-animation-delay: 0.2s;
+  -moz-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+.fade-in.two {
+  -webkit-animation-delay: 0.4s;
+  -moz-animation-delay:0.4s;
+  animation-delay: 0.4s;
+}
+
+.fade-in.three {
+  -webkit-animation-delay: 0.6s;
+  -moz-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+
+
+
+
