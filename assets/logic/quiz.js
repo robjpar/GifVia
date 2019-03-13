@@ -90,7 +90,7 @@ function questionGenerator() {
     } else if (count >= 6) {
         gameOver();
     }
-    console.log(difficulty);
+    // console.log(difficulty);
     function allowGamePlay() {
         getAjax();
         intervalId = setInterval(countDown, 1000);
@@ -99,13 +99,13 @@ function questionGenerator() {
 
     function getAjax() {
         var triviaQueryURL = "https://opentdb.com/api.php?amount=1&category=" + currentPlayer.categoryId + "&difficulty=" + difficulty + "&type=multiple";
-        console.log(triviaQueryURL);
+        // console.log(triviaQueryURL);
         $.ajax({
             url: triviaQueryURL,
             method: "GET"
         }).then(function(response) {
             question = response.results[0].question;
-            console.log(question);
+            // console.log(question);
             wordArray = question.split(" ");
             // pickWord();
             $("#question-display").html(question);
@@ -118,15 +118,14 @@ function questionGenerator() {
     };
 };
 
-//this technically now works, but it's very slow in loading gifs
-
 function generateTriviaGif() {
     $.ajax({
         url: gifQueryURL, 
         method: "GET"
     }).then(function(response) {
-        console.log(gifQueryURL);
-        var imageURL = response.data.image_original_url;
+        // console.log(response);
+        // console.log(gifQueryURL);
+        var imageURL = response.data.fixed_height_small_url;
         gif.attr("src", imageURL).attr("alt", "trivia image");
     })
 };
@@ -141,11 +140,14 @@ function shuffleAnswers() {
         textArray[index] = temp;
     }
     for (var i = 0; i < textArray.length; i++) {
-        textArray[i].html(answerArray[i]).css("color", "black");
+        var button = $(`<button type="button" class="btn btn-light answer" style="color:purple">${answerArray[i]}</button>`);
+        textArray[i].append(button).css("color", "purple");
     }
 };
 
 $(".answer").on("click", function() {
+    // console.log("Answer[0] = "+answerArray[0]);
+    //         console.log("1 = "+ $("#answer-1").text());
     if (allowClicks) {
         userSelection = $(this).text();
         if (userSelection === answerArray[0]) {
@@ -167,16 +169,21 @@ $(".answer").on("click", function() {
             $("#question-display").text("Sorry, that was not right");
             lossesCounter++;
             $(this).css("color", "red");
-            //bug == this is not working to display correct answer
-            for (var i = 0; i < textArray.length; i++) {
-                if (textArray[i] === answerArray[0]) {
-                    console.log("this is the correct answer" + textArray[i]);
-                    textArray[i].css ("color", "green")
-                }
-            };
+            showRightAnswer();
             $("#losses").text(lossesCounter);
             winLoss = "loser";
             results();
+        }
+        function showRightAnswer() {
+            if ($("#answer-1").text() === answerArray[0]) {
+                $("#answer-1").css("color", "green")
+            } else if ($("#answer-2").text() === answerArray[0]) {
+                $("#answer-2").css("color", "green")
+            } else if ($("#answer-3").text() === answerArray[0]) {
+                $("#answer-3").css("color", "green")
+            } else if ($("#answer-4").text() === answerArray[0]) {
+                $("#answer-4").css("color", "green")
+            }
         }
         function results() {
             allowClicks = false;
@@ -213,7 +220,7 @@ function countDown() {
             generateWinLossGif();
         }
     }
-    console.log(timer)
+    // console.log(timer)
 };
 
 function gameOver() {
