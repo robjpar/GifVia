@@ -1,7 +1,7 @@
 var currentPlayer = {
-    nickName: "Player566",
-    category: "mythology",
-    categoryId: 20
+    nickName: "Player1032",
+    category: "books",
+    categoryId: 10
 }
 
 sessionStorage.setItem("currentPlayer", JSON.stringify(currentPlayer));
@@ -23,13 +23,14 @@ var database = firebase.database();
 
 var winsCounter = 0;
 var lossesCounter = 0;
+var score = 0;
 var count = 1;
 var timer = 0;
 var intervalId;
 var timerRunning = false;
 var userSelection = null;
 var question = "";
-var words = [];
+var word = "";
 var wordArray = [];
 var answerArray = [];
 var textArray = [$("#answer-1"), $("#answer-2"), $("#answer-3"), $("#answer-4")];
@@ -44,13 +45,13 @@ var topics = "";
 var topicNumber = 0;
 var difficulty = "";
 var giphyAPIKey = "pUpYuVe3td58u23oogHLM1T2pHFENVTJ&limit=10";
-var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&tag=";
+var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&tag=" + currentPlayer.category;
 
 
 var pastPlayer = {
     nickName: currentPlayer.nickName,
     category: currentPlayer.category,
-    score: winsCounter
+    score: score
 }
 
 database.ref("past-players").push(pastPlayer, function (error) {
@@ -61,11 +62,15 @@ database.ref("past-players").push(pastPlayer, function (error) {
     }
 });
 
-$( document ).ready(function() {
+$(document).ready(function() {
     $("#username").html(currentPlayer.nickName);
     $("#topic").html(currentPlayer.category);
-    questionGenerator();
+    timerRunning = false;
 });
+
+$("#trivia-gif").one("click", function() {
+    questionGenerator();
+})
 
 
 function questionGenerator() {
@@ -85,6 +90,7 @@ function questionGenerator() {
     } else if (count >= 6) {
         gameOver();
     }
+    console.log(difficulty);
     function allowGamePlay() {
         getAjax();
         intervalId = setInterval(countDown, 1000);
@@ -93,6 +99,7 @@ function questionGenerator() {
 
     function getAjax() {
         var triviaQueryURL = "https://opentdb.com/api.php?amount=1&category=" + currentPlayer.categoryId + "&difficulty=" + difficulty + "&type=multiple";
+        console.log(triviaQueryURL);
         $.ajax({
             url: triviaQueryURL,
             method: "GET"
@@ -100,7 +107,7 @@ function questionGenerator() {
             question = response.results[0].question;
             console.log(question);
             wordArray = question.split(" ");
-            pickWord();
+            // pickWord();
             $("#question-display").html(question);
             var short = response.results[0];
             answerArray = [];
@@ -118,6 +125,7 @@ function generateTriviaGif() {
         url: gifQueryURL, 
         method: "GET"
     }).then(function(response) {
+        console.log(gifQueryURL);
         var imageURL = response.data.image_original_url;
         gif.attr("src", imageURL).attr("alt", "trivia image");
     })
@@ -145,6 +153,14 @@ $(".answer").on("click", function() {
             $(this).css("color", "green");
             winsCounter++;
             $("#wins").text(winsCounter);
+            if (difficulty === "easy") {
+                score = score +1;
+            } else if (difficulty === "medium") {
+                score = score + 2;
+            } else if (difficulty === "hard") {
+                score = score + 3;
+            }
+            $("#score").html(score);
             winLoss = "winner";
             results();
         } else {
@@ -227,28 +243,26 @@ function gameOver() {
     }
 };
 
-//this code isn't working correctly
+//need to finish/check code for removing html description of ' and "
+//do we want gif to be related to word from question or topic?
+//is there an easier way to pick a "focal point" word from question?
 
 function pickWord() {
     var item = Math.floor(Math.random()*wordArray.length);
-    console.log(wordArray[item]);
-        if (wordArray[item].length < 6) {
-            pickWord();
-        } else {
-            console.log("pick me!");
-            gifQueryURL = gifQueryURL+item;
-            generateTriviaGif();
-        }
+    // console.log(wordArray[item]);
+    if (wordArray[item].length < 6) {
+        pickWord();
+    } else if (wordArray[item].indexOf("$#039")) {
+        wordArray.splice(item, 1, " ");
+        console.log("yes" + wordArray[item]);
+    } else if (wordArray[i].indexOf("&quot;")) {
+        ("$&quot;").replace("$&quot;", " ");
+    } else {
+        console.log("pick me!");
+        word = wordArray[item];
+        console.log(word);
+        generateTriviaGif();
     }
-    
-    // console.log(wordArray);
-    // for (var i = 0; i < wordArray.length; i++) {
-    //     if (wordArray[i].indexOf("$#039")) {
-    //         console.log("yes" + i);
-    //         ("$#039").replace("$#039", " ");
-    //     } else if (wordArray[i].indexOf("&quot;")) {
-    //         ("$&quot;").replace("$&quot;", " ");
-    //     }
-    // }
-    
-// };
+};
+
+//re-write database push for current player?
