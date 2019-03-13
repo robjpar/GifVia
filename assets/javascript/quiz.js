@@ -1,33 +1,12 @@
-// data sent from index.js
+var currentPlayer = {
+    nickName: "Player1032",
+    category: "books",
+    categoryId: 10
+}
+
+sessionStorage.setItem("currentPlayer", JSON.stringify(currentPlayer));
+
 var currentPlayer = JSON.parse(sessionStorage.getItem("currentPlayer"));
-console.log(currentPlayer);
-// ==================
-
-var winsCounter = 0;
-var lossesCounter = 0;
-var count = 0;
-var timer = 0;
-var intervalId;
-var timerRunning = false;
-var userSelection = null;
-var questions;
-var newArray = [];
-
-var gif = $("<img>");
-
-var winLoss = "win";
-
-var topic = $("#user-input").text();
-var topicNumber = $("#user-input").val();
-var difficulty = $("#difficulty-input").val();
-var giphyAPIKey = "";
-
-//API only generates a few topics, so these will have to be input on front end
-//there are 32 categories--this is how they are pulled based on number
-//do we also want to include difficulty?
-
-var triviaQueryURL = "https://opentdb.com/api.php?amount=10&category=" + topicNumber + "&difficulty=" + difficulty + "&type=multiple";
-var gifQueryURL = "https://api.gifphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&tag=";
 
 var config = {
     apiKey: "AIzaSyAh9csQszjYRTf32OYxyoalMqw1fIusxac",
@@ -37,126 +16,344 @@ var config = {
     storageBucket: "gifvia-b45c0.appspot.com",
     messagingSenderId: "160762099816"
   };
-  firebase.initializeApp(config);
 
-  var database = firebase.database();
+firebase.initializeApp(config);
 
-$("submit").on("click", function() {
-    $.ajax({
-        url: triviaQueryURL,
-        method: "GET"
-    }).then(function(response) {
-        console.log(response);
-        display();
-    });
+var database = firebase.database();
+
+var winsCounter = 0;
+var lossesCounter = 0;
+var score = 0;
+var count = 1;
+var timer = 0;
+var intervalId;
+var timerRunning = false;
+var userSelection = null;
+var question = "";
+var word = "";
+var wordArray = [];
+var answerArray = [];
+var correctAnswer = "";
+var textArray = [$("#answer-1"), $("#answer-2"), $("#answer-3"), $("#answer-4")];
+var category = "";
+var allowClicks = false;
+
+var gif = $("#trivia-gif");
+
+var winLoss = "win";
+
+// var topics = "";
+// var topicNumber = 0;
+var difficulty = "";
+var giphyAPIKey = "pUpYuVe3td58u23oogHLM1T2pHFENVTJ&limit=10";
+var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&rating=g&tag=";
+
+
+var pastPlayer = {
+    nickName: currentPlayer.nickName,
+    category: currentPlayer.category,
+    score: score
+}
+
+var questionInformation = {
+    question: question,
+    outcome: winLoss,
+    correctAnswer: correctAnswer,
+    userSelection: userSelection,
+    category: currentPlayer.category,
+}
+
+database.ref("past-players").push(pastPlayer, function (error) {
+    if (error) {
+        console.log("The write failed, error code: " + error.code);
+    } else {
+        console.log("The write successful");
+    }
+});
+
+$(document).ready(function() {
+    $("#username").html(currentPlayer.nickName);
+    $("#topic").html(currentPlayer.category);
+    timerRunning = false;
+    $("#question-display").text("Click the image to get started!");
+});
+
+$("#trivia-gif").one("click", function() {
+    questionGenerator();
 })
 
-function display() {
-    questions = response;
-    $("#question-display").text(questions.results[count].question);
-    randomizeAnswers();
-    $("#answer-display").text(newArray);
-    generateTriviaGif();
-    $("#gif-display").text(gif);
-    gamePlay();
-    checkCount();
 
-    function randomizeAnswers() {
-        //write a function that takes correct answer and places it randomly in incorrect answer array while maintaining
-        //data point that it is the correct answer
-        newArray = [];
+function questionGenerator() {
+    clearInterval(intervalId);
+    userSelection = null;
+    timer = 10;
+    timerRunning = true;
+    allowClicks = true;
+    if (count < 2) {
+        difficulty = "easy";
+        allowGamePlay();
+    } else if (count > 1 && count < 3) {
+        difficulty = "medium";
+        allowGamePlay();
+    } else if (count > 2 && count < 4) {
+        difficulty = "hard";
+        allowGamePlay();
+    } else if (count > 3) {
+        gameOver();
     }
-    //how do we identify save this data? Into a variable?
-    //for (var i = 0; i < response.length; i++)
+    // console.log(difficulty);
+    function allowGamePlay() {
+        getAjax();
+        intervalId = setInterval(countDown, 1000);
+    }
+
+
+    function getAjax() {
+        var triviaQueryURL = "https://opentdb.com/api.php?amount=1&category=" + currentPlayer.categoryId + "&difficulty=" + difficulty + "&type=multiple";
+        // console.log(triviaQueryURL);
+        $.ajax({
+            url: triviaQueryURL,
+            method: "GET"
+        }).then(function(response) {
+            question = response.results[0].question;
+            // console.log(question);
+            wordArray = question.split(" ");
+            // pickWord();
+            $("#question-display").html(question);
+            var short = response.results[0];
+            answerArray = [];
+            answerArray.push(short.correct_answer, short.incorrect_answers[0], short.incorrect_answers[1], short.incorrect_answers[2]);
+            correctAnswer = answerArray[0];
+            shuffleAnswers();
+            generateTriviaGif(this.category);
+        });
+    };
 };
-
-
 
 function generateTriviaGif() {
     $.ajax({
-        url: gifQueryURL + topic, //is this the correct syntax?
+        url: gifQueryURL + currentPlayer.category, 
         method: "GET"
     }).then(function(response) {
-        var imageURL = response.data.image_original_url;
-        console.log(imageURL);
+        createCORSRequest();
+        var imageURL = response.data.fixed_height_small_url;
         gif.attr("src", imageURL).attr("alt", "trivia image");
     })
 };
 
-function generateWinLossGif() {
-    $.ajax({
-        url: gifQueryURL + winLoss, //is this the correct syntax? -- I don't think this will work since result is a string that includes "" --this might not be cohesive with giphy's API documentation
-        method: "GET"
-    }).then(function(response) {
-        var imageURL = response.data.image_original_url;
-        console.log(imageURL);
-        gif.attr("src", imageURL);
-        $("#gif-display").text(gif);
-    })
-    if (count <= 10) {
-        setTimeout(display, 5000);
-    } else {
-        setTimeout(gameOver, 5000);
+function shuffleAnswers() {
+    var ctr = textArray.length, temp, index;
+    while (ctr > 0) {
+        index = Math.floor(Math.random() * ctr);
+        ctr--;
+        temp = textArray[ctr];
+        textArray[ctr] = textArray[index];
+        textArray[index] = temp;
     }
-    userSelection = null;
-    timerRunning = false;
-    clearInterval(intervalId);
-}
-
-//in function gamePlay make sure count++
-
-function gamePlay() {
-    $("input[type=radio]").click(function() {
-        userSelection = this.text;
-        if (userSelection === questions.results[count].correct_answer) {
-            winsCounter++;
-            winLoss = "win";
-            generateWinLossGif();
-        } else if (userSelection !== questions.results[count].correct_answer) {
-            lossesCounter++;
-            winLoss = "loss";
-            generateWinLossGif();
-        }
-    })
+    for (var i = 0; i < textArray.length; i++) {
+        textArray[i].text("");
+        var button = $(`<button type="button" class="btn btn-light answer" id="button-${i+1}" style="color:black">${answerArray[i]}</button>`);
+        textArray[i].append(button).css("color", "purple");
+    }
 };
 
-function checkCount() {
-    timer = 15;
-    timerRunning = ture;
-    intervalId = setInterval(countDown, 1000);
+function selectAnswer() {
+    if (allowClicks) {
+        clearInterval(intervalId);
+        userSelection = $(this).text();
+        if (userSelection === answerArray[0]) {
+            $("#question-display").text("Yes! You are correct!");
+            $(this).css("color", "green").css("background-color", "greenyellow");
+            winsCounter++;
+            $("#wins").text(winsCounter);
+            if (difficulty === "easy") {
+                score = score +1;
+            } else if (difficulty === "medium") {
+                score = score + 2;
+            } else if (difficulty === "hard") {
+                score = score + 3;
+            }
+            $("#score").html(score);
+            winLoss = "winner";
+            results();
+        } else {
+            $("#question-display").text("Sorry, that was not right");
+            lossesCounter++;
+            $(this).css("color", "red").css("background-color", "pink");
+            showRightAnswer();
+            $("#losses").text(lossesCounter);
+            winLoss = "loser";
+            results();
+        }
+        database.ref("questions").push(questionInformation, function (error) {
+            if (error) {
+                console.log("The write failed, error code: " + error.code);
+            } else {
+                console.log("The write successful");
+            }
+        });
+        function results() {
+            allowClicks = false;
+            generateWinLossGif();
+            count++;
+            timerRunning = false;
+        }
+    }
+};
+
+function showRightAnswer() {
+    if ($("#button-1").text() === answerArray[0]) {
+        $("#button-1").css("color", "green").css("background-color", "greenyellow");
+    } else if ($("#button-2").text() === answerArray[0]) {
+        $("#button-2").css("color", "green")
+    } else if ($("#button-3").text() === answerArray[0]) {
+        $("#button-3").css("color", "green")
+    } else if ($("#button-4").text() === answerArray[0]) {
+        $("#button-4").css("color", "green")
+    }
+};
+
+function generateWinLossGif() {
+    $.ajax({
+        url: gifQueryURL + winLoss,
+        method: "GET"
+    }).then(function(response) {
+        createCORSRequest();
+        var imageURL = response.data.image_original_url;
+        gif.attr("src", imageURL);
+    });
+    clearInterval(intervalId);
+    setTimeout(questionGenerator, 3000);
 }
 
 function countDown() {
     if (timerRunning) {
-        $("#timer").text = timer;
+        $("#timer").text(timer);
         timer--;
-        if (timer < 0 || userSelection !== null) {
-            count++;
+        if (timer < 0) {
+            $("#question-display").text("You are out of time");
             lossesCounter++;
-            clearInterval(intervalId);
-            winLoss = "time over";
+            $("#losses").text(lossesCounter);
+            showRightAnswer();
+            winLoss = "loser";
+            timerRunning = false;
             generateWinLossGif();
-            timerRunning=false;
         }
     }
+    // console.log(timer)
 };
 
 function gameOver() {
-    $("#wins-counter").text(winsCounter);
-    $("#losses-counter").text(lossesCounter);
-    if (winsCounter > lossesCounter) {
-        winsLoss = "win";
-    } else if (lossesCounter > winsCounter) {
-        winsLoss = "loss";
-    } else if (winsCounter === lossesCounter) {
-        winsLoss = "tie";
+    clearInterval(intervalId);
+    timerRunning = false;
+    for (var i = 0; i < textArray.length; i++) {
+        textArray[i].text("");
     }
-    database.ref().push({
-        username: username,
-        outcome: winsLoss,
-        winsCounter: winsCounter,
-        lossesCounter: lossesCounter,
-        //add in functionality to each question that pushes results to firebase? or focus solely on user outcome?
-    })
-    $("#question-display-div").html(generateWinLossGif());
-}
+    if (winsCounter > lossesCounter) {
+        $("#question-display").text("You won! Great job");
+        winLoss = "winner";
+    } else if (lossesCounter > winsCounter) {
+        $("#question-display").text("You lose :(");
+        winLoss = "loser";
+    } else if (lossesCounter === winsCounter) {
+        $("#question-display").text("You tied!");
+        winLoss = "tie";
+    };
+    finalWinLoss();
+    $("#try-again").html('<a class="btn btn-primary" href="index.html" role="button" style="margin:10px">Pick a new topic!</a>').append('<a class="btn btn-primary" role="button" id="more-questions">Get another 12 questions</a>');
+    
+    function finalWinLoss() {
+        $.ajax({
+            url: gifQueryURL + winLoss,
+            method: "GET"
+        }).then(function(response) {
+            createCORSRequest();
+            var imageURL = response.data.image_original_url;
+            gif.attr("src", imageURL);
+        });
+    }
+};
+
+function moreQuestions() {
+    clearInterval(intervalId);
+    count = 1;
+    winsCounter = 0;
+    lossesCounter = 0;
+    $("#wins").text(winsCounter);
+    $("#losses").text(lossesCounter);
+    $("#try-again").text("");
+    questionGenerator();
+};
+
+//need to finish/check code for removing html description of ' and "
+//do we want gif to be related to word from question or topic?
+//is there an easier way to pick a "focal point" word from question?
+
+function pickWord() {
+    var item = Math.floor(Math.random()*wordArray.length);
+    // console.log(wordArray[item]);
+    if (wordArray[item].length < 6) {
+        pickWord();
+    } else if (wordArray[item].indexOf("$#039")) {
+        wordArray.splice(item, 1, " ");
+        console.log("yes" + wordArray[item]);
+    } else if (wordArray[i].indexOf("&quot;")) {
+        ("$&quot;").replace("$&quot;", " ");
+    } else {
+        console.log("pick me!");
+        word = wordArray[item];
+        console.log(word);
+        generateTriviaGif();
+    }
+};
+
+$(document).on("click", ".answer", selectAnswer);
+$(document).on("click", "#more-questions", moreQuestions);
+
+//re-write database push for current player?
+
+// Create the XHR object.
+function createCORSRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+      // XHR for Chrome/Firefox/Opera/Safari.
+      xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined") {
+      // XDomainRequest for IE.
+      xhr = new XDomainRequest();
+      xhr.open(method, url);
+    } else {
+      // CORS not supported.
+      xhr = null;
+    }
+    return xhr;
+  }
+  
+  // Helper method to parse the title tag from the response.
+  function getTitle(text) {
+    return text.match('<title>(.*)?</title>')[1];
+  }
+  
+  // Make the actual CORS request.
+  function makeCorsRequest() {
+    // This is a sample server that supports CORS.
+     
+    var xhr = createCORSRequest('GET', url);
+    if (!xhr) {
+      alert('CORS not supported');
+      return;
+    }
+  
+    // Response handlers.
+    xhr.onload = function() {
+      var text = xhr.responseText;
+      var title = getTitle(text);
+      alert('Response from CORS request to ' + url + ': ' + title);
+    };
+  
+    xhr.onerror = function() {
+      alert('Woops, there was an error making the request.');
+    };
+  
+    xhr.send();
+  }
