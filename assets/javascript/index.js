@@ -188,7 +188,7 @@ function renderScoreboard() {
 function renderHighestScore() {
     var player = pastPlayers[pastPlayers.length - 1];
 
-    $("#highest-score-message").text(`Nickname: ${player.nickname} Topic: ${player.category} Highest Score: ${player.score}`);
+    $("#highest-score-message").html(`Nickname: ${player.nickname} <br> Topic: ${player.category} <br> Highest Score: ${player.score}`);
 }
 const PLAYER_COUNT = 5;
 database.ref(PAST_PLAYERS_REF).orderByChild('score').limitToLast(PLAYER_COUNT).on('value', function (snapshot) {
