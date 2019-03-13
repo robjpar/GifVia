@@ -54,6 +54,13 @@ var pastPlayer = {
     score: score
 }
 
+var questionInformation = {
+    question: question,
+    outcome: winLoss,
+    correctAnswer: answerArray[0],
+    userSelection: userSelection,
+}
+
 database.ref("past-players").push(pastPlayer, function (error) {
     if (error) {
         console.log("The write failed, error code: " + error.code);
@@ -141,6 +148,7 @@ function shuffleAnswers() {
     }
     for (var i = 0; i < textArray.length; i++) {
         var button = $(`<button type="button" class="btn btn-light answer" style="color:purple">${answerArray[i]}</button>`);
+        textArray[i].val("");
         textArray[i].append(button).css("color", "purple");
     }
 };
@@ -186,6 +194,13 @@ $(".answer").on("click", function() {
             }
         }
         function results() {
+            database.ref("questions").push(questionInformation, function (error) {
+                if (error) {
+                    console.log("The write failed, error code: " + error.code);
+                } else {
+                    console.log("The write successful");
+                }
+            });
             allowClicks = false;
             generateWinLossGif();
             count++;
