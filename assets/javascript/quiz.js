@@ -141,7 +141,11 @@ function shuffleAnswers() {
 function selectAnswer() {
     if (allowClicks) {
         clearInterval(intervalId);
-        userSelection = $(this).text();
+        userSelection = ($(this).html());
+        //userSelection = JSON.stringify($(this).html());
+        // console.log(userSelection);
+        // var correct = (answerArray[0]);
+        // console.log(correct);
         if (userSelection === answerArray[0]) {
             $("#question-display").text("Yes! You are correct!");
             $(this).css("color", "green").css("background-color", "greenyellow");
@@ -163,7 +167,7 @@ function selectAnswer() {
             $(this).css("color", "red").css("background-color", "pink");
             showRightAnswer();
             $("#losses").text(lossesCounter);
-            winLoss = "loser";
+            winLoss = "crying";
             results();
         }
         var questionInformation = {
@@ -225,7 +229,7 @@ function countDown() {
             lossesCounter++;
             $("#losses").text(lossesCounter);
             showRightAnswer();
-            winLoss = "loser";
+            winLoss = "crying";
             timerRunning = false;
             generateWinLossGif();
         }
@@ -244,7 +248,7 @@ function gameOver() {
         winLoss = "winner";
     } else if (lossesCounter > winsCounter) {
         $("#question-display").text("You lose :(");
-        winLoss = "loser";
+        winLoss = "crying";
     } else if (lossesCounter === winsCounter) {
         $("#question-display").text("You tied!");
         winLoss = "tie";
@@ -252,7 +256,7 @@ function gameOver() {
     finalWinLoss();
     $("#try-again").html('<a class="btn btn-primary" href="index.html" role="button" id="new-topic" style="margin:10px">Pick a new topic!</a>').append('<a class="btn btn-primary" role="button" id="more-questions">Get another 12 questions</a>');
     var pastPlayer = {
-        nickName: currentPlayer.nickname,
+        nickname: currentPlayer.nickname,
         category: currentPlayer.category,
         score: score
     }
