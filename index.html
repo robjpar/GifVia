@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Index</title>
+  <title>GifVia</title>
 
   <!-- Link to Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
@@ -26,11 +26,138 @@
   <!-- Links to Javascript/jQuery CDN -->
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+
+  <!-- Customary CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
+  <div id="header">
+
+    <h1 id="banner">GifVia</h1>
+
+    <h5>An interactive, GIF animated trivia game</h5>
+
+  </div>
+
+  <br>
 
   <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="row">
+          <div class="col-sm-12" id="info">
+            <h3>Choose a topic then enter a nickname.</h3>
+            <h5>If no nickname is chosen, you will be registered as anonymous.</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12" id="quizTopic">
+            <div class="dropdown">
+              <div class="form-group">
+                <label for="quiz-categiry" id="quizLabel">Quiz Topic:</label><br>
+                <select class="form-control" id="quiz-category">
+                </select>
+              </div>
+            </div>
+
+            <h1>Nickname:</h1>
+            <span id="nickname-message"
+            style="color: orange"></span>
+            <input  type="text" class="tBox" id="nickname">
+            <br><br>
+            <p class="pinNumber">If you want to reuse the nickname, choose a Secret #:</p>
+            <span id="secret-number-message" style="color: red"></span>
+            <input  type="number" class="tBox2"id="secret-number">
+            <!--JS-->
+            
+            <button id="register-button" type="button" class="startGameButton btn btn-info">Start Game</button>
+            
+
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-7" id="highScore">
+        <div class="row">
+          <div class="col-sm-12">
+            <!--JS-->
+            <!--JS-->
+            <h1 id="scoreHead">High Score:</h1>
+            <h3>
+              
+              <span id="highest-score-message"></span>
+            </h3>
+            <div class="playerName"></div>
+
+            <!-- <img id="gif" src="https://media.giphy.com/media/9xt1MUZqkneFiWrAAD/giphy.gif"> -->
+            <img id="gif-img">
+            <br><br><br>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-11" id="table">
+        <h3>Top Players</h3>
+        <table class="table table-sm text-center" id=tableText>
+
+          <tr id="tableHead">
+            <th>Player</th>
+            <th>Topic</th>
+            <th>Score</th>
+
+          </tr>
+          <div class="tableItems">
+              <tbody id="scoreboard-body"></tbody>
+            <!-- <tr>
+              <JS-->
+              <!-- <td>
+                <div id="playerName"></div>
+              </td>
+              <td>
+                <div id="playerScore"></div>
+              </td>
+              <td>
+                <div id="topic"></div>
+              </td>
+            </tr>
+            <!-JS-->
+            <!-- <td>
+              <div id="playerName2"></div>
+            </td>
+            <td>
+              <div id="playerScore2"></div>
+            </td>
+            <td>
+              <div id="topic2"></div>
+            </td>
+            </tr> -->
+        </div>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <br><br>
+
+
+
+  <footer>Designed by Phillip Makris, Nash Mcdonald, Krystal Christensen-Wiederrich and Robert Paruch</footer>
+
+
+
+
+
+  <!-- ======================================================================================= -->
+
+  <!-- <div class="container">
 
     <form>
       <div class="form-group">
@@ -76,7 +203,12 @@
 
     <a href="stats.html" target="_blank">Stats</a>
 
-  </div>
+  </div> -->
+
+  <!-- ======================================================================================= -->
+
+
+
 
   <!-- Link to this webpage's JS script -->
   <script src="assets/javascript/index.js"></script>
@@ -88,6 +220,7 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-</body>
+
+  <body>
 
 </html>
