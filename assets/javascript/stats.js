@@ -23,7 +23,8 @@ const QUESTION_REF = "questions";
 var pastPlayers = [];
 var questions = [];
 var categoryHistogram = {};
-var questionGraph = {};
+var questionHistogram = {};
+var question = {};
 
 database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
     if (snapshot.val()) {
@@ -35,7 +36,7 @@ database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
 
         ///
         // console.log("past players:");
-        // console.log(pastPlayers);
+        console.log(pastPlayers);
 
         makeCategoryHistogram();
         plotChart1();
@@ -48,19 +49,20 @@ database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
 database.ref(QUESTION_REF).on('value', function (snapshot) {
     if (snapshot.val()) {
         questions = [];
+
         snapshot.forEach(function (childSnapshot) {
             questions.push(childSnapshot.val());
         });
 
-        console.log("questions: ");
+        // console.log("questions: ");
         console.log(questions);
     } else {
         console.log(`There is no data for ${QUESTION_REF}`);
-    }
+    };
 
-    makeQuestionGraph();
+    makeQuestionsHistogram();
     plotChart2();
-});
+})
 
 function makeCategoryHistogram() {
 
@@ -77,15 +79,17 @@ function makeCategoryHistogram() {
     // console.log(categoryHistogram);
 }
 
-function makeQuestionGraph() {
+function makeQuestionsHistogram() {
 
-    questions.forEach(function (accuracy) {
-        if (accuracy.category in questionGraph) {
-            questionGraph[accuracy.category] += 1;
+    questions.forEach(function (question) {
+        if (question.category in questionHistogram) {
+            questionHistogram[question.category] += 1;
         } else {
-            questionGraph[accuracy.category] = 1;
+            questionHistogram[question.category] = 1;
         }
     });
+
+    console.log(questionHistogram);
 }
 
 
@@ -111,13 +115,13 @@ function plotChart1() {
     }
 
     ////
-    console.log(labels);
-    console.log(data);
+    // console.log(labels);
+    // console.log(data);
 
     var totalCountGames = pastPlayers.length;
 
     ////
-    console.log(totalCountGames);
+    // console.log(totalCountGames);
     
     Chart.defaults.global.defaultFontSize = 16;
 
@@ -159,65 +163,59 @@ function plotChart1() {
 };
 
 function plotChart2() {
-    // var labels = Object.keys(questionGraph);
-    // var data = Object.values(questionGraph);
 
-    var sortable = [];
-    for (var category in questionGraph) {
-        sortable.push([category, questionGraph[category]]);
+
+    var sortableTwo = [];
+    for (var category in questionHistogram) {
+        sortableTwo.push([category, questionHistogram[category]]);
     }
-    sortable.sort(function (a, b) {
+    sortableTwo.sort(function (a, b) {
         return b[1] - a[1];
     });
 
-    var labels = [];
-    var data = [];
-    for (let i = 0; i < sortable.length; i++) {
-        labels.push(sortable[i][0]);
-        data.push(sortable[i][1]);
-    }
+    var questionLabels = [];
+    var dataChartTwo = [];
+    for (let i = 0; i < sortableTwo.length; i++) {
+        questionLabels.push(sortableTwo[i][0]);
+        dataChartTwo.push(sortableTwo[i][1]);
+    };
 
-    console.log(labels);
-    console.log(data);
+    console.log(questionLabels);
+    console.log(dataChartTwo);
 
-    var totalQuestionsAsked = questions.length;
 
-    console.log(totalQuestionsAsked);
+    var ctx = document.getElementById("chart-2");
 
-    Chart.defaults.global.defaultFontSize = 16;
-
-    var ctx = document.getElementById("chart-2").getContext('2d');
-
-    var myChart = new Chart(cts, {
+    var barChartData = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: questionLabels, // categories, x-axis
             datasets: [{
-                data: data,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                // 'rgba(75, 192, 192, 0.2)',
-                // 'rgba(153, 102, 255, 0.2)',
-                // 'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                // 'rgba(75, 192, 192, 1)',
-                // 'rgba(153, 102, 255, 1)',
-                // 'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
+                data: dataChartTwo,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    // 'rgba(75, 192, 192, 0.2)',
+                    // 'rgba(153, 102, 255, 0.2)',
+                    // 'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    // 'rgba(75, 192, 192, 1)',
+                    // 'rgba(153, 102, 255, 1)',
+                    // 'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
         },
         options: {
             title: {
                 display: true,
-                text: ''
+                text: "Amount of questions asked per topic",
             }
         }
     })
-}
+};
