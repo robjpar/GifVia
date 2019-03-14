@@ -1,11 +1,7 @@
 #header {
     text-align: center;
     border: solid;
-    
     border-color: rgba(0, 0, 0, 0);
-    
-    
-    
     background-color: rgb(0, 70, 83);
     color: rgb(236, 236, 236);
     
@@ -26,70 +22,52 @@
     background-color: rgba(0, 0, 0, 0.788);
     color: rgb(212, 212, 212);
     border-color: rgba(0, 0, 0, 0.281);
-    
     margin-left: 2px;
-    
-    
     
 }
 
 #quizTopic {
     border: solid;
     border-color: rgba(0, 0, 0, 0.336);
-    margin-top: 5px;
-    padding-bottom: 40px;
+    margin-top: 2px;
+    padding-bottom: 20px;
     font-size: 50px;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.788);
     color: rgb(212, 212, 212);
 }
 
-
-
 footer {
    
     text-align: center;
-    
     margin-top:5px;
     margin-bottom:5px;
     padding: 5px;
-    
-    
     color: rgb(255, 255, 255);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     
 }
 
-
-
 #banner {
     font-size: 85px;
     
-    
-    
-    
 }
-
-
-
 
 .tBox {
     
     text-align: center;
-    font-size: 35px;
+    font-size: 25px;
+    margin-bottom: 30px;
     
 }
 
 aside {
     border: solid;
     float: right;
-    
-     margin-left: auto;
+    margin-left: auto;
     margin-right: auto;
     margin: 5px; 
-
-    
 }
 
 body {
@@ -104,7 +82,15 @@ input {
 }
 
 #quizLabel {
-    font-size: 45px;
+    font-size: 40px;
+}
+
+.userLabel {
+  font-size: 40px;
+}
+
+.choose {
+  font-size: 22px;
 }
 
 .scoreTable {
@@ -117,10 +103,6 @@ input {
     color: rgb(212, 212, 212);
     border-color: rgba(255, 255, 255, 0);
     text-align: center;
-    
-    
-    
-    
     margin-top: 10px;
     
 }
@@ -145,32 +127,32 @@ input {
     font-size: 30px;
     background-color: rgb(0, 70, 83);
     margin-top: 30px;
-    width: 200px;
+    width: 180px;
     border-style: solid;
     border-color: rgb(0, 0, 0);
 }
 
-#gif {
-    height: 290px;
-    width: 290px;
+.gif {
+    height: 300px;
+    width: 300px;
 }
 
 #sel1 {
     background-color: rgb(224, 224, 224);
 }
 
-#headerGif1 {
-    height: 90px;
-    width: 90px;
+.headerGif1 {
+    height: 130px;
+    width: 110px;
     float: right;
     
     
 }
 
-#headerGif2 {
-    height: 90px;
-    width: 90px;
-    float: left;
+.headerGif2 {
+  height: 130px;
+  width: 110px;
+  float: left;
     
 }
 
@@ -180,24 +162,51 @@ input {
 
 .pinNumber {
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .tBox2 {
-  font-size: 20px;
+  font-size: 15px;
   text-align: center;
 }
 
+.footerGif1 {
+  height: 130px;
+  width: 100px;
+  float: right;
+  
+  
+}
+
+.footerGif2 {
+height: 130px;
+width: 100px;
+float: left;
+  
+}
+
+.sideGif1 {
+  height: 300px;
+  width: 500px;
+  position: relative;
+}
+
+.nickWarning {
+  font-size: 15px;
+}
+
+
+
 /*HOVER SECTION*/
 
-#banner:hover {
+#banner {
     
     -webkit-animation-name: wiggle;
     -ms-animation-name: wiggle;
-    -ms-animation-duration: 1000ms;
-    -webkit-animation-duration: 1000ms;
-    -webkit-animation-iteration-count: 100;
-    -ms-animation-iteration-count: 1;
+    -ms-animation-duration: 5000ms;
+    -webkit-animation-duration: 3000ms;
+    -webkit-animation-iteration-count: 1000;
+    -ms-animation-iteration-count: 50;
     -webkit-animation-timing-function: ease-in-out;
     -ms-animation-timing-function: ease-in-out;
   }
@@ -262,43 +271,6 @@ input {
       }
 
 
-#gif:hover {
-    -webkit-animation-name: wiggle;
-        -ms-animation-name: wiggle;
-        -ms-animation-duration: 1000ms;
-        -webkit-animation-duration: 1000ms;
-        -webkit-animation-iteration-count: 100;
-        -ms-animation-iteration-count: 1;
-        -webkit-animation-timing-function: ease-in-out;
-        -ms-animation-timing-function: ease-in-out;
-      }
-      
-      @-webkit-keyframes wiggle {
-        0% {-webkit-transform: rotate(10deg);}
-        25% {-webkit-transform: rotate(-10deg);}
-        50% {-webkit-transform: rotate(20deg);}
-        75% {-webkit-transform: rotate(-5deg);}
-        100% {-webkit-transform: rotate(0deg);}
-      }
-      
-      @-ms-keyframes wiggle {
-        0% {-ms-transform: rotate(1deg);}
-        25% {-ms-transform: rotate(-1deg);}
-        50% {-ms-transform: rotate(1.5deg);}
-        75% {-ms-transform: rotate(-5deg);}
-        100% {-ms-transform: rotate(0deg);}
-      }
-      
-      @keyframes wiggle {
-        0% {transform: rotate(10deg);}
-        25% {transform: rotate(-10deg);}
-        50% {transform: rotate(20deg);}
-        75% {transform: rotate(-5deg);}
-        100% {transform: rotate(0deg);}
-      }
-
-
-
 #quizLabel:hover {
     -webkit-animation-name: wiggle;
         -ms-animation-name: wiggle;
@@ -334,7 +306,78 @@ input {
         100% {transform: rotate(0deg);}
       }
 
-h1:hover {
+#scoreHead:hover {
+  -webkit-animation-name: wiggle;
+        -ms-animation-name: wiggle;
+        -ms-animation-duration: 1000ms;
+        -webkit-animation-duration: 1000ms;
+        -webkit-animation-iteration-count: 100;
+        -ms-animation-iteration-count: 1;
+        -webkit-animation-timing-function: ease-in-out;
+        -ms-animation-timing-function: ease-in-out;
+      }
+      
+      @-webkit-keyframes wiggle {
+        0% {-webkit-transform: rotate(10deg);}
+        25% {-webkit-transform: rotate(-10deg);}
+        50% {-webkit-transform: rotate(20deg);}
+        75% {-webkit-transform: rotate(-5deg);}
+        100% {-webkit-transform: rotate(0deg);}
+      }
+      
+      @-ms-keyframes wiggle {
+        0% {-ms-transform: rotate(1deg);}
+        25% {-ms-transform: rotate(-1deg);}
+        50% {-ms-transform: rotate(1.5deg);}
+        75% {-ms-transform: rotate(-5deg);}
+        100% {-ms-transform: rotate(0deg);}
+      }
+      
+      @keyframes wiggle {
+        0% {transform: rotate(10deg);}
+        25% {transform: rotate(-10deg);}
+        50% {transform: rotate(20deg);}
+        75% {transform: rotate(-5deg);}
+        100% {transform: rotate(0deg);}
+      }
+
+
+#quizLabel:hover {
+    -webkit-animation-name: wiggle;
+        -ms-animation-name: wiggle;
+        -ms-animation-duration: 1000ms;
+        -webkit-animation-duration: 1000ms;
+        -webkit-animation-iteration-count: 100;
+        -ms-animation-iteration-count: 1;
+        -webkit-animation-timing-function: ease-in-out;
+        -ms-animation-timing-function: ease-in-out;
+      }
+      
+      @-webkit-keyframes wiggle {
+        0% {-webkit-transform: rotate(10deg);}
+        25% {-webkit-transform: rotate(-10deg);}
+        50% {-webkit-transform: rotate(20deg);}
+        75% {-webkit-transform: rotate(-5deg);}
+        100% {-webkit-transform: rotate(0deg);}
+      }
+      
+      @-ms-keyframes wiggle {
+        0% {-ms-transform: rotate(1deg);}
+        25% {-ms-transform: rotate(-1deg);}
+        50% {-ms-transform: rotate(1.5deg);}
+        75% {-ms-transform: rotate(-5deg);}
+        100% {-ms-transform: rotate(0deg);}
+      }
+      
+      @keyframes wiggle {
+        0% {transform: rotate(10deg);}
+        25% {transform: rotate(-10deg);}
+        50% {transform: rotate(20deg);}
+        75% {transform: rotate(-5deg);}
+        100% {transform: rotate(0deg);}
+}
+
+.userLabel:hover {
     -webkit-animation-name: wiggle;
         -ms-animation-name: wiggle;
         -ms-animation-duration: 1000ms;
@@ -370,6 +413,153 @@ h1:hover {
       }
 
 
+.P:hover {
+  -webkit-animation-name: wiggle;
+        -ms-animation-name: wiggle;
+        -ms-animation-duration: 1000ms;
+        -webkit-animation-duration: 1000ms;
+        -webkit-animation-iteration-count: 100;
+        -ms-animation-iteration-count: 1;
+        -webkit-animation-timing-function: ease-in-out;
+        -ms-animation-timing-function: ease-in-out;
+      }
+      
+      @-webkit-keyframes wiggle {
+        0% {-webkit-transform: rotate(10deg);}
+        25% {-webkit-transform: rotate(-10deg);}
+        50% {-webkit-transform: rotate(20deg);}
+        75% {-webkit-transform: rotate(-5deg);}
+        100% {-webkit-transform: rotate(0deg);}
+      }
+      
+      @-ms-keyframes wiggle {
+        0% {-ms-transform: rotate(1deg);}
+        25% {-ms-transform: rotate(-1deg);}
+        50% {-ms-transform: rotate(1.5deg);}
+        75% {-ms-transform: rotate(-5deg);}
+        100% {-ms-transform: rotate(0deg);}
+      }
+      
+      @keyframes wiggle {
+        0% {transform: rotate(10deg);}
+        25% {transform: rotate(-10deg);}
+        50% {transform: rotate(20deg);}
+        75% {transform: rotate(-5deg);}
+        100% {transform: rotate(0deg);}
+      }
+
+
+
+.T:hover {
+  -webkit-animation-name: wiggle;
+        -ms-animation-name: wiggle;
+        -ms-animation-duration: 1000ms;
+        -webkit-animation-duration: 1000ms;
+        -webkit-animation-iteration-count: 100;
+        -ms-animation-iteration-count: 1;
+        -webkit-animation-timing-function: ease-in-out;
+        -ms-animation-timing-function: ease-in-out;
+      }
+      
+      @-webkit-keyframes wiggle {
+        0% {-webkit-transform: rotate(10deg);}
+        25% {-webkit-transform: rotate(-10deg);}
+        50% {-webkit-transform: rotate(20deg);}
+        75% {-webkit-transform: rotate(-5deg);}
+        100% {-webkit-transform: rotate(0deg);}
+      }
+      
+      @-ms-keyframes wiggle {
+        0% {-ms-transform: rotate(1deg);}
+        25% {-ms-transform: rotate(-1deg);}
+        50% {-ms-transform: rotate(1.5deg);}
+        75% {-ms-transform: rotate(-5deg);}
+        100% {-ms-transform: rotate(0deg);}
+      }
+      
+      @keyframes wiggle {
+        0% {transform: rotate(10deg);}
+        25% {transform: rotate(-10deg);}
+        50% {transform: rotate(20deg);}
+        75% {transform: rotate(-5deg);}
+        100% {transform: rotate(0deg);}
+      }
+
+
+
+
+.S:hover {
+  -webkit-animation-name: wiggle;
+        -ms-animation-name: wiggle;
+        -ms-animation-duration: 1000ms;
+        -webkit-animation-duration: 1000ms;
+        -webkit-animation-iteration-count: 100;
+        -ms-animation-iteration-count: 1;
+        -webkit-animation-timing-function: ease-in-out;
+        -ms-animation-timing-function: ease-in-out;
+      }
+      
+      @-webkit-keyframes wiggle {
+        0% {-webkit-transform: rotate(10deg);}
+        25% {-webkit-transform: rotate(-10deg);}
+        50% {-webkit-transform: rotate(20deg);}
+        75% {-webkit-transform: rotate(-5deg);}
+        100% {-webkit-transform: rotate(0deg);}
+      }
+      
+      @-ms-keyframes wiggle {
+        0% {-ms-transform: rotate(1deg);}
+        25% {-ms-transform: rotate(-1deg);}
+        50% {-ms-transform: rotate(1.5deg);}
+        75% {-ms-transform: rotate(-5deg);}
+        100% {-ms-transform: rotate(0deg);}
+      }
+      
+      @keyframes wiggle {
+        0% {transform: rotate(10deg);}
+        25% {transform: rotate(-10deg);}
+        50% {transform: rotate(20deg);}
+        75% {transform: rotate(-5deg);}
+        100% {transform: rotate(0deg);}
+      }
+
+
+
+
+.TP:hover {
+  -webkit-animation-name: wiggle;
+        -ms-animation-name: wiggle;
+        -ms-animation-duration: 1000ms;
+        -webkit-animation-duration: 1000ms;
+        -webkit-animation-iteration-count: 100;
+        -ms-animation-iteration-count: 1;
+        -webkit-animation-timing-function: ease-in-out;
+        -ms-animation-timing-function: ease-in-out;
+      }
+      
+      @-webkit-keyframes wiggle {
+        0% {-webkit-transform: rotate(10deg);}
+        25% {-webkit-transform: rotate(-10deg);}
+        50% {-webkit-transform: rotate(20deg);}
+        75% {-webkit-transform: rotate(-5deg);}
+        100% {-webkit-transform: rotate(0deg);}
+      }
+      
+      @-ms-keyframes wiggle {
+        0% {-ms-transform: rotate(1deg);}
+        25% {-ms-transform: rotate(-1deg);}
+        50% {-ms-transform: rotate(1.5deg);}
+        75% {-ms-transform: rotate(-5deg);}
+        100% {-ms-transform: rotate(0deg);}
+      }
+      
+      @keyframes wiggle {
+        0% {transform: rotate(10deg);}
+        25% {transform: rotate(-10deg);}
+        50% {transform: rotate(20deg);}
+        75% {transform: rotate(-5deg);}
+        100% {transform: rotate(0deg);}
+      }
 
 
 
