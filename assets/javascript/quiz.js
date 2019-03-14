@@ -118,7 +118,7 @@ function generateTriviaGif() {
     }).then(function(response) {
         createCORSRequest();
         var imageURL = response.data.fixed_height_small_url;
-        gif.attr("src", imageURL).attr("alt", "trivia image");
+        gif.attr("src", imageURL).attr("alt", "trivia image").css("max-height", "200px");
     })
 };
 
