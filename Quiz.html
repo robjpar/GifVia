@@ -16,13 +16,19 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <!-- Links to style CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/QuizStyle.css">
-
     <!-- Link to AJAX -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
+
+      <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+
+    <!-- Links to style CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/QuizStyle.css">
+
     <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
 
@@ -31,63 +37,46 @@
 <body>
 
     <div id="header">
-        <h1 id="banner">GifVia</h1>
-        <h6>An interactive, GIF animated trivia game</h6>
+        <h1 id="banner" style = "font-family: 'Neucha', cursive;">GifVia</h1>
+        <h5>An interactive, GIF animated trivia game</h5>
     </div>
 
 
     <div class="row">
-        <div class="col">
-            <div class="row">
-                <div class="col">
-                    <!-- Used for Centering -->
-                </div>
-                <div class="col">
-                    <!-- Score Card -->
-                    <div class="card bgColor fade-in one" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title" id="username">Nickname</h5>
-                            <h5 class="card-title" id="topic">Quiz Topic</h5>
-                            <p class="card-text">Correct = <span id="wins">0</span></p>
-                            <p class="card-text">Incorrect = <span id="losses">0</span></p>
-                            <p class="card-text">Score = <span id="score">0</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <!-- Used for Centering -->
-                </div>
-            </div>
-        </div>
+        <div class = "col"></div>
         <!-- Question/Answer Container -->
         <div class="col bgColor fade-in two">
-            <div class="card-body">
-                <h5 class="card-title" id="question-display">
-                    <!-- Question Here -->
-                </h5>
-            </div>
-            <div class="row">
-                <div class="col-md-6" id="answer-1"><!-- Placement for button --></div>
-                <div class="col-md-6" id="answer-2"><!-- Placement for button --></div>
-            </div>
             <div class="row text-center">
                 <div class="col">
                     <!-- Used for Centering -->
                 </div>
                 <div class="col">
-                    <div class="card" style="width: 22rem;">
+                    <div class="card mt-3" style="width: 22rem;">
+                        <div class="card-header" style = "color:black">
+                                <span id = "username" style = "text-align: left"></span>
+                        </div>
                         <div class="card-img-top">
                             <img src="assets/images/me.png" class="card-img-top" id="trivia-gif" alt="Gif">
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item card-header" style = "color:black"><span id = "question-display"></span></li>
+                            <li class="list-group-item" style = "color:black">Timer: <span id = "timer"></span></li>
+                        </ul>
+                        <div class = card-body>
+                            <div class="row">
+                                <div class="col-md-6" id="answer-1"><!-- Placement for button --></div>
+                                <div class="col-md-6" id="answer-2"><!-- Placement for button --></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" id="answer-3"><!-- Placement for button --></div>
+                                <div class="col-md-6" id="answer-4"><!-- Placement for button --></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <!-- Used for Centering -->
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6" id="answer-3"><!-- Placement for button --></div>
-                <div class="col-md-6" id="answer-4"><!-- Placement for button --></div>
             </div>
             <div class="row mb-4">
                 <div class = "col"><!-- for centering --></div>
@@ -96,14 +85,17 @@
             </div>
         </div>
         <div class="col">
-            <!-- Timer -->
-            <div class="card text-center bgColor fade-in three" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Timer</h5>
-                    <h5 class="card-title" id="timer">10</h5>
+                <div class="card bgColor fade-in one" style="width: 18rem; vertical-align: middle">
+                    <div class="card-body">
+                        <h5 class="card-title" id="username">Nickname</h5>
+                        <h5 class="card-title" id="topic">Quiz Topic</h5>
+                        <p class="card-text">Correct = <span id="wins">0</span></p>
+                        <p class="card-text">Incorrect = <span id="losses">0</span></p>
+                        <p class="card-text">Score = <span id="score">0</span></p>
+                    </div>
                 </div>
             </div>
-        </div>
+        <div class = "col"></div>
     </div>
 
     <!-- Link to this webpage's JS script -->
