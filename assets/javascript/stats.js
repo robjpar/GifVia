@@ -29,12 +29,9 @@ database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
             pastPlayers.push(childSnapshot.val());
         });
-
-        ///
-        console.log("past players:");
-        console.log(pastPlayers);
-
+        
         makeCategoryHistogram();
+
         plotChart1();
         plotChart2();
 
@@ -52,53 +49,37 @@ function makeCategoryHistogram() {
             categoryHistogram[player.category] = 1;
         }
     });
-
-    ////
-    console.log("categoryHistogram:");
-    console.log(categoryHistogram);
 }
 
+Chart.defaults.global.defaultFontSize = 16;
 
 function plotChart1() {
 
-    // var labels = Object.keys(categoryHistogram);
-    // var data = Object.values(categoryHistogram);
-
-    var sortable = [];
+    var histogramList = [];
     for (var category in categoryHistogram) {
-        sortable.push([category, categoryHistogram[category]]);
+        histogramList.push([category, categoryHistogram[category]]);
     }
-    sortable.sort(function (a, b) {
+    histogramList.sort(function (a, b) {
         return b[1] - a[1];
     });
 
     var labels = [];
     var data = [];
-    for (let i = 0; i < sortable.length; i++) {
-        labels.push(sortable[i][0]);
-        data.push(sortable[i][1]);
-
+    for (let i = 0; i < histogramList.length; i++) {
+        labels.push(histogramList[i][0]);
+        data.push(histogramList[i][1]);
     }
 
-    ////
-    console.log(labels);
-    console.log(data);
-
     var totalCountGames = pastPlayers.length;
-
-    ////
-    console.log(totalCountGames);
-
-    Chart.defaults.global.defaultFontSize = 16;
 
     var ctx = document.getElementById("chart-1").getContext('2d');
 
     var myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: labels,
+            labels: labels, // labels
             datasets: [{
-                data: data,
+                data: data, // data
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -128,7 +109,6 @@ function plotChart1() {
     });
 }
 
-
 var barChartData = {
     labels: ['Cat. 1', 'Cat. 2', 'Cat. 3', 'Cat. 4'], // categories, x-axis
     datasets: [{
@@ -153,9 +133,6 @@ var barChartData = {
 };
 
 function plotChart2() {
-
-
-    Chart.defaults.global.defaultFontSize = 16;
 
     var ctx = document.getElementById("chart-2").getContext('2d');
 
