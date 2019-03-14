@@ -241,7 +241,7 @@ var barChartData = {
 
 function plotChart3() {
 
-    var ctx = document.getElementById("chart-2").getContext('2d');
+    var ctx = document.getElementById("chart-3").getContext('2d');
 
     var myChart = new Chart(ctx, {
         type: 'bar',
