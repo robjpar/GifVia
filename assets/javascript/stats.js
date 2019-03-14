@@ -36,6 +36,7 @@ database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
 
         makeCategoryHistogram();
         plotChart1();
+        plotChart2();
 
     } else {
         console.log(`There is no data: ${PAST_PLAYERS_REF}`);
@@ -87,11 +88,11 @@ function plotChart1() {
 
     ////
     console.log(totalCountGames);
-    
+
     Chart.defaults.global.defaultFontSize = 16;
 
     var ctx = document.getElementById("chart-1").getContext('2d');
-    
+
     var myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
@@ -125,4 +126,60 @@ function plotChart1() {
 
         }
     });
+}
+
+
+var barChartData = {
+    labels: ['Cat. 1', 'Cat. 2', 'Cat. 3', 'Cat. 4'], // categories, x-axis
+    datasets: [{
+        label: 'Easy',
+        data: [2, 3, 4, 5], // values for each category, for a given part; y-axis
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+    }, {
+        label: 'Medium',
+        data: [2, 3, 4, 3], // values for each category, for a given part; y-axis
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+    }, {
+        label: 'Hard',
+        data: [2, 3, 3, 2], // values for each category, for a given part; y-axis
+        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+        borderColor: 'rgba(255, 206, 86, 1)',
+        borderWidth: 1
+    }]
+};
+
+function plotChart2() {
+
+
+    Chart.defaults.global.defaultFontSize = 16;
+
+    var ctx = document.getElementById("chart-2").getContext('2d');
+
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            title: {
+                display: true,
+                text: '"Wins" accumulated based on the category-type'
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            responsive: true,
+            scales: {
+                xAxes: [{
+                    stacked: true,
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+    })
 }
