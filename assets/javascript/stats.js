@@ -34,13 +34,13 @@ database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
             pastPlayers.push(childSnapshot.val());
         });
 
-        ///
         // console.log("past players:");
         console.log(pastPlayers);
 
         makeCategoryHistogram();
-        plotChart1();
 
+        plotChart1();
+   
     } else {
         console.log(`There is no data: ${PAST_PLAYERS_REF}`);
     }
@@ -62,6 +62,8 @@ database.ref(QUESTION_REF).on('value', function (snapshot) {
 
     makeQuestionsHistogram();
     plotChart2();
+  
+    plotChart3();
 })
 
 function makeCategoryHistogram() {
@@ -74,7 +76,6 @@ function makeCategoryHistogram() {
         }
     });
 
-    ////
     // console.log("categoryHistogram:");
     // console.log(categoryHistogram);
 }
@@ -90,31 +91,28 @@ function makeQuestionsHistogram() {
     });
 
     console.log(questionHistogram);
+
 }
 
+Chart.defaults.global.defaultFontSize = 16;
 
 function plotChart1() {
 
-    // var labels = Object.keys(categoryHistogram);
-    // var data = Object.values(categoryHistogram);
-
-    var sortable = [];
+    var histogramList = [];
     for (var category in categoryHistogram) {
-        sortable.push([category, categoryHistogram[category]]);
+        histogramList.push([category, categoryHistogram[category]]);
     }
-    sortable.sort(function (a, b) {
+    histogramList.sort(function (a, b) {
         return b[1] - a[1];
     });
 
     var labels = [];
     var data = [];
-    for (let i = 0; i < sortable.length; i++) {
-        labels.push(sortable[i][0]);
-        data.push(sortable[i][1]);
-
+    for (let i = 0; i < histogramList.length; i++) {
+        labels.push(histogramList[i][0]);
+        data.push(histogramList[i][1]);
     }
 
-    ////
     // console.log(labels);
     // console.log(data);
 
@@ -122,17 +120,15 @@ function plotChart1() {
 
     ////
     // console.log(totalCountGames);
-    
-    Chart.defaults.global.defaultFontSize = 16;
 
     var ctx = document.getElementById("chart-1").getContext('2d');
-    
+
     var myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: labels,
+            labels: labels, // labels
             datasets: [{
-                data: data,
+                data: data, // data
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -160,10 +156,9 @@ function plotChart1() {
 
         }
     });
-};
+}
 
 function plotChart2() {
-
 
     var sortableTwo = [];
     for (var category in questionHistogram) {
@@ -219,3 +214,61 @@ function plotChart2() {
         }
     })
 };
+
+
+var barChartData = {
+    labels: ['Cat. 1', 'Cat. 2', 'Cat. 3', 'Cat. 4'], // categories, x-axis
+    datasets: [{
+        label: 'Easy',
+        data: [2, 3, 4, 5], // values for each category, for a given part; y-axis
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+    }, {
+        label: 'Medium',
+        data: [2, 3, 4, 3], // values for each category, for a given part; y-axis
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+    }, {
+        label: 'Hard',
+        data: [2, 3, 3, 2], // values for each category, for a given part; y-axis
+        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+        borderColor: 'rgba(255, 206, 86, 1)',
+        borderWidth: 1
+    }]
+};
+
+function plotChart3() {
+
+    var ctx = document.getElementById("chart-2").getContext('2d');
+
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            title: {
+                display: true,
+                text: '"Wins" accumulated based on the category-type'
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            responsive: true,
+            scales: {
+                xAxes: [{
+                    stacked: true
+
+                }],
+                yAxes: [{
+                    stacked: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Wins"
+                    }
+                }]
+            }
+        }
+    })
+}

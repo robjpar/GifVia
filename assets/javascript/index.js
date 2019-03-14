@@ -37,10 +37,6 @@ var pastNicknames = {};
 database.ref(PAST_NICKNAMES_REF).on('value', function (snapshot) {
     if (snapshot.val()) {
         pastNicknames = snapshot.val();
-
-        ////
-        console.log("past nicknames:");
-        console.log(pastNicknames);
     }
 });
 
@@ -49,13 +45,13 @@ function getLoginInfo(nickname, secretNumber) {
     if (nickname in pastNicknames && secretNumber === "") {
         return "nickname used";
     }
-
     if (nickname in pastNicknames && pastNicknames[nickname] !== secretNumber) {
         return "secret does not match";
     }
 }
 
 function saveLoginInfo(nickname, secretNumber) {
+
     pastNicknames[nickname] = secretNumber;
     database.ref(PAST_NICKNAMES_REF).set(pastNicknames, function (error) {
         if (error) {
@@ -70,7 +66,6 @@ $("#register-button").click(function (event) {
 
     var nickname = $("#nickname").val().trim();
     var validNickname = /^[a-zA-Z0-9_]*$/.test(nickname) && nickname.length >= 8;
-
 
     var secretNumber = $("#secret-number").val().trim();
     var validSecretNumber = /^[0-9]*$/.test(secretNumber) && (secretNumber.length === 0 || secretNumber.length >= 4);
@@ -125,13 +120,14 @@ function getQuizCategories() {
 }
 getQuizCategories();
 
-function getGif(term, number) {
+function getGif(term, count) {
     var queryURL = "https://api.giphy.com/v1/gifs/search?";
 
     var queryParams = {
         api_key: "dc6zaTOxFJmzC",
         q: term,
-        limit: number
+        rating: "g",
+        limit: count
     };
 
     $.ajax({
@@ -139,24 +135,22 @@ function getGif(term, number) {
         method: "GET"
     }).then(function (response) {
 
-        var gif = response.data[Math.floor(Math.random() * number)];
+        var gif = response.data[Math.floor(Math.random() * count)];
 
         var title = gif.title;
         var rating = gif.rating;
         var url = gif.images.fixed_height.url;
 
-        console.log("rating: " + rating);
-
         $("#gif-img").attr("src", url).attr("alt", title);
-
     });
 }
 const GIF_TERM = "winner";
 const GIF_COUNT = 10;
 getGif(GIF_TERM, GIF_COUNT);
 
-// Simulation of adding past players to the firebase
-for (let i = 0; i < 0; i++) {
+// Simulation of adding past players to the firebase============================
+const COUNT = 0;
+for (let i = 0; i < COUNT; i++) {
     var pastPlayer = {
         nickname: "Player-" + Math.floor(Math.random() * 100000),
         category: [
@@ -175,7 +169,7 @@ for (let i = 0; i < 0; i++) {
         }
     });
 }
-// =================================================
+// =============================================================================
 
 var pastPlayers = [];
 
@@ -190,6 +184,7 @@ function renderHighestScore() {
 
     $("#highest-score-message").html(`Nickname: ${player.nickname} <br> Topic: ${player.category} <br> Highest Score: ${player.score}`);
 }
+
 const PLAYER_COUNT = 5;
 database.ref(PAST_PLAYERS_REF).orderByChild('score').limitToLast(PLAYER_COUNT).on('value', function (snapshot) {
     if (snapshot.val()) {
@@ -205,14 +200,9 @@ database.ref(PAST_PLAYERS_REF).orderByChild('score').limitToLast(PLAYER_COUNT).o
     } else {
         console.log(`There is no data: ${PAST_PLAYERS_REF}`);
     }
-
 });
 
-
-
-
-
-// this runs in quiz.js
+// this runs in quiz.js=========================================================
 // var score = 14; // example
 
 // var pastPlayer = {
@@ -221,8 +211,6 @@ database.ref(PAST_PLAYERS_REF).orderByChild('score').limitToLast(PLAYER_COUNT).o
 //     score: score
 // }
 
-// // database.ref("past-players").set("");
-
 // database.ref("past-players").push(pastPlayer, function (error) {
 //     if (error) {
 //         console.log("The write failed, error code: " + error.code);
@@ -230,4 +218,4 @@ database.ref(PAST_PLAYERS_REF).orderByChild('score').limitToLast(PLAYER_COUNT).o
 //         console.log("The write successful");
 //     }
 // });
-// =================
+// =============================================================================
