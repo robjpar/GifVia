@@ -35,13 +35,17 @@
 </head>
 
 <body>
+  
   <div id="header">
-
+    <img class="headerGif1" src="https://media.giphy.com/media/MxYQrB9jeGzza/giphy.gif">
+    <img class="headerGif2" src="https://media.giphy.com/media/MxYQrB9jeGzza/giphy.gif">
     <h1 id="banner">GifVia</h1>
-
-    <h5>An interactive, GIF animated trivia game</h5>
+    
+    <h5><img class="hello1" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif">An interactive, GIF animated trivia game<img class="hello2" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif"></h5>
+    
 
   </div>
+  
 
   <br>
 
@@ -50,41 +54,42 @@
       <div class="col-sm-4">
         <div class="row">
           <div class="col-sm-12" id="info">
-            <h3>Choose a topic then enter a nickname.</h3>
-            <h5>If no nickname is chosen, you will be registered as anonymous.</h5>
+            <h4 class="choose">Choose a topic then enter a username.</h4>
+            
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12" id="quizTopic">
             <div class="dropdown">
               <div class="form-group">
-                <label for="quiz-categiry" id="quizLabel">Quiz Topic:</label><br>
+                <label for="quiz-category" id="quizLabel">Quiz Topic:</label><br>
                 <select class="form-control" id="quiz-category">
                 </select>
               </div>
             </div>
 
-            <h1>Nickname:</h1>
-            <span id="nickname-message"
+            <h1 class="userLabel">Username:</h1>
+            <span class="nickWarning" id="nickname-message"
             style="color: orange"></span>
             <input  type="text" class="tBox" id="nickname">
-            <br><br>
-            <p class="pinNumber">If you want to reuse the nickname, choose a Secret #:</p>
-            <span id="secret-number-message" style="color: red"></span>
-            <input  type="number" class="tBox2"id="secret-number">
-            <!--JS-->
             
-            <button id="register-button" type="button" class="startGameButton btn btn-info">Start Game</button>
+            <h5 class="pinNumber">If you want to reuse the username, choose a Secret #:</h5>
+            <span class="secret"  id="secret-number-message" style="color: orange"></span>
+            <input  type="number" class="tBox2"id="secret-number"><br>
+            
+            
+            <img class="hello3" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif"><button id="register-button" type="button" class="startGameButton btn btn-info">Start Game</button><img class="hello4" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif">
             
 
           </div>
         </div>
       </div>
+      
       <div class="col-sm-7" id="highScore">
         <div class="row">
           <div class="col-sm-12">
-            <!--JS-->
-            <!--JS-->
+            <img class="goodJ1" src="https://media.giphy.com/media/l0HU4vCCdtME0RZlu/giphy.gif">
+            <img class="goodJ2" src="https://media.giphy.com/media/l0HU4vCCdtME0RZlu/giphy.gif">
             <h1 id="scoreHead">High Score:</h1>
             <h3>
               
@@ -93,8 +98,10 @@
             <div class="playerName"></div>
 
             <!-- <img id="gif" src="https://media.giphy.com/media/9xt1MUZqkneFiWrAAD/giphy.gif"> -->
-            <img id="gif-img">
+            <img class="gif" id="gif-img">
             <br><br><br>
+            
+            </h3><a href="stats.html" target="_blank" class="stats">Click Here For Stats!</a>
             
           </div>
         </div>
@@ -104,53 +111,33 @@
     <div class="row">
 
       <div class="col-sm-11" id="table">
-        <h3>Top Players</h3>
+        <h3 class="TP">Top Players</h3>
         <table class="table table-sm text-center" id=tableText>
 
           <tr id="tableHead">
-            <th>Player</th>
-            <th>Topic</th>
-            <th>Score</th>
+            <th class="P">Player</th>
+            <th class="T">Topic</th>
+            <th class="S">Score</th>
 
           </tr>
           <div class="tableItems">
               <tbody id="scoreboard-body"></tbody>
-            <!-- <tr>
-              <JS-->
-              <!-- <td>
-                <div id="playerName"></div>
-              </td>
-              <td>
-                <div id="playerScore"></div>
-              </td>
-              <td>
-                <div id="topic"></div>
-              </td>
-            </tr>
-            <!-JS-->
-            <!-- <td>
-              <div id="playerName2"></div>
-            </td>
-            <td>
-              <div id="playerScore2"></div>
-            </td>
-            <td>
-              <div id="topic2"></div>
-            </td>
-            </tr> -->
+           
         </div>
         </table>
+        
       </div>
 
     </div>
   </div>
+  
 
-  <br><br>
+  <br><br><br><br><br><br><br>
 
-
-
+  <img class="footerGif1" src="https://media.giphy.com/media/MxYQrB9jeGzza/giphy.gif">
+  <img class="footerGif2" src="https://media.giphy.com/media/MxYQrB9jeGzza/giphy.gif">
   <footer>Designed by Phillip Makris, Nash Mcdonald, Krystal Christensen-Wiederrich and Robert Paruch</footer>
-
+  
 
 
 

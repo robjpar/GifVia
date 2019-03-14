@@ -144,7 +144,7 @@ function getGif(term, count) {
         $("#gif-img").attr("src", url).attr("alt", title);
     });
 }
-const GIF_TERM = "winner";
+const GIF_TERM = "good work";
 const GIF_COUNT = 10;
 getGif(GIF_TERM, GIF_COUNT);
 
