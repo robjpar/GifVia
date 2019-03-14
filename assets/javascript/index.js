@@ -151,7 +151,7 @@ function getGif(term, number) {
 
     });
 }
-const GIF_TERM = "win";
+const GIF_TERM = "good work";
 const GIF_COUNT = 10;
 getGif(GIF_TERM, GIF_COUNT);
 

@@ -31,8 +31,8 @@
     color: rgb(212, 212, 212);
     border-color: rgba(0, 0, 0, 0.281);
     margin-left: 2px;
-    background-image: url("https://media.giphy.com/media/3ov9k8fmDbIqzzbsLS/giphy.gif");
-    background-size: 700px;
+    background-image: url("https://media.giphy.com/media/xT9IgMgdur6larNA1a/giphy.gif");
+    background-size: 1000px;
     
 }
 
@@ -45,8 +45,8 @@
     text-align: center;
     background-color: rgba(0, 0, 0, 0.788);
     color: rgb(212, 212, 212);
-    background-image: url("https://media.giphy.com/media/G6AhHC38Ty1IQ/giphy.gif");
-    background-size: 30000px;
+    background-image: url("https://media.giphy.com/media/xT9IgMgdur6larNA1a/giphy.gif");
+    background-size: 5000px;
 }
 
 footer {
@@ -224,7 +224,7 @@ float: left;
 }
 
 .hello3, .hello4 {
-  width: 70px;
+  width: 82px;
   height: 85px;
 }
 
