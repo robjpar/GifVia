@@ -174,10 +174,15 @@ function plotChart2() {
             responsive: true,
             scales: {
                 xAxes: [{
-                    stacked: true,
+                    stacked: true
+
                 }],
                 yAxes: [{
-                    stacked: true
+                    stacked: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Wins"
+                    }
                 }]
             }
         }
