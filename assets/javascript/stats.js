@@ -35,7 +35,7 @@ database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
         });
 
         // console.log("past players:");
-        console.log(pastPlayers);
+        // console.log(pastPlayers);
 
         makeCategoryHistogram();
 
@@ -84,9 +84,13 @@ function makeQuestionsHistogram() {
 
     questions.forEach(function (question) {
         if (question.category in questionHistogram) {
-            questionHistogram[question.category] += 1;
+            if (question.outcome === "winner") {
+                questionHistogram[question.category] += 1;
+            }
         } else {
-            questionHistogram[question.category] = 1;
+            if (question.outcome === "winner") {
+                questionHistogram[question.category] = 1;
+            }
         }
     });
 
@@ -168,6 +172,8 @@ function plotChart2() {
         return b[1] - a[1];
     });
 
+    console.log(sortableTwo);
+
     var questionLabels = [];
     var dataChartTwo = [];
     for (let i = 0; i < sortableTwo.length; i++) {
@@ -179,7 +185,7 @@ function plotChart2() {
     console.log(dataChartTwo);
 
 
-    var ctx = document.getElementById("chart-2");
+    var ctx = document.getElementById("chart-2").getContext('2d');
 
     var barChartData = new Chart(ctx, {
         type: 'bar',
@@ -209,7 +215,7 @@ function plotChart2() {
         options: {
             title: {
                 display: true,
-                text: "Amount of questions asked per topic",
+                text: "Number of right answers guessed per topic",
             }
         }
     })
