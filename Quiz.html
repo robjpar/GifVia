@@ -16,74 +16,142 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <!-- Links to style CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
-    <!-- Firebase App is always required and must be first -->
-    <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js"></script>
-    <!-- Add additional services that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase-database.js"></script>
-
-    <!-- Links to Javascript/jQuery CDN -->
+    <!-- Link to AJAX -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+
+    <!-- Links to style CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/QuizStyle.css">
+
+    <!-- Links to firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
+
 </head>
 
 <body>
 
-    <div class="jumbotron jumbotron-fluid text-center">
-        <div class="container">
-            <h1 class="display-4">GifVia</h1>
-            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.
+    <div id="header">
+        <h1 id="banner">GifVia</h1>
+        <h5>An interactive, GIF animated trivia game</h5>
+    </div>
+    <div class="row text-center mt-2">
+        <div class="col">
+            <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#Instructions" role="button"
+                    aria-expanded="false" aria-controls="Instructions">How to Play</a>
             </p>
         </div>
     </div>
 
+    <div class="jumbotron bgColor collapse" id="Instructions">
+        <h1 class="display-6">How to Play</h1>
 
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="assets/images/me.png" class="card-img-top" alt="nash dog">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
+        <p><span class="text-left">You have 10 Seconds to answer each question</span></p>
+        <p><span class="text-left">Questions are based on the topic you chose</span></p>
+        <p><span class="text-left">Questions get more difficult as the quiz progresses</span></p>
+        <p><span class="text-left">You get more points for answering harder questions</span></p>
+        <p><span class="text-left">Answering more questions correctly than incorrectly means you win!</span></p>
+        <p><span class="text-left">Click the gif to start the quiz!</span></p>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col"></div>
+        <!-- Question/Answer Container -->
+        <div class="col fade-in two bgColor">
+            <div class="row text-center">
+                <div class="container text-center">
+                    <div class="col">
+                        <!-- Used for Centering -->
+                    </div>
+                    <div class="col">
+                        <div class="container">
+                            <div class="card mt-3">
+                                <div class="card-header" style="color:black">
+                                    <span id="username" style="text-align: left"></span>
+                                </div>
+                                <div class="card-header" style="color:black">
+                                    Topic = <span id="topic" style="text-align: left"></span>
+                                </div>
+                                <div class="card-img-top">
+                                    <img src="https://media.giphy.com/media/xULW8vuRXQYvaGJAQw/giphy.gif"
+                                        class="card-img-top" id="trivia-gif" alt="Gif">
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item card-header" style="color:black"><span
+                                            id="question-display"></span></li>
+                                    <li class="list-group-item" style="color:black">Timer: <span id="timer">10</span>
+                                    </li>
+                                </ul>
+                                <div class=card-body>
+                                    <div class="row">
+                                        <div class="col-md-6 hvr-buzz-out" id="answer-1">
+                                            <!-- Placement for button -->
+                                        </div>
+                                        <div class="col-md-6 hvr-buzz-out" id="answer-2">
+                                            <!-- Placement for button -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 hvr-buzz-out" id="answer-3">
+                                            <!-- Placement for button -->
+                                        </div>
+                                        <div class="col-md-6 hvr-buzz-out" id="answer-4">
+                                            <!-- Placement for button -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-header" style="color:black">
+                                    Correct = <span id="wins">0</span>
+                                </div>
+                                <div class="card-header" style="color:black">
+                                    Incorrect = <span id="losses">0</span>
+                                </div>
+                                <div class="card-header" style="color:black">
+                                    Score = <span id="score">0</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col text-center">
-                <h1>Question Div <span class="badge badge-secondary"></span></h1>
-                <div class="card text-center" style="width: 21rem;">
-                    <img src="assets/images/me.png" class="card-img-top" alt="nash dog">
-                </div>
-
-                <div class="row">
-                    <div class="col">Answer 1</div>
-                    <div class="col">Answer 2</div>
-                </div>
-                <div class="row">
-                    <div class="col">Answer 3</div>
-                    <div class="col">Answer 4</div>
+                <div class="col">
+                    <!-- Used for Centering -->
                 </div>
             </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="assets/images/me.png" class="card-img-top" alt="nash dog">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                    </div>
+            <div class="row mb-4">
+                <div class="col">
+                    <!-- for centering -->
+                </div>
+                <div class="col" id="try-again">
+                    <!-- Try Again Button Appended Here -->
+                </div>
+                <div class="col">
+                    <!-- for centering -->
                 </div>
             </div>
         </div>
+        <div class="col"></div>
     </div>
 
     <!-- Link to this webpage's JS script -->
     <script type="text/javascript" src="assets/javascript/quiz.js"></script>
 
+    <footer>Designed by Phillip Makris, Nash Mcdonald, Krystal Christensen-Wiederrich and Robert Paruch </footer>
+
     <!-- Link to Bootstrap Javascript/jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <!-- <script type="text/javascript" src="assets/logic/quiz.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>

@@ -152,6 +152,10 @@ input {
     width: 300px;
 }
 
+#trivia-gif {
+  max-height: 200px;
+}
+
 #sel1 {
     background-color: rgb(224, 224, 224);
 }
