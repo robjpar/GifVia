@@ -286,8 +286,19 @@ function plotChart3() {
 }
 
 $(document).ready( function(){
+    var winWidth = $( window ).width();
+
+    if(winWidth<992){ //992 is where text and other things get wonky
+        Chart.defaults.global.defaultFontSize = 6;
+        $('.canvasCont').attr('style','height: 40vh; margin-bottom: 20px;');
+    }
+    else{
+        Chart.defaults.global.defaultFontSize = 18;
+        $('.canvasCont').attr('style','');
+    }
+
     $( window ).resize(function() {
-        var winWidth = $( window ).width();
+        winWidth = $( window ).width();
 
         if(winWidth<992){ //992 is where text and other things get wonky
             Chart.defaults.global.defaultFontSize = 6;
