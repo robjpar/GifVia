@@ -4,8 +4,7 @@
     border-color: rgba(0, 0, 0, 0);
     background-color: rgb(0, 70, 83);
     color: rgb(236, 236, 236);
-    background-image: url("");
-    background-size: 1px;
+    
     
 }
 
@@ -20,8 +19,8 @@
 
 .choose {
   font-size: 22px;
-  background-image: url("https://media.giphy.com/media/G6AhHC38Ty1IQ/giphy.gif");
-  background-size: 25000px;
+  background-image: url("https://media.giphy.com/media/TmDFyAtfly6yc/giphy.gif");
+    background-size: 1px;
 }
 
 #highScore {
@@ -31,8 +30,8 @@
     color: rgb(212, 212, 212);
     border-color: rgba(0, 0, 0, 0.281);
     margin-left: 2px;
-    background-image: url("https://media.giphy.com/media/3ohhwzFoJL39gzI4dW/giphy.gif");
-    background-size: 1px;
+    background-image: url("https://media.giphy.com/media/3ov9k8fmDbIqzzbsLS/giphy.gif");
+    background-size: 700px;
     
 }
 
@@ -45,7 +44,7 @@
     text-align: center;
     background-color: rgba(0, 0, 0, 0.788);
     color: rgb(212, 212, 212);
-    background-image: url("https://media.giphy.com/media/3ohhwzFoJL39gzI4dW/giphy.gif");
+    background-image: url("https://media.giphy.com/media/TmDFyAtfly6yc/giphy.gif");
     background-size: 1px;
 }
 
