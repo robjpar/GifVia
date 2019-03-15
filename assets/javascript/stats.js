@@ -291,9 +291,11 @@ $(document).ready( function(){
 
         if(winWidth<992){ //992 is where text and other things get wonky
             Chart.defaults.global.defaultFontSize = 6;
+            $('.canvasCont').attr('style','height: 40vh; margin-bottom: 20px;');
         }
         else{
             Chart.defaults.global.defaultFontSize = 18;
+            $('.canvasCont').attr('style','');
         }
     });
 });
