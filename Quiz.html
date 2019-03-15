@@ -33,12 +33,14 @@
     <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase-database.js"></script>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
+
 </head>
 
 <body>
 
     <div id="header">
-        <h1 id="banner" style="font-family: 'Neucha', cursive;">GifVia</h1>
+        <h1 id="banner">GifVia</h1>
         <h5>An interactive, GIF animated trivia game</h5>
     </div>
     <div class="row text-center mt-2">
@@ -52,64 +54,73 @@
 
     <div class="jumbotron bgColor collapse" id="Instructions">
         <h1 class="display-6">How to Play</h1>
-        
-            <p><span class = "text-left">You have 10 Seconds to answer each question</span></p>
-            <p><span class = "text-left">Questions are based on the topic you chose</span></p>
-            <p><span class = "text-left">Questions get more difficult as the quiz progresses</span></p>
-            <p><span class = "text-left">You get more points for answering harder questions</span></p>
-            <p><span class = "text-left">Click the gif to start the quiz!</span></p>
-       
+
+        <p><span class="text-left">You have 10 Seconds to answer each question</span></p>
+        <p><span class="text-left">Questions are based on the topic you chose</span></p>
+        <p><span class="text-left">Questions get more difficult as the quiz progresses</span></p>
+        <p><span class="text-left">You get more points for answering harder questions</span></p>
+        <p><span class="text-left">Answering more questions correctly than incorrectly means you win!</span></p>
+        <p><span class="text-left">Click the gif to start the quiz!</span></p>
+
     </div>
 
 
     <div class="row">
         <div class="col"></div>
         <!-- Question/Answer Container -->
-        <div class="col bgColor fade-in two">
+        <div class="col fade-in two bgColor">
             <div class="row text-center">
-                <div class="col">
-                    <!-- Used for Centering -->
-                </div>
-                <div class="col">
-                    <div class="card mt-3" style="width: 20rem;">
-                        <div class="card-header" style="color:black">
-                            <span id="username" style="text-align: left"></span>
-                        </div>
-                        <div class="card-header" style="color:black">
-                            Topic = <span id="topic" style="text-align: left"></span>
-                        </div>
-                        <div class="card-img-top">
-                            <img src="https://media.giphy.com/media/xULW8vuRXQYvaGJAQw/giphy.gif" class="card-img-top"
-                                id="trivia-gif" alt="Gif">
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item card-header" style="color:black"><span
-                                    id="question-display"></span></li>
-                            <li class="list-group-item" style="color:black">Timer: <span id="timer">10</span></li>
-                        </ul>
-                        <div class=card-body>
-                            <div class="row">
-                                <div class="col-md-6" id="answer-1">
-                                    <!-- Placement for button -->
+                <div class="container text-center">
+                    <div class="col">
+                        <!-- Used for Centering -->
+                    </div>
+                    <div class="col">
+                        <div class="container">
+                            <div class="card mt-3">
+                                <div class="card-header" style="color:black">
+                                    <span id="username" style="text-align: left"></span>
                                 </div>
-                                <div class="col-md-6" id="answer-2">
-                                    <!-- Placement for button -->
+                                <div class="card-header" style="color:black">
+                                    Topic = <span id="topic" style="text-align: left"></span>
+                                </div>
+                                <div class="card-img-top">
+                                    <img src="https://media.giphy.com/media/xULW8vuRXQYvaGJAQw/giphy.gif"
+                                        class="card-img-top" id="trivia-gif" alt="Gif">
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item card-header" style="color:black"><span
+                                            id="question-display"></span></li>
+                                    <li class="list-group-item" style="color:black">Timer: <span id="timer">10</span>
+                                    </li>
+                                </ul>
+                                <div class=card-body>
+                                    <div class="row">
+                                        <div class="col-md-6 hvr-buzz-out" id="answer-1">
+                                            <!-- Placement for button -->
+                                        </div>
+                                        <div class="col-md-6 hvr-buzz-out" id="answer-2">
+                                            <!-- Placement for button -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 hvr-buzz-out" id="answer-3">
+                                            <!-- Placement for button -->
+                                        </div>
+                                        <div class="col-md-6 hvr-buzz-out" id="answer-4">
+                                            <!-- Placement for button -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-header" style="color:black">
+                                    Correct = <span id="wins">0</span>
+                                </div>
+                                <div class="card-header" style="color:black">
+                                    Incorrect = <span id="losses">0</span>
+                                </div>
+                                <div class="card-header" style="color:black">
+                                    Score = <span id="score">0</span>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6" id="answer-3">
-                                    <!-- Placement for button -->
-                                </div>
-                                <div class="col-md-6" id="answer-4">
-                                    <!-- Placement for button -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-header" style="color:black">
-                            Correct = <span id="wins">0</span>
-                        </div>
-                        <div class="card-header" style="color:black">
-                            Score = <span id="score">0</span>
                         </div>
                     </div>
                 </div>
