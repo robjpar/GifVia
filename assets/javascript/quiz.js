@@ -47,7 +47,7 @@ var winLoss = "win";
 // var topics = "";
 // var topicNumber = 0;
 var difficulty = "";
-var giphyAPIKey = "dc6zaTOxFJmzC";
+var giphyAPIKey = "pUpYuVe3td58u23oogHLM1T2pHFENVTJ";
 var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&rating=g&tag=";
 
 
@@ -138,15 +138,16 @@ function shuffleAnswers() {
     }
 };
 
+function decodeHtml(html) {
+    return $('<div>').html(html).text();
+};
+
 function selectAnswer() {
     if (allowClicks) {
         clearInterval(intervalId);
         userSelection = ($(this).html());
-        //userSelection = JSON.stringify($(this).html());
-        // console.log(userSelection);
-        // var correct = (answerArray[0]);
-        // console.log(correct);
-        if (userSelection === answerArray[0]) {
+        correctAnswer = decodeHtml(answerArray[0]);
+        if (userSelection === correctAnswer) {
             $("#question-display").text("Yes! You are correct!");
             $(this).css("color", "green").css("background-color", "greenyellow");
             winsCounter++;
