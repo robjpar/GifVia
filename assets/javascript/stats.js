@@ -40,7 +40,7 @@ database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
         makeCategoryHistogram();
 
         plotChart1();
-   
+
     } else {
         console.log(`There is no data: ${PAST_PLAYERS_REF}`);
     }
@@ -62,7 +62,7 @@ database.ref(QUESTION_REF).on('value', function (snapshot) {
 
     makeQuestionsHistogram();
     plotChart2();
-  
+
     plotChart3();
 })
 
@@ -98,7 +98,7 @@ function makeQuestionsHistogram() {
 
 }
 
-Chart.defaults.global.defaultFontSize = 16;
+Chart.defaults.global.defaultFontSize = 18;
 
 function plotChart1() {
 
@@ -122,7 +122,6 @@ function plotChart1() {
 
     var totalCountGames = pastPlayers.length;
 
-    ////
     // console.log(totalCountGames);
 
     var ctx = document.getElementById("chart-1").getContext('2d');
@@ -130,24 +129,24 @@ function plotChart1() {
     var myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: labels, // labels
+            labels: labels.slice(0, 6), // labels
             datasets: [{
-                data: data, // data
+                data: data.slice(0, 6), // data
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(255, 206, 86, 0.2)',
-                    // 'rgba(75, 192, 192, 0.2)',
-                    // 'rgba(153, 102, 255, 0.2)',
-                    // 'rgba(255, 159, 64, 0.2)'
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
                 ],
                 borderColor: [
                     'rgba(255,99,132,1)',
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
-                    // 'rgba(75, 192, 192, 1)',
-                    // 'rgba(153, 102, 255, 1)',
-                    // 'rgba(255, 159, 64, 1)'
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
                 ],
                 borderWidth: 1
             }]
@@ -157,7 +156,6 @@ function plotChart1() {
                 display: true,
                 text: 'Most Often Chosen Quiz Topics, Games Played: ' + totalCountGames,
             },
-
         }
     });
 }
@@ -190,24 +188,24 @@ function plotChart2() {
     var barChartData = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: questionLabels, // categories, x-axis
+            labels: questionLabels.slice(0, 6), // categories, x-axis
             datasets: [{
-                data: dataChartTwo,
+                data: dataChartTwo.slice(0, 6),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(255, 206, 86, 0.2)',
-                    // 'rgba(75, 192, 192, 0.2)',
-                    // 'rgba(153, 102, 255, 0.2)',
-                    // 'rgba(255, 159, 64, 0.2)'
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
                 ],
                 borderColor: [
                     'rgba(255,99,132,1)',
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
-                    // 'rgba(75, 192, 192, 1)',
-                    // 'rgba(153, 102, 255, 1)',
-                    // 'rgba(255, 159, 64, 1)'
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
                 ],
                 borderWidth: 1
             }]
@@ -215,7 +213,10 @@ function plotChart2() {
         options: {
             title: {
                 display: true,
-                text: "Number of right answers guessed per topic",
+                text: "Number of Correct Answers Guessed per Topic",
+            },
+            legend: {
+                display: false
             }
         }
     })
@@ -255,7 +256,7 @@ function plotChart3() {
         options: {
             title: {
                 display: true,
-                text: '"Wins" accumulated based on the category-type'
+                text: 'Correct Answers Accumulated Based on the Category-Type'
             },
             tooltips: {
                 mode: 'index',
@@ -270,8 +271,8 @@ function plotChart3() {
                 yAxes: [{
                     stacked: true,
                     scaleLabel: {
-                        display: true,
-                        labelString: "Wins"
+                        display: false,
+                        labelString: "Correct Answers"
                     }
                 }]
             }
