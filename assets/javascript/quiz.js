@@ -138,28 +138,16 @@ function shuffleAnswers() {
     }
 };
 
+function decodeHtml(html) {
+    return $('<div>').html(html).text();
+};
+
 function selectAnswer() {
     if (allowClicks) {
         clearInterval(intervalId);
         userSelection = ($(this).html());
-        var solution = answerArray[0];
-        var correct = [];
-        for (var i = 0; i < solution.length; i++) {
-            var correctedword = solution[i];
-            if (correctedword.indexOf("&rsquo;")) {
-                correctedword = correctedword.replace("&rsquo;", "'");
-            } 
-            if (correctedword.indexOf("&#039;")) {
-                correctedword = correctedword.replace("&#039;", '"');
-            } 
-            correct.push(correctedword);
-        }
-        console.log(correct);
-        //userSelection = JSON.stringify($(this).html());
-        // console.log(userSelection);
-        // var correct = (answerArray[0]);
-        // console.log(correct);
-        if (userSelection === answerArray[0]) {
+        correctAnswer = decodeHtml(answerArray[0]);
+        if (userSelection === correctAnswer) {
             $("#question-display").text("Yes! You are correct!");
             $(this).css("color", "green").css("background-color", "greenyellow");
             winsCounter++;
