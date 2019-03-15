@@ -156,6 +156,8 @@ function plotChart1() {
                 display: true,
                 text: 'Most Often Chosen Quiz Topics, Games Played: ' + totalCountGames,
             },
+            responsive: true,
+            maintainAspectRatio: true,
         }
     });
 }
@@ -217,7 +219,9 @@ function plotChart2() {
             },
             legend: {
                 display: false
-            }
+            },
+            responsive: true,
+            maintainAspectRatio: true,
         }
     })
 };
@@ -263,6 +267,7 @@ function plotChart3() {
                 intersect: false
             },
             responsive: true,
+            maintainAspectRatio: true,
             scales: {
                 xAxes: [{
                     stacked: true
@@ -279,3 +284,16 @@ function plotChart3() {
         }
     })
 }
+
+$(document).ready( function(){
+    $( window ).resize(function() {
+        var winWidth = $( window ).width();
+
+        if(winWidth<992){ //992 is where text and other things get wonky
+            Chart.defaults.global.defaultFontSize = 6;
+        }
+        else{
+            Chart.defaults.global.defaultFontSize = 18;
+        }
+    });
+});
