@@ -1,12 +1,3 @@
-// Initialize Firebase
-// var config = {
-//     apiKey: "AIzaSyBwE9yjpyz60Le4j6krVBvHU9Yk3wyCIjg",
-//     authDomain: "gifvia-7b161.firebaseapp.com",
-//     databaseURL: "https://gifvia-7b161.firebaseio.com",
-//     projectId: "gifvia-7b161",
-//     storageBucket: "gifvia-7b161.appspot.com",
-//     messagingSenderId: "400561292234"
-// };
 var config = {
     apiKey: "AIzaSyAh9csQszjYRTf32OYxyoalMqw1fIusxac",
     authDomain: "gifvia-b45c0.firebaseapp.com",
@@ -25,6 +16,8 @@ var questions = [];
 var categoryHistogram = {};
 var questionHistogram = {};
 var question = {};
+
+//function references Firebase to store player data
 
 database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
     if (snapshot.val()) {
@@ -46,6 +39,7 @@ database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
     }
 });
 
+//this function references database to store category response data
 database.ref(QUESTION_REF).on('value', function (snapshot) {
     if (snapshot.val()) {
         questions = [];
@@ -62,10 +56,9 @@ database.ref(QUESTION_REF).on('value', function (snapshot) {
 
     makeQuestionsHistogram();
     plotChart2();
-
-    plotChart3();
 })
 
+//function compiles information regarding how many times a certain category has been played
 function makeCategoryHistogram() {
 
     pastPlayers.forEach(function (player) {
@@ -76,10 +69,9 @@ function makeCategoryHistogram() {
         }
     });
 
-    // console.log("categoryHistogram:");
-    // console.log(categoryHistogram);
 }
 
+//function makes a dataset that compiles how many "winning" answers have accumulated based on category type
 function makeQuestionsHistogram() {
 
     questions.forEach(function (question) {
@@ -95,11 +87,12 @@ function makeQuestionsHistogram() {
     });
 
     console.log(questionHistogram);
+};
 
-}
-
+//sets chart default size
 Chart.defaults.global.defaultFontSize = 18;
 
+//plots first chart looking at categories selected most often -- sets a display limit of 6
 function plotChart1() {
 
     var histogramList = [];
@@ -162,6 +155,7 @@ function plotChart1() {
     });
 }
 
+//function displays second chart that looks at how many "winning" answers have been compiled per category (display limit 6)
 function plotChart2() {
 
     var sortableTwo = [];
@@ -225,65 +219,6 @@ function plotChart2() {
         }
     })
 };
-
-
-var barChartData = {
-    labels: ['Cat. 1', 'Cat. 2', 'Cat. 3', 'Cat. 4'], // categories, x-axis
-    datasets: [{
-        label: 'Easy',
-        data: [2, 3, 4, 5], // values for each category, for a given part; y-axis
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1
-    }, {
-        label: 'Medium',
-        data: [2, 3, 4, 3], // values for each category, for a given part; y-axis
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 1
-    }, {
-        label: 'Hard',
-        data: [2, 3, 3, 2], // values for each category, for a given part; y-axis
-        backgroundColor: 'rgba(255, 206, 86, 0.2)',
-        borderColor: 'rgba(255, 206, 86, 1)',
-        borderWidth: 1
-    }]
-};
-
-function plotChart3() {
-
-    var ctx = document.getElementById("chart-3").getContext('2d');
-
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            title: {
-                display: true,
-                text: 'Correct Answers Accumulated Based on the Category-Type'
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: false
-            },
-            responsive: true,
-            maintainAspectRatio: true,
-            scales: {
-                xAxes: [{
-                    stacked: true
-
-                }],
-                yAxes: [{
-                    stacked: true,
-                    scaleLabel: {
-                        display: false,
-                        labelString: "Correct Answers"
-                    }
-                }]
-            }
-        }
-    })
-}
 
 $(document).ready( function(){
     var winWidth = $( window ).width();
