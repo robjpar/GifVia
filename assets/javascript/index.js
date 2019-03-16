@@ -1,12 +1,4 @@
 // Initialize Firebase
-// var config = {
-//     apiKey: "AIzaSyBwE9yjpyz60Le4j6krVBvHU9Yk3wyCIjg",
-//     authDomain: "gifvia-7b161.firebaseapp.com",
-//     databaseURL: "https://gifvia-7b161.firebaseio.com",
-//     projectId: "gifvia-7b161",
-//     storageBucket: "gifvia-7b161.appspot.com",
-//     messagingSenderId: "400561292234"
-// };
 var config = {
     apiKey: "AIzaSyAh9csQszjYRTf32OYxyoalMqw1fIusxac",
     authDomain: "gifvia-b45c0.firebaseapp.com",
@@ -20,6 +12,7 @@ var database = firebase.database();
 const PAST_PLAYERS_REF = "past-players";
 const PAST_NICKNAMES_REF = "past-nicknames";
 
+// Info for the current player
 var currentPlayer = {
     nickname: "",
     category: "",
@@ -27,12 +20,14 @@ var currentPlayer = {
     score: 0
 }
 
+// Read the info for the current player from the session storage if exists
 var savedCurrentPlayer = JSON.parse(sessionStorage.getItem("currentPlayer"));
 if (savedCurrentPlayer) {
     $("#nickname").val(savedCurrentPlayer.nickname);
     $("#quiz-category").val(savedCurrentPlayer.category);
 }
 
+// Read the login info from the Firebase
 var pastNicknames = {};
 database.ref(PAST_NICKNAMES_REF).on('value', function (snapshot) {
     if (snapshot.val()) {
@@ -40,6 +35,7 @@ database.ref(PAST_NICKNAMES_REF).on('value', function (snapshot) {
     }
 });
 
+// Login info validation
 function getLoginInfo(nickname, secretNumber) {
 
     if (nickname in pastNicknames && secretNumber === "") {
@@ -50,6 +46,7 @@ function getLoginInfo(nickname, secretNumber) {
     }
 }
 
+// Save the login info in Firebase
 function saveLoginInfo(nickname, secretNumber) {
 
     pastNicknames[nickname] = secretNumber;
@@ -62,6 +59,7 @@ function saveLoginInfo(nickname, secretNumber) {
     });
 }
 
+// Functionality of the login button
 $("#register-button").click(function (event) {
 
     var nickname = $("#nickname").val().trim();
@@ -70,6 +68,7 @@ $("#register-button").click(function (event) {
     var secretNumber = $("#secret-number").val().trim();
     var validSecretNumber = /^[0-9]*$/.test(secretNumber) && (secretNumber.length === 0 || secretNumber.length >= 4);
 
+    // Login info validation
     if (!validNickname) {
         $("#nickname-message").text("Nickname invalid!");
 
@@ -91,6 +90,7 @@ $("#register-button").click(function (event) {
         currentPlayer.category = $("#quiz-category").val();
         currentPlayer.categoryId = parseInt($("#quiz-category").find(':selected').data("category-id"));
 
+        // Save the login info in the session storage
         sessionStorage.setItem("currentPlayer", JSON.stringify(currentPlayer));
 
         $("#secret-number").val("");
@@ -101,6 +101,7 @@ $("#register-button").click(function (event) {
     }
 });
 
+// Get the quiz categories
 function getQuizCategories() {
     var queryURL = "https://opentdb.com/api_category.php";
 
@@ -120,6 +121,7 @@ function getQuizCategories() {
 }
 getQuizCategories();
 
+// Get the login page gif
 function getGif(term, count) {
     var queryURL = "https://api.giphy.com/v1/gifs/search?";
 
@@ -149,6 +151,7 @@ const GIF_COUNT = 10;
 getGif(GIF_TERM, GIF_COUNT);
 
 // Simulation of adding past players to the firebase============================
+// Used only for testing and debugging
 const COUNT = 0;
 for (let i = 0; i < COUNT; i++) {
     var pastPlayer = {
@@ -173,18 +176,21 @@ for (let i = 0; i < COUNT; i++) {
 
 var pastPlayers = [];
 
+// Render the scoreboard
 function renderScoreboard() {
     pastPlayers.forEach(function (player) {
         $("#scoreboard-body").prepend(`<tr><td>${player.nickname}</td><td>${player.category}</td><td>${player.score}</td></tr>`);
     });
 }
 
+// Render the highest score info
 function renderHighestScore() {
     var player = pastPlayers[pastPlayers.length - 1];
 
     $("#highest-score-message").html(`Nickname: ${player.nickname} <br> Topic: ${player.category} <br> Highest Score: ${player.score}`);
 }
 
+// Get the scoreboard info from Firebase
 const PLAYER_COUNT = 5;
 database.ref(PAST_PLAYERS_REF).orderByChild('score').limitToLast(PLAYER_COUNT).on('value', function (snapshot) {
     if (snapshot.val()) {
@@ -202,7 +208,8 @@ database.ref(PAST_PLAYERS_REF).orderByChild('score').limitToLast(PLAYER_COUNT).o
     }
 });
 
-// this runs in quiz.js=========================================================
+// This runs in quiz.js=========================================================
+// Used only for testing and debugging
 // var score = 14; // example
 
 // var pastPlayer = {
