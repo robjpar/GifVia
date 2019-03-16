@@ -24,6 +24,8 @@ var pastPlayers = [];
 var questions = [];
 var categoryHistogram = {};
 var questionHistogram = {};
+var difficultyEasyHistogram = {};
+var categoryTotal = 0;
 var question = {};
 
 database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
@@ -63,6 +65,7 @@ database.ref(QUESTION_REF).on('value', function (snapshot) {
     makeQuestionsHistogram();
     plotChart2();
 
+    makeDifficultyHistogram();
     plotChart3();
 })
 
@@ -95,7 +98,53 @@ function makeQuestionsHistogram() {
     });
 
     console.log(questionHistogram);
+};
 
+function makeDifficultyHistogram() {
+
+    questions.forEach(function (question) {
+        if (question.category in difficultyEasyHistogram) {
+            if (question.difficulty === "easy" && question.outcome === "winner") {
+                difficultyEasyHistogram[question.category] += 1;
+            }
+        } else {
+            if (question.difficulty === "easy" && question.outcome === "winner") {
+                difficultyEasyHistogram[question.category] = 1;
+            }
+        }
+
+            // if (question.difficulty === "easy") {
+            //     if (question.outcome === "winner") {
+            //         difficultyHistogram["easy"][question.category] += 1;
+            //     } 
+            // } else if (question.outcome === "medium") {
+            //     if (question.outcome === "winner") {
+            //         difficultyHistogram["medium"][question.category] += 1;
+            //     }
+            // } else if (question.outcome === "hard") {
+            //     if (question.outcome === "winner") {
+            //         difficultyHistogram["hard"][question.category] += 1;
+            //     }
+            // }
+        // categoryTotal = difficultyHistogram["easy"] + difficultyHistogram["medium"] + difficultyHistogram["hard"];
+        // } else {
+        //     if (question.difficulty === "easy") {
+        //         if (question.outcome === "winner") {
+        //             difficultyHistogram["easy"][question.category] = 1;
+        //         } 
+        //     } else if (question.outcome === "medium") {
+        //         if (question.outcome === "winner") {
+        //             difficultyHistogram["medium"][question.category] = 1;
+        //         }
+        //     } else if (question.outcome === "hard") {
+        //         if (question.outcome === "winner") {
+        //             difficultyHistogram["hard"][question.category] = 1;
+        //         }
+        //     }
+        //     categoryTotal = difficultyHistogram["easy"] + difficultyHistogram["medium"] + difficultyHistogram["hard"];
+        // }
+    });
+    console.log(difficultyEasyHistogram);
 }
 
 Chart.defaults.global.defaultFontSize = 18;
@@ -248,34 +297,52 @@ var barChartData = {
 
 function plotChart3() {
 
-    var ctx = document.getElementById("chart-3").getContext('2d');
+    var sortableThree = [];
+    for (var category in difficultyEasyHistogram) {
+        sortableThree.push([category, difficultyEasyHistogram[category]]);
+    }
+    sortableThree.sort(function (a, b) {
+        return b[1] - a[1];
+    });
 
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            title: {
-                display: true,
-                text: 'Correct Answers Accumulated Based on the Category-Type'
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: false
-            },
-            responsive: true,
-            scales: {
-                xAxes: [{
-                    stacked: true
+    console.log(sortableThree);
 
-                }],
-                yAxes: [{
-                    stacked: true,
-                    scaleLabel: {
-                        display: false,
-                        labelString: "Correct Answers"
-                    }
-                }]
-            }
-        }
-    })
+    // var difficultyLabels = [];
+    // var dataChartThree = [];
+    // for (let i = 0; i < sortableTwo.length; i++) {
+    //     difficultyLabels.push(sortableThree[i][0]);
+    //     dataChartThree.push(sortableThree[i][1]);
+    // };
+
+    // var ctx = document.getElementById("chart-3").getContext('2d');
+
+    // var myChart = new Chart(ctx, {
+    //     type: 'bar',
+    //     labels: 
+    //     datasets:
+    //     options: {
+    //         title: {
+    //             display: true,
+    //             text: 'Correct Answers Accumulated Based on the Category-Type'
+    //         },
+    //         tooltips: {
+    //             mode: 'index',
+    //             intersect: false
+    //         },
+    //         responsive: true,
+    //         scales: {
+    //             xAxes: [{
+    //                 stacked: true
+
+    //             }],
+    //             yAxes: [{
+    //                 stacked: true,
+    //                 scaleLabel: {
+    //                     display: false,
+    //                     labelString: "Correct Answers"
+    //                 }
+    //             }]
+    //         }
+    //     }
+    // })
 }
