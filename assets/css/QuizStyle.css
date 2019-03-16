@@ -47,38 +47,6 @@ input {
     font-size: 60px;
 }
 
-.scoreTable {
-    background-color: black;
-}
-
-#table {
-    border: solid;
-    background-color: rgba(0, 0, 0, 0.788);
-    color: rgb(212, 212, 212);
-    border-color: rgba(255, 255, 255, 0);
-    text-align: center;
-    margin-left: 20px;
-    
-    margin-top: 10px;
-    
-}
-
-#tableText {
-    color: rgb(212, 212, 212);
-}
-
-#tableHead {
-    font-size: 20px;
-}
-
-#tableItems {
-    font-size: 1px;
-}
-
-#scoreHead {
-    font-size: 45px;
-}
-
 /* If all divs have the same styling, why not create a class that does it all. */
 .bgColor{
     border: solid;
