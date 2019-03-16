@@ -44,14 +44,12 @@ var gif = $("#trivia-gif");
 
 var winLoss = "win";
 
-// var topics = "";
-// var topicNumber = 0;
 var difficulty = "";
 var giphyAPIKey = "pUpYuVe3td58u23oogHLM1T2pHFENVTJ";
 var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&rating=g&tag=";
 
 
-
+//function to display username and category selected
 $(document).ready(function() {
     $("#username").html(currentPlayer.nickname);
     $("#topic").html(currentPlayer.category);
@@ -59,30 +57,33 @@ $(document).ready(function() {
     $("#question-display").text("Click the image to get started!");
 });
 
+//function to start gameplay
 $("#trivia-gif").one("click", function() {
     questionGenerator();
 })
 
-
+//function that references trivia question API to select questions based on category
 function questionGenerator() {
     clearInterval(intervalId);
     userSelection = null;
     timer = 10;
     timerRunning = true;
     allowClicks = true;
-    if (count < 2) {
+    //assigns difficulty based on the number of questions and ends the game when 12 questions has been reached
+    if (count < 5) {
         difficulty = "easy";
         allowGamePlay();
-    } else if (count > 1 && count < 3) {
+    } else if (count > 4 && count < 9) {
         difficulty = "medium";
         allowGamePlay();
-    } else if (count > 2 && count < 4) {
+    } else if (count > 8 && count < 13) {
         difficulty = "hard";
         allowGamePlay();
-    } else if (count > 3) {
+    } else if (count > 12) {
         gameOver();
     }
-    // console.log(difficulty);
+
+    //function that references API and also starts timer function
     function allowGamePlay() {
         getAjax();
         intervalId = setInterval(countDown, 1000);
@@ -91,15 +92,12 @@ function questionGenerator() {
 
     function getAjax() {
         var triviaQueryURL = "https://opentdb.com/api.php?amount=1&category=" + currentPlayer.categoryId + "&difficulty=" + difficulty + "&type=multiple";
-        // console.log(triviaQueryURL);
         $.ajax({
             url: triviaQueryURL,
             method: "GET"
         }).then(function(response) {
             question = response.results[0].question;
-            // console.log(question);
             wordArray = question.split(" ");
-            // pickWord();
             $("#question-display").html(question);
             var short = response.results[0];
             answerArray = [];
@@ -111,6 +109,7 @@ function questionGenerator() {
     };
 };
 
+//function that generated gif based on trivia topic
 function generateTriviaGif() {
     $.ajax({
         url: gifQueryURL + currentPlayer.category, 
@@ -122,6 +121,7 @@ function generateTriviaGif() {
     })
 };
 
+//function to store answers from API in an array and shuffle div elements to append answers to
 function shuffleAnswers() {
     var ctr = textArray.length, temp, index;
     while (ctr > 0) {
@@ -138,10 +138,12 @@ function shuffleAnswers() {
     }
 };
 
+//function to verify answers from array can be adequately compared to HTML interpretation of raw JSON data
 function decodeHtml(html) {
     return $('<div>').html(html).text();
 };
 
+//function that allows user to select an answer and evaluate if answer is correct
 function selectAnswer() {
     if (allowClicks) {
         clearInterval(intervalId);
@@ -179,6 +181,7 @@ function selectAnswer() {
             category: currentPlayer.category,
             difficulty: difficulty
         }
+        //function to push question results to Firebase to be used in data analysis
         database.ref("questions").push(questionInformation, function (error) {
             if (error) {
                 console.log("The write failed, error code: " + error.code);
@@ -195,6 +198,7 @@ function selectAnswer() {
     }
 };
 
+//if user selection is incorrect, this function shows correct answer
 function showRightAnswer() {
     if ($("#button-1").text() === answerArray[0]) {
         $("#button-1").css("color", "green").css("background-color", "greenyellow");
@@ -207,6 +211,7 @@ function showRightAnswer() {
     }
 };
 
+//generates a gif based on outcome of game
 function generateWinLossGif() {
     $.ajax({
         url: gifQueryURL + winLoss,
@@ -220,6 +225,7 @@ function generateWinLossGif() {
     setTimeout(questionGenerator, 3000);
 }
 
+//timer function
 function countDown() {
     if (timerRunning) {
         $("#timer").text(timer);
@@ -235,9 +241,9 @@ function countDown() {
             generateWinLossGif();
         }
     }
-    // console.log(timer)
 };
 
+//function at the end of the game to evaluate if player won, lost, or tied
 function gameOver() {
     clearInterval(intervalId);
     timerRunning = false;
@@ -261,6 +267,7 @@ function gameOver() {
         category: currentPlayer.category,
         score: score
     }
+    //function that pushes player information to Firebase
     database.ref("past-players").push(pastPlayer, function (error) {
         if (error) {
             console.log("The write failed, error code: " + error.code);
@@ -268,6 +275,7 @@ function gameOver() {
             console.log("The write successful");
         }
     });
+    //generate gif based on final outcome of game
     function finalWinLoss() {
         $.ajax({
             url: gifQueryURL + winLoss,
@@ -280,6 +288,8 @@ function gameOver() {
     }
 };
 
+//function related to button that generates more questions
+
 function moreQuestions() {
     clearInterval(intervalId);
     count = 1;
@@ -291,67 +301,36 @@ function moreQuestions() {
     questionGenerator();
 };
 
-
-//need to finish/check code for removing html description of ' and "
-//do we want gif to be related to word from question or topic?
-//is there an easier way to pick a "focal point" word from question?
-
-function pickWord() {
-    var item = Math.floor(Math.random()*wordArray.length);
-    // console.log(wordArray[item]);
-    if (wordArray[item].length < 6) {
-        pickWord();
-    } else if (wordArray[item].indexOf("$#039")) {
-        wordArray.splice(item, 1, " ");
-        console.log("yes" + wordArray[item]);
-    } else if (wordArray[i].indexOf("&quot;")) {
-        ("$&quot;").replace("$&quot;", " ");
-    } else {
-        console.log("pick me!");
-        word = wordArray[item];
-        console.log(word);
-        generateTriviaGif();
-    }
-};
-
+//on-click functions to allow user selection and more questions to be loaded
 $(document).on("click", ".answer", selectAnswer);
 $(document).on("click", "#more-questions", moreQuestions);
 
-//re-write database push for current player?
-
-// Create the XHR object.
+//CORS request to allow same API for giphy.com to be referenced both from index.html and quiz.html
 function createCORSRequest(method, url) {
     var xhr = new XMLHttpRequest();
     if ("withCredentials" in xhr) {
-      // XHR for Chrome/Firefox/Opera/Safari.
       xhr.open(method, url, true);
     } else if (typeof XDomainRequest != "undefined") {
-      // XDomainRequest for IE.
       xhr = new XDomainRequest();
       xhr.open(method, url);
     } else {
-      // CORS not supported.
       xhr = null;
     }
     return xhr;
   }
   
-  // Helper method to parse the title tag from the response.
   function getTitle(text) {
     return text.match('<title>(.*)?</title>')[1];
   }
   
-  // Make the actual CORS request.
   function makeCorsRequest() {
-    // This is a sample server that supports CORS.
      
     var xhr = createCORSRequest('GET', url);
     if (!xhr) {
       alert('CORS not supported');
       return;
     }
-  
-    // Response handlers.
+
     xhr.onload = function() {
       var text = xhr.responseText;
       var title = getTitle(text);
