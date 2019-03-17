@@ -35,56 +35,54 @@
 </head>
 
 <body>
-  
   <div id="header">
     <img class="headerGif1" src="https://media.giphy.com/media/MxYQrB9jeGzza/giphy.gif">
     <img class="headerGif2" src="https://media.giphy.com/media/MxYQrB9jeGzza/giphy.gif">
     <h1 id="banner">GifVia</h1>
-    
-    <h5><img class="hello1" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif">An interactive, GIF animated trivia game<img class="hello2" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif"></h5>
-    
 
+    <h5><img class="hello1" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif">An interactive, GIF
+      animated trivia game<img class="hello2" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif"></h5>
   </div>
-  
 
   <br>
 
   <div class="container">
     <div class="row">
+
       <div class="col-sm-4">
         <div class="row">
           <div class="col-sm-12" id="info">
             <h4 class="choose">Choose a topic then enter a username.</h4>
-            
           </div>
         </div>
+
         <div class="row">
           <div class="col-sm-12" id="quizTopic">
             <div class="dropdown">
               <div class="form-group">
-                <label for="quiz-category" id="quizLabel"><img class="quizGif1" src="https://media.giphy.com/media/xT8qBgW8yb7NtOBFu0/giphy.gif">Quiz Topic:<img class="quizGif1" src="https://media.giphy.com/media/xT8qBgW8yb7NtOBFu0/giphy.gif"></label><br>
+                <label for="quiz-category" id="quizLabel"><img class="quizGif1" src="https://media.giphy.com/media/xT8qBgW8yb7NtOBFu0/giphy.gif">Quiz
+                  Topic:<img class="quizGif1" src="https://media.giphy.com/media/xT8qBgW8yb7NtOBFu0/giphy.gif"></label><br>
                 <select class="form-control" id="quiz-category">
                 </select>
               </div>
             </div>
 
             <h1 class="userLabel">Username:</h1>
-            <span class="nickWarning" id="nickname-message"
-            style="color: orange"></span>
-            <input  type="text" class="tBox" id="nickname" placeholder="alphanum 8 char">
-            
+            <span class="nickWarning" id="nickname-message" style="color: orange"></span>
+            <input type="text" class="tBox" id="nickname" placeholder="alphanum 8 char">
+
             <h5 class="pinNumber">If you want to reuse the username, choose a Secret #:</h5>
-            <span class="secret"  id="secret-number-message" style="color: orange"></span>
-            <input  type="number" class="tBox2"id="secret-number" placeholder="0000"><br>
-            
-            
-            <img class="hello3" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif"><button id="register-button" type="button" class="startGameButton btn btn-info">Start Game</button><img class="hello4" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif">
-            
+            <span class="secret" id="secret-number-message" style="color: orange"></span>
+            <input type="number" class="tBox2" id="secret-number" placeholder="0000"><br>
+
+
+            <img class="hello3" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif"><button id="register-button"
+              type="button" class="startGameButton btn btn-info">Start Game</button><img class="hello4" src="https://media.giphy.com/media/xUOwGiewfQAm3tcIA8/giphy.gif">
 
           </div>
         </div>
       </div>
-      
+
       <div class="col-sm-7" id="highScore">
         <div class="row">
           <div class="col-sm-12">
@@ -92,17 +90,15 @@
             <img class="goodJ2" src="https://media.giphy.com/media/l0HU4vCCdtME0RZlu/giphy.gif">
             <h1 id="scoreHead">High Score:</h1>
             <h3>
-              
               <span class="scoreChart" id="highest-score-message"></span>
             </h3>
             <div class="playerName"></div>
 
-            <!-- <img id="gif" src="https://media.giphy.com/media/9xt1MUZqkneFiWrAAD/giphy.gif"> -->
             <img class="gif" id="gif-img">
             <br><br><br>
-            
+
             <a href="stats.html" target="_blank" class="stats">Click Here For Stats!</a>
-            
+
           </div>
         </div>
       </div>
@@ -118,33 +114,29 @@
             <th class="P">Player</th>
             <th class="T">Topic</th>
             <th class="S">Score</th>
-
           </tr>
+
           <div class="tableItems">
-              <tbody id="scoreboard-body"></tbody>
-           
-        </div>
+            <tbody id="scoreboard-body"></tbody>
+          </div>
+
         </table>
-        
+
       </div>
 
     </div>
+
   </div>
-  
 
   <br><br><br><br><br><br><br>
 
   <img class="footerGif1" src="https://media.giphy.com/media/MxYQrB9jeGzza/giphy.gif">
   <img class="footerGif2" src="https://media.giphy.com/media/MxYQrB9jeGzza/giphy.gif">
   <footer>Designed by Phillip Makris, Nash Mcdonald, Krystal Christensen-Wiederrich and Robert Paruch</footer>
-  
+
   <a href="opener.html" target="_blank">Opener</a>
 
-
-
-
-  <!-- ======================================================================================= -->
-
+  <!-- Used only for testing and debugging ===================================================== -->
   <!-- <div class="container">
 
     <form>
@@ -192,11 +184,7 @@
     <a href="stats.html" target="_blank">Stats</a>
 
   </div> -->
-
-  <!-- ======================================================================================= -->
-
-
-
+  <!-- ========================================================================================= -->
 
   <!-- Link to this webpage's JS script -->
   <script src="assets/javascript/index.js"></script>

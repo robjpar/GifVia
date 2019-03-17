@@ -1,3 +1,4 @@
+// Initialize Firebase
 var config = {
     apiKey: "AIzaSyAh9csQszjYRTf32OYxyoalMqw1fIusxac",
     authDomain: "gifvia-b45c0.firebaseapp.com",
@@ -18,7 +19,6 @@ var questionHistogram = {};
 var question = {};
 
 //function references Firebase to store player data
-
 database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
     if (snapshot.val()) {
         pastPlayers = [];
@@ -27,11 +27,7 @@ database.ref(PAST_PLAYERS_REF).on('value', function (snapshot) {
             pastPlayers.push(childSnapshot.val());
         });
 
-        // console.log("past players:");
-        // console.log(pastPlayers);
-
         makeCategoryHistogram();
-
         plotChart1();
 
     } else {
@@ -48,8 +44,6 @@ database.ref(QUESTION_REF).on('value', function (snapshot) {
             questions.push(childSnapshot.val());
         });
 
-        // console.log("questions: ");
-        console.log(questions);
     } else {
         console.log(`There is no data for ${QUESTION_REF}`);
     };
@@ -68,7 +62,6 @@ function makeCategoryHistogram() {
             categoryHistogram[player.category] = 1;
         }
     });
-
 }
 
 //function makes a dataset that compiles how many "winning" answers have accumulated based on category type
@@ -110,12 +103,7 @@ function plotChart1() {
         data.push(histogramList[i][1]);
     }
 
-    // console.log(labels);
-    // console.log(data);
-
     var totalCountGames = pastPlayers.length;
-
-    // console.log(totalCountGames);
 
     var ctx = document.getElementById("chart-1").getContext('2d');
 
@@ -166,18 +154,12 @@ function plotChart2() {
         return b[1] - a[1];
     });
 
-    console.log(sortableTwo);
-
     var questionLabels = [];
     var dataChartTwo = [];
     for (let i = 0; i < sortableTwo.length; i++) {
         questionLabels.push(sortableTwo[i][0]);
         dataChartTwo.push(sortableTwo[i][1]);
     };
-
-    console.log(questionLabels);
-    console.log(dataChartTwo);
-
 
     var ctx = document.getElementById("chart-2").getContext('2d');
 
@@ -220,28 +202,27 @@ function plotChart2() {
     })
 };
 
-$(document).ready( function(){
-    var winWidth = $( window ).width();
+// Responsive layout
+$(document).ready(function () {
+    var winWidth = $(window).width();
 
-    if(winWidth<992){ //992 is where text and other things get wonky
+    if (winWidth < 992) { //992 is where text and other things get wonky
         Chart.defaults.global.defaultFontSize = 6;
-        $('.canvasCont').attr('style','height: 40vh; margin-bottom: 20px;');
-    }
-    else{
+        $('.canvasCont').attr('style', 'height: 40vh; margin-bottom: 20px;');
+    } else {
         Chart.defaults.global.defaultFontSize = 18;
-        $('.canvasCont').attr('style','');
+        $('.canvasCont').attr('style', '');
     }
 
-    $( window ).resize(function() {
-        winWidth = $( window ).width();
+    $(window).resize(function () {
+        winWidth = $(window).width();
 
-        if(winWidth<992){ //992 is where text and other things get wonky
+        if (winWidth < 992) { //992 is where text and other things get wonky
             Chart.defaults.global.defaultFontSize = 6;
-            $('.canvasCont').attr('style','height: 40vh; margin-bottom: 20px;');
-        }
-        else{
+            $('.canvasCont').attr('style', 'height: 40vh; margin-bottom: 20px;');
+        } else {
             Chart.defaults.global.defaultFontSize = 18;
-            $('.canvasCont').attr('style','');
+            $('.canvasCont').attr('style', '');
         }
     });
 });

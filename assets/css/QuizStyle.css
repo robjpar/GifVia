@@ -1,106 +1,144 @@
-
 #header {
-    text-align: center;
-    border: solid;
-    width: 100%;
-    border-color: rgba(0, 0, 0, 0);
-    background-color: rgb(0, 70, 83);
-    color: rgb(236, 236, 236);
+  text-align: center;
+  border: solid;
+  width: 100%;
+  border-color: rgba(0, 0, 0, 0);
+  background-color: rgb(0, 70, 83);
+  color: rgb(236, 236, 236);
 }
 
 #container {
-    display: flex;              /* establish flex container */
-    flex-direction: column;     /* stack flex items vertically */
-    justify-content: center;    /* center items vertically, in this case */
-    align-items: center;        /* center items horizontally, in this case */
-    height: 300px;
-    border: 1px solid black;
+  display: flex;
+  /* establish flex container */
+  flex-direction: column;
+  /* stack flex items vertically */
+  justify-content: center;
+  /* center items vertically, in this case */
+  align-items: center;
+  /* center items horizontally, in this case */
+  height: 300px;
+  border: 1px solid black;
 }
 
 footer {
-   
-    text-align: center;
-    
-    margin: 50px 0px 0px 0px;
-    padding: 5px 0px 5x 0px;
-    color: rgb(255, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+  text-align: center;
+  margin: 50px 0px 0px 0px;
+  padding: 5px 0px 5x 0px;
+  color: rgb(255, 255, 255);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
 }
 
 #banner {
-    font-size: 85px;  
+  font-size: 85px;
 }
 
 body {
-    background-image: url("https://i.imgur.com/dqj1Hfw.jpg");
-    background-size: cover;
-    font-family: 'Neucha', cursive !important;
-    background-attachment: fixed;
+  background-image: url("https://i.imgur.com/dqj1Hfw.jpg");
+  background-size: cover;
+  font-family: 'Neucha', cursive !important;
+  background-attachment: fixed;
 }
 
 input {
-    background-color: rgb(224, 224, 224);
+  background-color: rgb(224, 224, 224);
 }
 
 #quizLabel {
-    font-size: 60px;
+  font-size: 60px;
 }
 
 /* If all divs have the same styling, why not create a class that does it all. */
-.bgColor{
-    border: solid;
-    background-color: rgba(0, 0, 0, 0.788); 
-    color: rgb(212, 212, 212);
-    border-color: rgba(255, 255, 255, 0);
-    text-align: center;
-    margin-left: 20px;
-    margin-top: 10px;
-}
-.answer{
-    margin: 5px 5px 5px 5px;
-    font-size: 25px;
-}
-#question-display{
-    text-align: center;
-    height: 60px; /* Set so that the div doesn't constantly shift when larger text is added */
-}
-.card {
-    margin: 0 auto; /* Added */
-    float: none; /* Added */
-    margin-bottom: 10px; /* Added */
-    width: 32rem;
-}
-.card-header{
-    font-size: 25px;
-}
-li{
-    font-size: 25px;
+.bgColor {
+  border: solid;
+  background-color: rgba(0, 0, 0, 0.788);
+  color: rgb(212, 212, 212);
+  border-color: rgba(255, 255, 255, 0);
+  text-align: center;
+  margin-left: 20px;
+  margin-top: 10px;
 }
 
+.answer {
+  margin: 5px 5px 5px 5px;
+  font-size: 25px;
+}
+
+#question-display {
+  text-align: center;
+  height: 60px;
+  /* Set so that the div doesn't constantly shift when larger text is added */
+}
+
+.card {
+  margin: 0 auto;
+  /* Added */
+  float: none;
+  /* Added */
+  margin-bottom: 10px;
+  /* Added */
+  width: 32rem;
+}
+
+.card-header {
+  font-size: 25px;
+}
+
+li {
+  font-size: 25px;
+}
 
 /* --------------------------------- */
 /*         Fade Animations           */
 /* --------------------------------- */
 
 /* make keyframes that tell the start state and the end state of our object */
-@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
 
 .fade-in {
-  opacity:0;  /* make things invisible upon start */
-  -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
-  -moz-animation:fadeIn ease-in 1;
-  animation:fadeIn ease-in 1;
+  opacity: 0;
+  /* make things invisible upon start */
+  -webkit-animation: fadeIn ease-in 1;
+  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
 
-  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
-  -moz-animation-fill-mode:forwards;
-  animation-fill-mode:forwards;
+  -webkit-animation-fill-mode: forwards;
+  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
 
-  -webkit-animation-duration:1s;
-  -moz-animation-duration:1s;
-  animation-duration:1s;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
 }
 
 .fade-in.one {
@@ -111,7 +149,7 @@ li{
 
 .fade-in.two {
   -webkit-animation-delay: 0.4s;
-  -moz-animation-delay:0.4s;
+  -moz-animation-delay: 0.4s;
   animation-delay: 0.4s;
 }
 
@@ -124,160 +162,227 @@ li{
 /*HOVER SECTION*/
 
 @-webkit-keyframes wiggle {
-    0% {-webkit-transform: rotate(10deg);}
-    25% {-webkit-transform: rotate(-10deg);}
-    50% {-webkit-transform: rotate(20deg);}
-    75% {-webkit-transform: rotate(-5deg);}
-    100% {-webkit-transform: rotate(0deg);}
-  }
-  
-  @-ms-keyframes wiggle {
-    0% {-ms-transform: rotate(1deg);}
-    25% {-ms-transform: rotate(-1deg);}
-    50% {-ms-transform: rotate(1.5deg);}
-    75% {-ms-transform: rotate(-5deg);}
-    100% {-ms-transform: rotate(0deg);}
-  }
-  
-  @keyframes wiggle {
-    0% {transform: rotate(10deg);}
-    25% {transform: rotate(-10deg);}
-    50% {transform: rotate(20deg);}
-    75% {transform: rotate(-5deg);}
-    100% {transform: rotate(0deg);}
+  0% {
+    -webkit-transform: rotate(10deg);
   }
 
-#banner:hover {
-    
-    -webkit-animation-name: wiggle;
-    -ms-animation-name: wiggle;
-    -ms-animation-duration: 1000ms;
-    -webkit-animation-duration: 1000ms;
-    -webkit-animation-iteration-count: 100;
-    -ms-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease-in-out;
-    -ms-animation-timing-function: ease-in-out;
+  25% {
+    -webkit-transform: rotate(-10deg);
   }
+
+  50% {
+    -webkit-transform: rotate(20deg);
+  }
+
+  75% {
+    -webkit-transform: rotate(-5deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(0deg);
+  }
+}
+
+@-ms-keyframes wiggle {
+  0% {
+    -ms-transform: rotate(1deg);
+  }
+
+  25% {
+    -ms-transform: rotate(-1deg);
+  }
+
+  50% {
+    -ms-transform: rotate(1.5deg);
+  }
+
+  75% {
+    -ms-transform: rotate(-5deg);
+  }
+
+  100% {
+    -ms-transform: rotate(0deg);
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(10deg);
+  }
+
+  25% {
+    transform: rotate(-10deg);
+  }
+
+  50% {
+    transform: rotate(20deg);
+  }
+
+  75% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+#banner:hover {
+  -webkit-animation-name: wiggle;
+  -ms-animation-name: wiggle;
+  -ms-animation-duration: 1000ms;
+  -webkit-animation-duration: 1000ms;
+  -webkit-animation-iteration-count: 100;
+  -ms-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in-out;
+  -ms-animation-timing-function: ease-in-out;
+}
 
 
 /* Buzz Out */
 @-webkit-keyframes hvr-buzz-out {
-    10% {
-      -webkit-transform: translateX(3px) rotate(2deg);
-      transform: translateX(3px) rotate(2deg);
-    }
-    20% {
-      -webkit-transform: translateX(-3px) rotate(-2deg);
-      transform: translateX(-3px) rotate(-2deg);
-    }
-    30% {
-      -webkit-transform: translateX(3px) rotate(2deg);
-      transform: translateX(3px) rotate(2deg);
-    }
-    40% {
-      -webkit-transform: translateX(-3px) rotate(-2deg);
-      transform: translateX(-3px) rotate(-2deg);
-    }
-    50% {
-      -webkit-transform: translateX(2px) rotate(1deg);
-      transform: translateX(2px) rotate(1deg);
-    }
-    60% {
-      -webkit-transform: translateX(-2px) rotate(-1deg);
-      transform: translateX(-2px) rotate(-1deg);
-    }
-    70% {
-      -webkit-transform: translateX(2px) rotate(1deg);
-      transform: translateX(2px) rotate(1deg);
-    }
-    80% {
-      -webkit-transform: translateX(-2px) rotate(-1deg);
-      transform: translateX(-2px) rotate(-1deg);
-    }
-    90% {
-      -webkit-transform: translateX(1px) rotate(0);
-      transform: translateX(1px) rotate(0);
-    }
-    100% {
-      -webkit-transform: translateX(-1px) rotate(0);
-      transform: translateX(-1px) rotate(0);
-    }
-  }
-  @keyframes hvr-buzz-out {
-    10% {
-      -webkit-transform: translateX(3px) rotate(2deg);
-      transform: translateX(3px) rotate(2deg);
-    }
-    20% {
-      -webkit-transform: translateX(-3px) rotate(-2deg);
-      transform: translateX(-3px) rotate(-2deg);
-    }
-    30% {
-      -webkit-transform: translateX(3px) rotate(2deg);
-      transform: translateX(3px) rotate(2deg);
-    }
-    40% {
-      -webkit-transform: translateX(-3px) rotate(-2deg);
-      transform: translateX(-3px) rotate(-2deg);
-    }
-    50% {
-      -webkit-transform: translateX(2px) rotate(1deg);
-      transform: translateX(2px) rotate(1deg);
-    }
-    60% {
-      -webkit-transform: translateX(-2px) rotate(-1deg);
-      transform: translateX(-2px) rotate(-1deg);
-    }
-    70% {
-      -webkit-transform: translateX(2px) rotate(1deg);
-      transform: translateX(2px) rotate(1deg);
-    }
-    80% {
-      -webkit-transform: translateX(-2px) rotate(-1deg);
-      transform: translateX(-2px) rotate(-1deg);
-    }
-    90% {
-      -webkit-transform: translateX(1px) rotate(0);
-      transform: translateX(1px) rotate(0);
-    }
-    100% {
-      -webkit-transform: translateX(-1px) rotate(0);
-      transform: translateX(-1px) rotate(0);
-    }
-  }
-  .hvr-buzz-out {
-    display: inline-block;
-    vertical-align: middle;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  }
-  .hvr-buzz-out:hover, .hvr-buzz-out:focus, .hvr-buzz-out:active {
-    -webkit-animation-name: hvr-buzz-out;
-    animation-name: hvr-buzz-out;
-    -webkit-animation-duration: 0.75s;
-    animation-duration: 0.75s;
-    -webkit-animation-timing-function: linear;
-    animation-timing-function: linear;
-    -webkit-animation-iteration-count: 1;
-    animation-iteration-count: 1;
+  10% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
   }
 
-  @media only screen and (max-width: 600px) {
-    .card {
-      width: 19rem;
-    }
-    .container{
-        width: 100%;
-    }
-    .card-header{
-        font-size: 15px;
-    }
-    li{
-        font-size: 15px;
-    }
-    .answer{
-        font-size: 15px;
-    }
+  20% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
   }
 
+  30% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  40% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+
+  60% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+
+  70% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+
+  80% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+
+  90% {
+    -webkit-transform: translateX(1px) rotate(0);
+    transform: translateX(1px) rotate(0);
+  }
+
+  100% {
+    -webkit-transform: translateX(-1px) rotate(0);
+    transform: translateX(-1px) rotate(0);
+  }
+}
+
+@keyframes hvr-buzz-out {
+  10% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  20% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+
+  30% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+
+  40% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+
+  60% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+
+  70% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+
+  80% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+
+  90% {
+    -webkit-transform: translateX(1px) rotate(0);
+    transform: translateX(1px) rotate(0);
+  }
+
+  100% {
+    -webkit-transform: translateX(-1px) rotate(0);
+    transform: translateX(-1px) rotate(0);
+  }
+}
+
+.hvr-buzz-out {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+.hvr-buzz-out:hover,
+.hvr-buzz-out:focus,
+.hvr-buzz-out:active {
+  -webkit-animation-name: hvr-buzz-out;
+  animation-name: hvr-buzz-out;
+  -webkit-animation-duration: 0.75s;
+  animation-duration: 0.75s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    width: 19rem;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .card-header {
+    font-size: 15px;
+  }
+
+  li {
+    font-size: 15px;
+  }
+
+  .answer {
+    font-size: 15px;
+  }
+}

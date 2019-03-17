@@ -1,155 +1,138 @@
 #header {
-    text-align: center;
-    border: solid;
-    border-color: rgba(0, 0, 0, 0);
-    background-color: rgb(0, 70, 83);
-    color: rgb(236, 236, 236);
-    
-    
+  text-align: center;
+  border: solid;
+  border-color: rgba(0, 0, 0, 0);
+  background-color: rgb(0, 70, 83);
+  color: rgb(236, 236, 236);
 }
 
 #info {
-    border: solid;
-    background-color: rgba(0, 0, 0, 0.788);
-    color: rgb(212, 212, 212);
-    border-color: rgba(0, 0, 0, 0.062);
-    font-size: 1px;
-    
+  border: solid;
+  background-color: rgba(0, 0, 0, 0.788);
+  color: rgb(212, 212, 212);
+  border-color: rgba(0, 0, 0, 0.062);
+  font-size: 1px;
 }
 
 .choose {
   font-size: 22px;
   background-image: url("https://media.giphy.com/media/TmDFyAtfly6yc/giphy.gif");
-    background-size: 1px;
+  background-size: 1px;
 }
 
 #highScore {
-    text-align: center;
-    border: solid;
-    background-color: rgba(0, 0, 0, 0.788);
-    color: rgb(212, 212, 212);
-    border-color: rgba(0, 0, 0, 0.281);
-    margin-left: 2px;
-    background-image: url("https://media.giphy.com/media/NxpMNq17Y2Khq/giphy.gif");
-    background-size: 650px;
-    
+  text-align: center;
+  border: solid;
+  background-color: rgba(0, 0, 0, 0.788);
+  color: rgb(212, 212, 212);
+  border-color: rgba(0, 0, 0, 0.281);
+  margin-left: 2px;
+  background-image: url("https://media.giphy.com/media/NxpMNq17Y2Khq/giphy.gif");
+  background-size: 650px;
 }
 
 #quizTopic {
-    border: solid;
-    border-color: rgba(0, 0, 0, 0.336);
-    margin-top: 2px;
-    padding-bottom: 20px;
-    font-size: 50px;
-    text-align: center;
-    
-    background-color: rgba(0, 0, 0, 0.788);
-    color: rgb(212, 212, 212);
-    
+  border: solid;
+  border-color: rgba(0, 0, 0, 0.336);
+  margin-top: 2px;
+  padding-bottom: 20px;
+  font-size: 50px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.788);
+  color: rgb(212, 212, 212);
 }
 
 footer {
-   
-    text-align: center;
-    margin-top:5px;
-    margin-bottom:5px;
-    padding: 5px;
-    color: rgb(255, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
 }
 
 #banner {
-    font-size: 85px;
-    
+  font-size: 85px;
 }
 
 .tBox {
-    
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 30px;
-    
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30px;
 }
 
 aside {
-    border: solid;
-    float: right;
-    margin-left: auto;
-    margin-right: auto;
-    margin: 5px; 
+  border: solid;
+  float: right;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 5px;
 }
 
 body {
-    background-image: url("https://i.imgur.com/dqj1Hfw.jpg");
-    background-size: cover;
-    font-family: 'Neucha', cursive;
-    background-attachment: fixed;
-    
+  background-image: url("https://i.imgur.com/dqj1Hfw.jpg");
+  background-size: cover;
+  font-family: 'Neucha', cursive;
+  background-attachment: fixed;
 }
 
 input {
-    background-color: rgb(224, 224, 224);
+  background-color: rgb(224, 224, 224);
 }
 
 #quizLabel {
-    font-size: 40px;
-    
-    
+  font-size: 40px;
 }
 
 .userLabel {
   font-size: 40px;
-  
 }
 
-
-
 .scoreTable {
-    background-color: black;
+  background-color: black;
 }
 
 #table {
-    border: solid;
-    background-color: rgba(0, 0, 0, 0.788);
-    color: rgb(212, 212, 212);
-    border-color: rgba(255, 255, 255, 0);
-    text-align: center;
-    margin-top: 10px;
-    background-image: url("https://media.giphy.com/media/120ErahsQyf1q8/giphy.gif");
-    background-size: 500px;
+  border: solid;
+  background-color: rgba(0, 0, 0, 0.788);
+  color: rgb(212, 212, 212);
+  border-color: rgba(255, 255, 255, 0);
+  text-align: center;
+  margin-top: 10px;
+  background-image: url("https://media.giphy.com/media/120ErahsQyf1q8/giphy.gif");
+  background-size: 500px;
 }
 
 #tableText {
-    color: rgb(212, 212, 212);
+  color: rgb(212, 212, 212);
 }
 
 #tableHead {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 #tableItems {
-    font-size: 1px;
+  font-size: 1px;
 }
 
 #scoreHead {
-    font-size: 45px;
-    color: rgb(251, 255, 0);
+  font-size: 45px;
+  color: rgb(251, 255, 0);
 }
 
 .startGameButton {
-    font-size: 30px;
-    background-color: rgb(0, 70, 83);
-    margin-top: 30px;
-    width: 180px;
-    border-style: solid;
-    border-color: rgb(0, 0, 0);
+  font-size: 30px;
+  background-color: rgb(0, 70, 83);
+  margin-top: 30px;
+  width: 180px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
 }
 
 .gif {
-    height: 300px;
-    width: 300px;
+  height: 300px;
+  width: 300px;
 }
 
 #trivia-gif {
@@ -157,22 +140,19 @@ input {
 }
 
 #sel1 {
-    background-color: rgb(224, 224, 224);
+  background-color: rgb(224, 224, 224);
 }
 
 .headerGif1 {
-    height: 130px;
-    width: 110px;
-    float: right;
-    
-    
+  height: 130px;
+  width: 110px;
+  float: right;
 }
 
 .headerGif2 {
   height: 130px;
   width: 110px;
   float: left;
-    
 }
 
 .alpha {
@@ -187,22 +167,18 @@ input {
 .tBox2 {
   font-size: 30px;
   text-align: center;
-  
 }
 
 .footerGif1 {
   height: 130px;
   width: 100px;
   float: right;
-  
-  
 }
 
 .footerGif2 {
-height: 130px;
-width: 100px;
-float: left;
-  
+  height: 130px;
+  width: 100px;
+  float: left;
 }
 
 .sideGif1 {
@@ -225,15 +201,16 @@ float: left;
   color: rgb(52, 255, 1);
 }
 
-.hello1, .hello2 {
+.hello1,
+.hello2 {
   width: 25px;
   height: 25px;
 }
 
-.hello3, .hello4 {
+.hello3,
+.hello4 {
   width: 75px;
   height: 85px;
-  
 }
 
 .goodJ1 {
@@ -263,92 +240,166 @@ float: left;
 .userGif1 {
   height: 40px;
   width: 60px;
-  
 }
-
-
-
-
-
-
 
 /*HOVER SECTION*/
 
-#banner, .TP, .P, .T, .S {
-    
-    -webkit-animation-name: wiggle;
-    -ms-animation-name: wiggle;
-    -ms-animation-duration: 20000ms;
-    -webkit-animation-duration: 20000ms;
-    -webkit-animation-iteration-count: 1000;
-    -ms-animation-iteration-count: 50;
-   
-  }
-  
-  @-webkit-keyframes wiggle {
-    0% {-webkit-transform: rotate(10deg);}
-    25% {-webkit-transform: rotate(-10deg);}
-    50% {-webkit-transform: rotate(20deg);}
-    75% {-webkit-transform: rotate(-5deg);}
-    100% {-webkit-transform: rotate(0deg);}
-  }
-  
-  @-ms-keyframes wiggle {
-    0% {-ms-transform: rotate(1deg);}
-    25% {-ms-transform: rotate(-1deg);}
-    50% {-ms-transform: rotate(1.5deg);}
-    75% {-ms-transform: rotate(-5deg);}
-    100% {-ms-transform: rotate(0deg);}
-  }
-  
-  @keyframes wiggle {
-    0% {transform: rotate(10deg);}
-    25% {transform: rotate(-10deg);}
-    50% {transform: rotate(20deg);}
-    75% {transform: rotate(-5deg);}
-    100% {transform: rotate(0deg);}
+#banner,
+.TP,
+.P,
+.T,
+.S {
+  -webkit-animation-name: wiggle;
+  -ms-animation-name: wiggle;
+  -ms-animation-duration: 20000ms;
+  -webkit-animation-duration: 20000ms;
+  -webkit-animation-iteration-count: 1000;
+  -ms-animation-iteration-count: 50;
+}
+
+@-webkit-keyframes wiggle {
+  0% {
+    -webkit-transform: rotate(10deg);
   }
 
-.startGameButton:hover, #quizLabel:hover, #scoreHead:hover, #quizLabel:hover, .userLabel:hover, .pinNumber:hover, .choose:hover {
-    -webkit-animation-name: wiggle;
-        -ms-animation-name: wiggle;
-        -ms-animation-duration: 2000ms;
-        -webkit-animation-duration: 2000ms;
-        -webkit-animation-iteration-count: 100;
-        -ms-animation-iteration-count: 1;
-        
-      }
-      
-      @-webkit-keyframes wiggle {
-        0% {-webkit-transform: rotate(10deg);}
-        25% {-webkit-transform: rotate(-10deg);}
-        50% {-webkit-transform: rotate(20deg);}
-        75% {-webkit-transform: rotate(-5deg);}
-        100% {-webkit-transform: rotate(0deg);}
-      }
-      
-      @-ms-keyframes wiggle {
-        0% {-ms-transform: rotate(1deg);}
-        25% {-ms-transform: rotate(-1deg);}
-        50% {-ms-transform: rotate(1.5deg);}
-        75% {-ms-transform: rotate(-5deg);}
-        100% {-ms-transform: rotate(0deg);}
-      }
-      
-      @keyframes wiggle {
-        0% {transform: rotate(10deg);}
-        25% {transform: rotate(-10deg);}
-        50% {transform: rotate(20deg);}
-        75% {transform: rotate(-5deg);}
-        100% {transform: rotate(0deg);}
-      }
+  25% {
+    -webkit-transform: rotate(-10deg);
+  }
 
+  50% {
+    -webkit-transform: rotate(20deg);
+  }
 
+  75% {
+    -webkit-transform: rotate(-5deg);
+  }
 
+  100% {
+    -webkit-transform: rotate(0deg);
+  }
+}
 
+@-ms-keyframes wiggle {
+  0% {
+    -ms-transform: rotate(1deg);
+  }
 
+  25% {
+    -ms-transform: rotate(-1deg);
+  }
 
+  50% {
+    -ms-transform: rotate(1.5deg);
+  }
 
+  75% {
+    -ms-transform: rotate(-5deg);
+  }
 
+  100% {
+    -ms-transform: rotate(0deg);
+  }
+}
 
+@keyframes wiggle {
+  0% {
+    transform: rotate(10deg);
+  }
 
+  25% {
+    transform: rotate(-10deg);
+  }
+
+  50% {
+    transform: rotate(20deg);
+  }
+
+  75% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.startGameButton:hover,
+#quizLabel:hover,
+#scoreHead:hover,
+#quizLabel:hover,
+.userLabel:hover,
+.pinNumber:hover,
+.choose:hover {
+  -webkit-animation-name: wiggle;
+  -ms-animation-name: wiggle;
+  -ms-animation-duration: 2000ms;
+  -webkit-animation-duration: 2000ms;
+  -webkit-animation-iteration-count: 100;
+  -ms-animation-iteration-count: 1;
+}
+
+@-webkit-keyframes wiggle {
+  0% {
+    -webkit-transform: rotate(10deg);
+  }
+
+  25% {
+    -webkit-transform: rotate(-10deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(20deg);
+  }
+
+  75% {
+    -webkit-transform: rotate(-5deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(0deg);
+  }
+}
+
+@-ms-keyframes wiggle {
+  0% {
+    -ms-transform: rotate(1deg);
+  }
+
+  25% {
+    -ms-transform: rotate(-1deg);
+  }
+
+  50% {
+    -ms-transform: rotate(1.5deg);
+  }
+
+  75% {
+    -ms-transform: rotate(-5deg);
+  }
+
+  100% {
+    -ms-transform: rotate(0deg);
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(10deg);
+  }
+
+  25% {
+    transform: rotate(-10deg);
+  }
+
+  50% {
+    transform: rotate(20deg);
+  }
+
+  75% {
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
