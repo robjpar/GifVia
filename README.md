@@ -13,6 +13,5 @@ In addition:
 - Users can load more questions on the topic they’re on or go back to the landing page to pick a new topic
 - An analysis feature keeps track not only of the most popular categories, but also how many questions were answered right from each of the trivia categories and displays this information in an easy-to-digest graph
 
-## How to access the website
-
-[GifVia website](https://nashbrowns.github.io/GifVia)
+## How to use
+Access the deployed website though this link [gif-via](https://robjpar.github.io/gif-via/). Alternatively, clone the repository to a local folder and open the `index.html` file with a web browser.
