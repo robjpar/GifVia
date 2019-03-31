@@ -15,3 +15,7 @@ In addition:
 
 ## How to use
 Access the deployed website though this link [gif-via](https://robjpar.github.io/gif-via/). Alternatively, clone the repository to a local folder and open the `index.html` file with a web browser.
+
+## Awards
+
+![Smart Cookie](smart-cookie.jpg)
