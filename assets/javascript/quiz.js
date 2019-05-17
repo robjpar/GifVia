@@ -45,7 +45,7 @@ var allowClicks = false;
 var gif = $("#trivia-gif");
 var winLoss = "win";
 var difficulty = "";
-var giphyAPIKey = "pUpYuVe3td58u23oogHLM1T2pHFENVTJ";
+var giphyAPIKey = "jxBgxQmHV64xddo6bKl1HZdb0xtgNSZc";
 var gifQueryURL = "https://api.giphy.com/v1/gifs/random?api_key=" + giphyAPIKey + "&rating=g&tag=";
 
 //function to display username and category selected

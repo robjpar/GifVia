@@ -126,7 +126,7 @@ function getGif(term, count) {
     var queryURL = "https://api.giphy.com/v1/gifs/search?";
 
     var queryParams = {
-        api_key: "dc6zaTOxFJmzC",
+        api_key: "jxBgxQmHV64xddo6bKl1HZdb0xtgNSZc",
         q: term,
         rating: "g",
         limit: count
