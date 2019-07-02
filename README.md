@@ -28,7 +28,7 @@ For each new question they select, they are not only trying to beat the timer, b
 
 ## Installation
 
-Access the deployed website though this link [gif-via](https://robjpar.github.io/gif-via/). Alternatively, clone the repository to a local folder and open the `index.html` file with a web browser.
+No installation is needed. Access the deployed website with a web browser through this link [gif-via](https://robjpar.github.io/gif-via/). Alternatively, clone the repository to a local folder and open the `index.html` file with a web browser.
 
 ## Usage
 
