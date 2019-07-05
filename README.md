@@ -17,7 +17,7 @@ For each new question they select, they are not only trying to beat the timer, b
 
 - HTML
 - CSS, Bootstrap, Webkits, Google Fonts
-- JavaScript, JQuery, Chart.js
+- JavaScript, JQuery, AJAX, Chart.js
 - Internet browser local storage
 - Google Firebase (real-time database)
 
