@@ -1,5 +1,7 @@
 # GifVia &mdash; An interactive, gif animated trivia game
 
+by Krystal Christensen-Wiederrich, Phillip Makris, Nash McDonald & Robert Paruch
+
 ![gif-via](images/gif-via.png 'gif-via')
 
 At its basic level, the website users can play multiple games of trivia on a variety of topics while trying to max their score and achieve the top spot on the Previous Players scoreboard.
